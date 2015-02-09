@@ -1,0 +1,36 @@
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture1_samples_-\000_deterministic\bin\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture1_samples_-\000_deterministic\bin\Debug\sample.pdb
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture1_samples_-\000_deterministic\obj\x86\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture1_samples_-\000_deterministic\obj\x86\Debug\sample.pdb
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture1_samples_+\001_ball_vector_position\bin\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture1_samples_+\001_ball_vector_position\bin\Debug\sample.pdb
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture1_samples_+\001_ball_vector_position\obj\x86\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture1_samples_+\001_ball_vector_position\obj\x86\Debug\sample.pdb
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\001_samples\obj\x86\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\001_samples\obj\x86\Debug\sample.pdb
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\001_samples\bin\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\001_samples\bin\Debug\sample.pdb
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\002_moving_in_a_direction\bin\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\002_moving_in_a_direction\bin\Debug\sample.pdb
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\002_moving_in_a_direction\obj\x86\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\002_moving_in_a_direction\obj\x86\Debug\sample.pdb
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\007_2drotation_around_a_point\bin\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\007_2drotation_around_a_point\bin\Debug\sample.pdb
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\007_2drotation_around_a_point\obj\x86\Debug\sample.exe
+D:\data\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\007_2drotation_around_a_point\obj\x86\Debug\sample.pdb
+C:\Users\Hans\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\007_2drotation_around_a_point\bin\Debug\GXPEngine.exe
+C:\Users\Hans\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\007_2drotation_around_a_point\bin\Debug\GXPEngine.pdb
+C:\Users\Hans\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\007_2drotation_around_a_point\obj\x86\Debug\GXPEngine.exe
+C:\Users\Hans\Dropbox\saxion\2014_2015\kwartaal_2\1_2_physics\sheets\lecture2_samples_+\007_2drotation_around_a_point\obj\x86\Debug\GXPEngine.pdb
+C:\Users\Randy\Dropbox\ACT\Assignments Quartile 2\lecture2_samples_+\007_2drotation_around_a_point\bin\Debug\GXPEngine.exe
+C:\Users\Randy\Dropbox\ACT\Assignments Quartile 2\lecture2_samples_+\007_2drotation_around_a_point\bin\Debug\GXPEngine.pdb
+C:\Users\Randy\Dropbox\ACT\Assignments Quartile 2\lecture2_samples_+\007_2drotation_around_a_point\obj\x86\Debug\GXPEngine.exe
+C:\Users\Randy\Dropbox\ACT\Assignments Quartile 2\lecture2_samples_+\007_2drotation_around_a_point\obj\x86\Debug\GXPEngine.pdb
+C:\Users\Randy\Dropbox\ACT\Assignments Quartile 2\Game Physics_412497_RandyKlaassen\Assignments 2\007_2drotation_around_a_point\bin\Debug\GXPEngine.exe
+C:\Users\Randy\Dropbox\ACT\Assignments Quartile 2\Game Physics_412497_RandyKlaassen\Assignments 2\007_2drotation_around_a_point\bin\Debug\GXPEngine.pdb
+C:\Users\Randy\Dropbox\ACT\Assignments Quartile 2\Game Physics_412497_RandyKlaassen\Assignments 2\007_2drotation_around_a_point\obj\x86\Debug\GXPEngine.exe
+C:\Users\Randy\Dropbox\ACT\Assignments Quartile 2\Game Physics_412497_RandyKlaassen\Assignments 2\007_2drotation_around_a_point\obj\x86\Debug\GXPEngine.pdb
+C:\Users\Randy\Documents\Projects\Project Pinballish\007_2drotation_around_a_point\bin\Debug\GXPEngine.exe
+C:\Users\Randy\Documents\Projects\Project Pinballish\007_2drotation_around_a_point\bin\Debug\GXPEngine.pdb
+C:\Users\Randy\Documents\Projects\Project Pinballish\007_2drotation_around_a_point\obj\x86\Debug\GXPEngine.exe
+C:\Users\Randy\Documents\Projects\Project Pinballish\007_2drotation_around_a_point\obj\x86\Debug\GXPEngine.pdb
