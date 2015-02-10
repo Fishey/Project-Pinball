@@ -40,14 +40,28 @@ namespace GXPEngine
 
 		void Update() {
 			foreach (Ship ship in _ships) {
-				rotateAroundPoint (ship, _center, (float)(10 * Math.PI / 180.0f)); // make the ships turn around the center of the screen
+				rotateAroundPoint (ship, _center, (float)(5 * Math.PI / 180.0f)); // make the ships turn around the center of the screen
+				processInput (ship);
 				ship.Step ();
 			}
 		}
 
 		void processInput(Ship ship)
 		{
-			if (Input.GetKey(Key.UP) && ship.PlayNum == 1)
+			switch (ship.PlayNum) {
+			case 1:
+				if (Input.GetKey (Key.UP)) {
+					Console.WriteLine ("pew pew!");
+					Projectile bullet = new Projectile (10);
+					bullet.velocity = new Vec2 (10, 0);
+					bullet.velocity.SetAngleDegrees (ship.rotation);
+
+				}
+				break;
+			default:
+				break;
+			}
+
 
 		}
 
@@ -62,7 +76,7 @@ namespace GXPEngine
 				sprite.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 				sprite.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
 			}
-			else if (Input.GetKey(Key.LEFT) && sprite.PlayNum == 2)
+			else if (Input.GetKey(Key.LEFT) && sprite.PlayNum == 1)
 			{
 				cosAngle = Math.Cos (-angle / 5);
 				sinAngle = Math.Sin (-angle / 5);

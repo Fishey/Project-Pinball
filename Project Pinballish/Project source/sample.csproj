@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Vec2.cs" />
     <Compile Include="Ship.cs" />
+    <Compile Include="Projectile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

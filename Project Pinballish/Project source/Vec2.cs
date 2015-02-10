@@ -89,7 +89,37 @@ namespace GXPEngine
 			return this.Substract(normal.Scale((1+bounciness) * this.Dot(normal)));
 		}
 
+		public void SetAngleRadians(float radians)
+		{
+			float length = Length();
+			this.x = (float) (length * Math.Cos (radians));
+			this.y = (float) (length * Math.Sin (radians));
+		}
 
+		public void SetAngleDegrees(float degrees)
+		{
+			SetAngleRadians (degrees * (float)Math.PI / 180);
+		}
+
+		public float GetAngleRadians()
+		{
+			return (float)Math.Atan2 (this.y, this.x);
+		}
+
+		public float GetAngleDegrees()
+		{
+			return (float)GetAngleRadians () * (float)(180 / Math.PI);
+		}
+
+		public void RotateDegrees(float degrees)
+		{
+			SetAngleDegrees (GetAngleDegrees () + degrees);
+		}
+
+		public void RotateRadians(float radians)
+		{
+			SetAngleRadians (GetAngleRadians () + radians);
+		}
 	}
 }
 
