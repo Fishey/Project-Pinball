@@ -1,12 +1,11 @@
 ﻿<Properties StartupItem="sample.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MyGame.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Projectile.cs">
     <Files>
-      <File FileName="MyGame.cs" Line="52" Column="52" />
-      <File FileName="c:\Users\Randy\Dropbox\ACT\Assignments Quartile 2\Game Physics_412497_RandyKlaassen\Components\Ball.cs" Line="1" Column="1" />
+      <File FileName="MyGame.cs" Line="36" Column="36" />
       <File FileName="Ship.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Randy\Documents\Projects\gxpengine\sources\gxpengine\Core\Texture2D.cs" Line="1" Column="1" />
-      <File FileName="Vec2.cs" Line="27" Column="27" />
+      <File FileName="Vec2.cs" Line="1" Column="1" />
+      <File FileName="Projectile.cs" Line="2" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
