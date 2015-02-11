@@ -9,15 +9,18 @@ namespace GXPEngine
 		private Vec2 _position;
 		private Vec2 _velocity;
 
+		private MyGame _MG;
+
 		private Color _ballColor;
 		private int _timer;
 
-		public Projectile (int pRadius, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius*2, pRadius*2)
+		public Projectile (int pRadius, MyGame MG, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius*2, pRadius*2)
 		{
 			radius = pRadius;
 			position = pPosition;
 			velocity = pVelocity;
 			_timer = 200;
+			_MG = MG;
 			_ballColor = pColor ?? Color.SaddleBrown;
 
 			draw ();
@@ -61,8 +64,13 @@ namespace GXPEngine
 			_timer--;
 			x = (float)_position.x;
 			y = (float)_position.y;
-			if (_timer == 0)
+			if (_timer == 0 || this.position.x < 0 || this.position.x > _MG.width || this.position.y < 0 || this.position.y > _MG.height) {
+				Console.WriteLine ("MG: {0}, {1}", _MG.width, -_MG.height);
+				Console.WriteLine ("boom! pos :{0}", position);
 				this.Destroy ();
+				this.velocity = Vec2.zero;
+				this.position = Vec2.zero;
+			}
 		}
 	}
 }

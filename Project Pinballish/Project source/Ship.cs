@@ -27,7 +27,6 @@ namespace GXPEngine
 			_playNum = playNum;
 			_MG = MG;
 			_level = level;
-			this.rotation = this.rotation + 180;
 
 			draw ();
 			x = (float)position.x;
@@ -69,13 +68,18 @@ namespace GXPEngine
 		{
 			if (LaserTimer == 0) {
 				_laserTimer = 100;
-				Projectile bullet = new Projectile (10);
+				Projectile bullet = new Projectile (10, _MG);
 				bullet.position = this.position.Clone ();
 				bullet.velocity = new Vec2 (10, 0);
 				bullet.velocity.SetAngleDegrees (this.rotation);
 				bullet.rotation = this.rotation;
 				_level.Projectiles.Add (bullet);
-				Sound pewpew = new Sound ("laser1.wav");
+				_level.AddChild (bullet);
+				Sound pewpew = new Sound("laser1.wav");
+				if (PlayerNum == 1)
+					pewpew = new Sound ("laser1.wav");
+				else if (PlayerNum == 2)
+					pewpew = new Sound ("laser2.wav");
 				_pewpew = pewpew.Play ();
 			}
 		}

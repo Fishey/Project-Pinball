@@ -60,6 +60,7 @@ namespace GXPEngine
 				processInput (ship);
 				ship.Step ();
 			}
+
 			foreach (Projectile bullet in _projectiles) {
 				bullet.Step ();
 				foreach(Asteroid asteroid in _asteroids){
@@ -116,6 +117,7 @@ namespace GXPEngine
 
 		void processInput(Ship ship)
 		{
+
 			switch (ship.PlayerNum) {
 			case 1:
 				if (Input.GetKeyDown (Key.UP)) {
@@ -130,6 +132,7 @@ namespace GXPEngine
 			default:
 				break;
 			}
+
 		}
 
 		public List<Projectile> Projectiles
