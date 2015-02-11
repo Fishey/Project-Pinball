@@ -57,7 +57,7 @@ namespace GXPEngine
 			}
 		}
 
-		public int PlayNum {
+		public int PlayerNum {
 			get { return this._playNum; }
 		}
 

@@ -116,6 +116,11 @@
     <Compile Include="Vec2.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Projectile.cs" />
+    <Compile Include="Asteroid.cs" />
+    <Compile Include="LevelSelector.cs" />
+    <Compile Include="QuitButton.cs" />
+    <Compile Include="StartButton.cs" />
+    <Compile Include="Titlescreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />
