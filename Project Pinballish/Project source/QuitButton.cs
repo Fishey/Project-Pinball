@@ -2,9 +2,9 @@
 
 namespace GXPEngine
 {
-	public class QuitButton : Sprite
+	public class QuitButton : AnimSprite
 	{
-		public QuitButton () : base ("QuitButton.png")
+		public QuitButton () : base ("QuitButton.png",1,2)
 		{
 		}
 	}

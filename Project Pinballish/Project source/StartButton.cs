@@ -2,9 +2,9 @@
 
 namespace GXPEngine
 {
-	public class StartButton : Sprite
+	public class StartButton : AnimSprite
 	{
-		public StartButton () : base ("StartButton.png")
+		public StartButton () : base ("StartButton.png",1,2)
 		{
 		}
 	}
