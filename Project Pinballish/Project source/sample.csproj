@@ -121,6 +121,7 @@
     <Compile Include="QuitButton.cs" />
     <Compile Include="StartButton.cs" />
     <Compile Include="Titlescreen.cs" />
+    <Compile Include="Level.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

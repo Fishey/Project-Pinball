@@ -1,15 +1,27 @@
 ﻿<Properties StartupItem="sample.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MyGame.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Level.cs">
     <Files>
-      <File FileName="MyGame.cs" Line="3" Column="3" />
-      <File FileName="Ship.cs" Line="1" Column="1" />
+      <File FileName="MyGame.cs" Line="5" Column="5" />
+      <File FileName="Level.cs" Line="78" Column="78" />
+      <File FileName="Ship.cs" Line="3" Column="3" />
       <File FileName="Vec2.cs" Line="1" Column="1" />
       <File FileName="Projectile.cs" Line="17" Column="17" />
       <File FileName="Asteroid.cs" Line="1" Column="1" />
       <File FileName="Titlescreen.cs" Line="1" Column="1" />
       <File FileName="StartButton.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="sample" expanded="True">
+            <Node name="Components" expanded="True" />
+            <Node name="gxpengine" expanded="True" />
+            <Node name="Level.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
