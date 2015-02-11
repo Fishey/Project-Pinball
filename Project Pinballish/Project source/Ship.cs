@@ -90,6 +90,7 @@ namespace GXPEngine
 
 		public int LaserTimer {
 			get {return this._laserTimer;}
+			set { this._laserTimer = value; }
 		}
 
 		public void Step () {

@@ -61,7 +61,7 @@ namespace GXPEngine
 			}
 		}
 
-		public void Step () {
+		public bool Step () {
 			_position.Add (_velocity);
 			_timer--;
 			x = (float)_position.x;
@@ -75,7 +75,9 @@ namespace GXPEngine
 				this.Destroy ();
 				this.velocity = Vec2.zero;
 				this.position = Vec2.zero;
+				return true;
 			}
+			return false;
 		}
 	}
 }

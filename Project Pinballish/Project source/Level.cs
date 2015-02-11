@@ -63,7 +63,9 @@ namespace GXPEngine
 
 			for (int i = _projectiles.Count - 1; i >= 0; i--)
 			{
-				_projectiles[i].Step ();
+				if (_projectiles [i].Step ()) { // if object destroyed
+					continue;
+				}
 				if (_projectiles.Count > 0) {
 					foreach (Asteroid asteroid in _asteroids) {
 						if (_projectiles [i].HitTest (asteroid)) {
@@ -74,6 +76,12 @@ namespace GXPEngine
 							Vec2 normal = new Vec2 (dx, dy).Normalize ();
 							_projectiles [i].velocity.Reflect (normal);
 							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
+						}
+					}
+
+					foreach (Ship ship in _ships) {
+						if (_projectiles [i].HitTest (ship)) {
+							ship.LaserTimer = 100;
 						}
 					}
 				}
