@@ -6,19 +6,19 @@ namespace GXPEngine
 	public class Ship : Canvas
 	{
 		private SoundChannel _pewpew;
-		private SoundChannel _pewpew2;
 
 		public readonly int radius;
 		private Vec2 _position;
 		private Vec2 _velocity;
 
 		private MyGame _MG;
+		private Level _level;
 
 		private Color _ballColor;
 		private int _playNum;
 		private int _laserTimer;
 
-		public Ship (int pRadius, int playNum, MyGame MG, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius*2, pRadius*2)
+		public Ship (int pRadius, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius*2, pRadius*2)
 		{
 			radius = pRadius;
 			position = pPosition;
@@ -26,6 +26,7 @@ namespace GXPEngine
 			_ballColor = pColor ?? Color.Blue;
 			_playNum = playNum;
 			_MG = MG;
+			_level = level;
 			this.rotation = this.rotation + 180;
 
 			draw ();
@@ -66,13 +67,17 @@ namespace GXPEngine
 
 		public void Fire()
 		{
-			_laserTimer = 100;
-			Projectile bullet = new Projectile (10);
-			bullet.position = this.position.Clone();
-			bullet.velocity = new Vec2 (10, 0);
-			bullet.velocity.SetAngleDegrees (this.rotation);
-			bullet.rotation = this.rotation;
-			//_level.
+			if (LaserTimer == 0) {
+				_laserTimer = 100;
+				Projectile bullet = new Projectile (10);
+				bullet.position = this.position.Clone ();
+				bullet.velocity = new Vec2 (10, 0);
+				bullet.velocity.SetAngleDegrees (this.rotation);
+				bullet.rotation = this.rotation;
+				_level.Projectiles.Add (bullet);
+				Sound pewpew = new Sound ("laser1.wav");
+				_pewpew = pewpew.Play ();
+			}
 		}
 
 		public int PlayerNum {

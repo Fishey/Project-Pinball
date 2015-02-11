@@ -23,12 +23,12 @@ namespace GXPEngine
 			_projectiles = new List<Projectile> (); // pew pews go here
 			_asteroids = new List<Asteroid> (); // things to pew pew at go here
 			//Create ships
-			_ship = new Ship(18, 1)	;
+			_ship = new Ship(18, 1, MG, this)	;
 			_ship.position.x = _mg.width/2 + _mg.width/4;
 			_ship.position.y = _mg.height/2 - 50;
 			_ships.Add (_ship);
 
-			_ship2 = new Ship (18, 2, Vec2.zero, Vec2.zero, Color.Red);
+			_ship2 = new Ship (18, 2, MG, this, Vec2.zero, Vec2.zero, Color.Red);
 			_ship2.position.x = _mg.width / 2 - _mg.width / 4;
 			_ship2.position.y = _mg.height / 2 - 50;
 			_ships.Add (_ship2); //uncomment this to add a second ship
@@ -117,42 +117,22 @@ namespace GXPEngine
 			switch (ship.PlayerNum) {
 			case 1:
 				if (Input.GetKeyDown (Key.UP)) {
-					Console.WriteLine ("pew pew!");
-					Projectile bullet = new Projectile (10);
-					bullet.position = ship.position.Clone();
-					bullet.velocity = new Vec2 (10, 0);
-					bullet.velocity.SetAngleDegrees (ship.rotation);
-					bullet.rotation = ship.rotation;
-					_projectiles.Add (bullet);
-					AddChild (bullet);
-					if (_pewpew != null) {
-						_pewpew.Stop ();
-					}
-					Sound pewpew = new Sound ("laser1.wav");
-					_pewpew = pewpew.Play ();
-
+					ship.Fire ();
 				}
 				break;
 			case 2:
 				if (Input.GetKeyDown (Key.W)) {
-					Console.WriteLine ("pew pew!");
-					Projectile bullet = new Projectile (10);
-					bullet.position = ship.position.Clone();
-					bullet.velocity = new Vec2 (10, 0);
-					bullet.velocity.SetAngleDegrees (ship.rotation);
-					bullet.rotation = ship.rotation;
-					_projectiles.Add (bullet);
-					AddChild (bullet);
-					if (_pewpew2 != null) {
-						_pewpew2.Stop ();
-					}
-					Sound pewpew = new Sound ("laser2.wav");
-					_pewpew2 = pewpew.Play ();
+					ship.Fire ();
 				}
 				break;
 			default:
 				break;
 			}
+		}
+
+		public List<Projectile> Projectiles
+		{
+			get { return this._projectiles; }
 		}
 	}
 }
