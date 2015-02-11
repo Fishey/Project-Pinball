@@ -85,6 +85,7 @@ namespace GXPEngine
 			switch (ship.PlayerNum) {
 			case 1:
 				if (Input.GetKeyDown (Key.UP)) {
+					ship.Fire ();
 					Console.WriteLine ("pew pew!");
 					Projectile bullet = new Projectile (10);
 					bullet.position = ship.position.Clone();
