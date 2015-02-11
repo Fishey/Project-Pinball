@@ -123,6 +123,7 @@
     <Compile Include="Titlescreen.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Trail.cs" />
+    <Compile Include="ControlButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />
