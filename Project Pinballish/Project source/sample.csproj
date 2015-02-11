@@ -122,6 +122,7 @@
     <Compile Include="StartButton.cs" />
     <Compile Include="Titlescreen.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="Trail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

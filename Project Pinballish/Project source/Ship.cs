@@ -68,7 +68,7 @@ namespace GXPEngine
 		{
 			if (LaserTimer == 0) {
 				_laserTimer = 100;
-				Projectile bullet = new Projectile (10, _MG);
+				Projectile bullet = new Projectile (10, _MG, _level);
 				bullet.position = this.position.Clone ();
 				bullet.velocity = new Vec2 (10, 0);
 				bullet.velocity.SetAngleDegrees (this.rotation);

@@ -61,17 +61,20 @@ namespace GXPEngine
 				ship.Step ();
 			}
 
-			foreach (Projectile bullet in _projectiles) {
-				bullet.Step ();
-				foreach(Asteroid asteroid in _asteroids){
-					if (bullet.HitTest (asteroid)) {
-						asteroid.Destroy ();
-						asteroid.SetXY (-1500, -1500);
-						float dx = asteroid.x - bullet.position.x;
-						float dy = asteroid.y - bullet.position.y;
-						Vec2 normal = new Vec2 (dx, dy).Normalize ();
-						bullet.velocity.Reflect (normal);
-						bullet.rotation = bullet.velocity.GetAngleDegrees ();
+			for (int i = _projectiles.Count - 1; i >= 0; i--)
+			{
+				_projectiles[i].Step ();
+				if (_projectiles.Count > 0) {
+					foreach (Asteroid asteroid in _asteroids) {
+						if (_projectiles [i].HitTest (asteroid)) {
+							asteroid.Destroy ();
+							asteroid.SetXY (-1500, -1500);
+							float dx = asteroid.x - _projectiles [i].position.x;
+							float dy = asteroid.y - _projectiles [i].position.y;
+							Vec2 normal = new Vec2 (dx, dy).Normalize ();
+							_projectiles [i].velocity.Reflect (normal);
+							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
+						}
 					}
 				}
 			}

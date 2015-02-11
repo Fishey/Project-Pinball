@@ -10,11 +10,10 @@ namespace GXPEngine
 		private Titlescreen _titleScreen;
 		private Level _level;
 
-
 		//pink fluffy unicorns with lasers
 
 	
-		public MyGame ():base (1280,720, false) 
+		public MyGame ():base (1920,1080, false) 
 		{
 			SetState ("titleScreen");
 		}

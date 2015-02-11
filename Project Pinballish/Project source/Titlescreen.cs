@@ -10,6 +10,8 @@ namespace GXPEngine
 		MyGame _game;
 		LevelSelector _levelselector;
 
+
+
 		public Titlescreen (MyGame myGame)
 		{
 			_background = new Sprite ("titlescreenph.jpg");
@@ -49,8 +51,7 @@ namespace GXPEngine
 					_levelselector.SetXY (450, 200);
 				}
 			}
-
-
+		
 			if (_levelselector.y == _startbutton.y) {
 				if (Input.GetKey (Key.Z)) {
 					_game.SetState ("level");
@@ -62,6 +63,7 @@ namespace GXPEngine
 					Environment.Exit (0);
 				}
 		 }
+		 
 		}
 
 
