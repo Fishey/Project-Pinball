@@ -44,18 +44,18 @@ namespace GXPEngine
 
 			if (Input.GetKeyDown (Key.UP))
 			{
-				if (_levelselector.y == _startbutton.y) 
+				if (_levelselector.y == _quitbutton.y) 
 				{
-					_levelselector.SetXY (770, 200);
+					_levelselector.SetXY (450, 200);
 				}
 			}
 
 
-//			if (_levelselector.y == _startbutton.y) {
-//				if (Input.GetKey (Key.Z)) {
-//					_game.SetState ("bl1");
-//				}
-//			}
+			if (_levelselector.y == _startbutton.y) {
+				if (Input.GetKey (Key.Z)) {
+					_game.SetState ("level");
+				}
+			}
 
 			if (_levelselector.y == _quitbutton.y) {
 				if (Input.GetKey (Key.Z)) {

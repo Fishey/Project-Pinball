@@ -18,6 +18,8 @@ namespace GXPEngine
 
 		public Level (MyGame MG)
 		{
+			_mg = MG;
+
 			AddChild(new Sprite("background.png")); // add a beautiful background
 			_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
 			_projectiles = new List<Projectile> (); // pew pews go here
