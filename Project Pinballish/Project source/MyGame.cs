@@ -9,6 +9,7 @@ namespace GXPEngine
 		private string _state = "";
 		private Titlescreen _titleScreen;
 		private Level _level;
+		private ControlScreen _controlscreen;
 
 		//pink fluffy unicorns with lasers
 
@@ -39,6 +40,13 @@ namespace GXPEngine
 				_titleScreen = new Titlescreen (this);
 				AddChild (_titleScreen);
 				break;
+
+			case "controls":
+				_controlscreen = new ControlScreen (this);
+				AddChild (_controlscreen);
+				break;
+
+
 			case "level":
 				SoundManager.PlayMusic (SoundFile.MUSIC1);
 				_level = new Level (this);
@@ -63,8 +71,12 @@ namespace GXPEngine
 			switch (_state) {
 			case "titleScreen":
 				_titleScreen.Destroy ();
+				break;
 
-					break;
+			case "controls":
+				_controlscreen.Destroy ();
+				break;
+
 			case "level":
 				_level.Destroy ();
 

@@ -126,6 +126,7 @@
     <Compile Include="ControlButton.cs" />
     <Compile Include="SoundManager.cs" />
     <Compile Include="HUD.cs" />
+    <Compile Include="ControlScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

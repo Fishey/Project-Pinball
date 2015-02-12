@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace GXPEngine
 {
 	public class Level : GameObject
+
 	{
 		private const int HEIGHT 	= 10;
 		private const int WIDTH		= 10;

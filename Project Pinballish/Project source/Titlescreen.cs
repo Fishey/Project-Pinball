@@ -23,19 +23,19 @@ namespace GXPEngine
 
 			_startbutton = new StartButton ();
 			AddChild (_startbutton);
-			_startbutton.SetXY (800, 200);
+			_startbutton.SetXY (800, 400);
 
 			_controlbutton = new ControlButton ();
 			AddChild (_controlbutton);
-			_controlbutton.SetXY (650, 350);
+			_controlbutton.SetXY (650, 550);
 
 			_quitbutton = new QuitButton ();
 			AddChild (_quitbutton);
-			_quitbutton.SetXY (840, 500);
+			_quitbutton.SetXY (840, 700);
 
 			_levelselector = new LevelSelector ();
 			AddChild (_levelselector);
-			_levelselector.SetXY (450, 200);
+			_levelselector.SetXY (450, 400);
 
 		}
 
@@ -49,12 +49,12 @@ namespace GXPEngine
 				if (_levelselector.y == _startbutton.y)
 				{
 					SoundManager.PlaySound (SoundFile.SELECTION, 0.5f);
-					_levelselector.SetXY (450, 350);
+					_levelselector.SetXY (450, 550);
 				}
 				else if (_levelselector.y == _controlbutton.y) 
 				{
 					SoundManager.PlaySound (SoundFile.SELECTION, 0.5f);
-					_levelselector.SetXY (450, 500);
+					_levelselector.SetXY (450, 700);
 				}
 		    }
 		
@@ -64,12 +64,12 @@ namespace GXPEngine
 				if (_levelselector.y == _quitbutton.y) 
 				{
 					SoundManager.PlaySound (SoundFile.SELECTION);
-					_levelselector.SetXY (450, 350);
+					_levelselector.SetXY (450, 550);
 				}
 				else if (_levelselector.y == _controlbutton.y) 
 				{
 					SoundManager.PlaySound (SoundFile.SELECTION);
-					_levelselector.SetXY (450, 200);
+					_levelselector.SetXY (450, 400);
 				}
 			
 			}
