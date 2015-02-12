@@ -80,7 +80,7 @@ namespace GXPEngine
 					}
 
 					foreach (Ship ship in _ships) {
-						if (_projectiles [i].HitTest (ship)) {
+						if (_projectiles [i].HitTest (ship) && _projectiles[i].PlayerNum != ship.PlayerNum) {
 							ship.LaserTimer = 100;
 						}
 					}

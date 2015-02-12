@@ -14,8 +14,9 @@ namespace GXPEngine
 
 		private Color _ballColor;
 		private int _timer;
+		private int _playerNum;
 
-		public Projectile (int pRadius, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius*2, pRadius*2)
+		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius*2, pRadius*2)
 		{
 			radius = pRadius;
 			position = pPosition;
@@ -23,6 +24,7 @@ namespace GXPEngine
 			_timer = 200;
 			_MG = MG;
 			_level = level;
+			_playerNum = playerNum;
 			_ballColor = pColor ?? Color.SaddleBrown;
 
 			draw ();
@@ -61,6 +63,10 @@ namespace GXPEngine
 			}
 		}
 
+		public int PlayerNum {
+			get { return this._playerNum; }
+		}
+
 		public bool Step () {
 			_position.Add (_velocity);
 			_timer--;
@@ -68,6 +74,7 @@ namespace GXPEngine
 			y = (float)_position.y;
 			Trail trail = new Trail (_level);
 			trail.SetXY (this.x, this.y);
+			trail.rotation = this.rotation;
 			_level.AddChild (trail);
 			if (_timer == 0 || this.position.x < 0 || this.position.x > _MG.width || this.position.y < 0 || this.position.y > _MG.height) {
 				_level.RemoveChild (this);

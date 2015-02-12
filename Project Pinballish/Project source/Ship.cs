@@ -5,8 +5,6 @@ namespace GXPEngine
 {
 	public class Ship : Canvas
 	{
-		private SoundChannel _pewpew;
-
 		public readonly int radius;
 		private Vec2 _position;
 		private Vec2 _velocity;
@@ -68,19 +66,17 @@ namespace GXPEngine
 		{
 			if (LaserTimer == 0) {
 				_laserTimer = 100;
-				Projectile bullet = new Projectile (10, _MG, _level);
+				Projectile bullet = new Projectile (10, _MG, _level, this.PlayerNum);
 				bullet.position = this.position.Clone ();
 				bullet.velocity = new Vec2 (10, 0);
 				bullet.velocity.SetAngleDegrees (this.rotation);
 				bullet.rotation = this.rotation;
 				_level.Projectiles.Add (bullet);
 				_level.AddChild (bullet);
-				Sound pewpew = new Sound("laser1.wav");
 				if (PlayerNum == 1)
-					pewpew = new Sound ("laser1.wav");
+					SoundManager.PlaySound (SoundFile.PEW1);
 				else if (PlayerNum == 2)
-					pewpew = new Sound ("laser2.wav");
-				_pewpew = pewpew.Play ();
+					SoundManager.PlaySound (SoundFile.PEW2);
 			}
 		}
 
