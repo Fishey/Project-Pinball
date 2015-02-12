@@ -6,15 +6,26 @@ namespace GXPEngine
 	{
 		int _damagecounter;
 
-		public Asteroid (int damage) : base("placeholder.png", 8, 1)
+		public Asteroid (int damage = 0) : base("placeholder.png", 8, 1)
 		{
-			_damagecounter = 0;
-			SetFrame (0);
+			_damagecounter = damage;
 		}
 
-		public void TakeDamage()
+		private void Update()
 		{
+			if (_damagecounter < 3) // I love you too, code
+				this.SetFrame (_damagecounter);
+			else
+				this.Destroy ();
+		}
 
+		public bool TakeDamage()
+		{
+			_damagecounter++;
+			if (_damagecounter >= 3)
+				return true;
+			else
+				return false;
 		}
 	}
 }

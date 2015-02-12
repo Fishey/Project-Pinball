@@ -39,7 +39,7 @@ namespace GXPEngine
 			_ship2 = new Ship ("RedShark.png", 2, MG, this, Vec2.zero, Vec2.zero);
 			_ship2.position.x = _mg.width / 2 - _mg.width / 4;
 			_ship2.position.y = _mg.height / 2 - 50;
-			_ships.Add (_ship2); //uncomment this to add a second ship
+			_ships.Add (_ship2);
 
 			ReadLevel (level);
 			for (int j = 0; j < HEIGHT; j++) {
@@ -50,19 +50,7 @@ namespace GXPEngine
 
 				}
 			}
-
-
-//			Asteroid asteroid1 = new Asteroid ();
-//			asteroid1.SetXY (_mg.width / 2, _mg.height / 2);
-//			asteroid1.y = asteroid1.y + 50;
-//			_asteroids.Add (asteroid1);
-//
-//			Asteroid asteroid2 = new Asteroid ();
-//			asteroid2.SetXY (_mg.width / 2, _mg.height / 2);
-//			asteroid2.y = asteroid2.y - 50;
-//			asteroid2.x = asteroid2.x - 50;
-//			_asteroids.Add (asteroid2);
-
+				
 			foreach(Ship ship in _ships)
 				AddChild (ship); // add the ships to the game
 
@@ -113,17 +101,20 @@ namespace GXPEngine
 				}
 */ // Derpy projectile collision
 					if (_projectiles.Count > 0) {
-					foreach (Asteroid asteroid in _asteroids) {
-						if (_projectiles [i].HitTest (asteroid)) {
+					for (int y = _asteroids.Count - 1; y >= 0; y--)
+					{
+						if (_projectiles [i].HitTest (_asteroids[y])) {
 							SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
 							SoundManager.PlaySound (SoundFile.RICOCHET);
-							asteroid.Destroy ();
-							asteroid.SetXY (-1500, -1500);
-							float dx = asteroid.x - _projectiles [i].position.x;
-							float dy = asteroid.y - _projectiles [i].position.y;
+							float dx = _asteroids[y].x - _projectiles [i].position.x;
+							float dy = _asteroids[y].y - _projectiles [i].position.y;
 							Vec2 normal = new Vec2 (dx, dy).Normalize ();
 							_projectiles [i].velocity.Reflect (normal);
 							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
+
+							if (_asteroids [y].TakeDamage ()) {
+								_asteroids.Remove (_asteroids [y]);
+							}
 						}
 					}
 
@@ -245,7 +236,7 @@ namespace GXPEngine
 			switch (tile) {
 
 			case 1: 
-				Asteroid asteroidfull = new Asteroid (0);
+				Asteroid asteroidfull = new Asteroid (2);
 				AddChild (asteroidfull);
 				asteroidfull.SetXY (x+580, y+140);
 				_asteroids.Add (asteroidfull);
@@ -259,7 +250,7 @@ namespace GXPEngine
 				break;
 
 			case 3:
-				Asteroid asteroid = new Asteroid (2);
+				Asteroid asteroid = new Asteroid (0);
 				AddChild (asteroid);
 				asteroid.SetXY (x+580, y+140);
 				_asteroids.Add (asteroid);
@@ -269,13 +260,6 @@ namespace GXPEngine
 			}
 
 		}
-	 
-
-
-
-
-
-
 
 
 	}
