@@ -15,8 +15,8 @@ namespace GXPEngine
 	
 		public MyGame ():base (1920,1080, false) 
 		{
-			//scaleX = 0.5f;
-			//scaleY = 0.5f;
+			scaleX = 0.5f;
+			scaleY = 0.5f;
 
 			SetState ("titleScreen");
 		}
@@ -49,6 +49,11 @@ namespace GXPEngine
 				_level = new Level (this, 2);
 				AddChild (_level);
 				break;
+			case "level3":
+				SoundManager.PlayMusic (SoundFile.MUSIC3);
+				_level = new Level (this, 3);
+				AddChild (_level);
+				break;
 			}
 		
 		}
@@ -61,6 +66,16 @@ namespace GXPEngine
 
 					break;
 			case "level":
+				_level.Destroy ();
+
+				break;
+			
+			case "level2":
+				_level.Destroy ();
+
+				break;
+
+			case "level3":
 				_level.Destroy ();
 
 				break;

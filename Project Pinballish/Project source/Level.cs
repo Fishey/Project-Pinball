@@ -9,7 +9,7 @@ namespace GXPEngine
 	{
 		private const int HEIGHT 	= 10;
 		private const int WIDTH		= 10;
-		private const int TILESIZE 	= 64;
+		private const int TILESIZE 	= 80;
 
 		private List<Ship> _ships;
 		private List<Projectile> _projectiles;
@@ -17,7 +17,6 @@ namespace GXPEngine
 		private Ship _ship = null;
 		private Ship _ship2 = null;
 		private Vec2 _center = null;
-		private Titlescreen _titleScreen;
 		private int[,] _data = new int[WIDTH,HEIGHT];
 
 		MyGame _mg;
@@ -41,25 +40,46 @@ namespace GXPEngine
 			_ship2.position.y = _mg.height / 2 - 50;
 			_ships.Add (_ship2); //uncomment this to add a second ship
 
-			Asteroid asteroid1 = new Asteroid (0);
-			asteroid1.SetXY (_mg.width / 2, _mg.height / 2);
-			asteroid1.y = asteroid1.y + 50;
-			_asteroids.Add (asteroid1);
+			ReadLevel (level);
+			for (int j = 0; j < HEIGHT; j++) {
+				for (int i = 0; i < WIDTH; i++) {
+					int tile = _data [j, i];
+					if (tile != 0)
+						addAsteroid (i * TILESIZE, j * TILESIZE, tile);
 
-			Asteroid asteroid2 = new Asteroid (0);
-			asteroid2.SetXY (_mg.width / 2, _mg.height / 2);
-			asteroid2.y = asteroid2.y - 50;
-			asteroid2.x = asteroid2.x - 50;
-			_asteroids.Add (asteroid2);
+				}
+			}
+
+
+//			Asteroid asteroid1 = new Asteroid ();
+//			asteroid1.SetXY (_mg.width / 2, _mg.height / 2);
+//			asteroid1.y = asteroid1.y + 50;
+//			_asteroids.Add (asteroid1);
+//
+//			Asteroid asteroid2 = new Asteroid ();
+//			asteroid2.SetXY (_mg.width / 2, _mg.height / 2);
+//			asteroid2.y = asteroid2.y - 50;
+//			asteroid2.x = asteroid2.x - 50;
+//			_asteroids.Add (asteroid2);
 
 			foreach(Ship ship in _ships)
 				AddChild (ship); // add the ships to the game
 
+
+
 			foreach (Asteroid asteroid in _asteroids)
 				AddChild (asteroid);
 
+
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
 		}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+																//ROTATION AND HIT TEST
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		void Update() {
 			Console.WriteLine (_ships [1].position);
 			foreach (Ship ship in _ships) {
@@ -67,6 +87,7 @@ namespace GXPEngine
 				processInput (ship);
 				ship.Step ();
 			}
+
 
 			for (int i = _projectiles.Count - 1; i >= 0; i--)
 			{
@@ -115,38 +136,50 @@ namespace GXPEngine
 			}
 		}
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+																	//ROTATING AROUND A POINT
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		void rotateAroundPoint(Ship ship, Vec2 center, float angle) {
-			if (ship.StunTimer == 0) {
-				double dx = ship.x - center.x;
-				double dy = ship.y - center.y;
+			double dx = ship.x - center.x;
+			double dy = ship.y - center.y;
 
-				double cosAngle = Math.Cos (angle / 5);
-				double sinAngle = Math.Sin (angle / 5);
-				// player1 controls
-				if (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 1) {
-					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-				} else if (Input.GetKey (Key.LEFT) && ship.PlayerNum == 1) {
-					cosAngle = Math.Cos (-angle / 5);
-					sinAngle = Math.Sin (-angle / 5);
-
-					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-				}
-				//player2 controls
-				if (Input.GetKey (Key.D) && ship.PlayerNum == 2) {
-					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-				} else if (Input.GetKey (Key.A) && ship.PlayerNum == 2) {
-					cosAngle = Math.Cos (-angle / 5);
-					sinAngle = Math.Sin (-angle / 5);
-
-					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-				}
-				ship.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
+			double cosAngle = Math.Cos (angle/5);
+			double sinAngle = Math.Sin (angle/5);
+			// player1 controls
+			if (Input.GetKey(Key.RIGHT) && ship.PlayerNum == 1)
+			{
+				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
 			}
+			else if (Input.GetKey(Key.LEFT) && ship.PlayerNum == 1)
+			{
+				cosAngle = Math.Cos (-angle / 5);
+				sinAngle = Math.Sin (-angle / 5);
+
+				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+			}
+			//player2 controls
+			if (Input.GetKey(Key.D) && ship.PlayerNum == 2)
+			{
+				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+			}
+			else if (Input.GetKey(Key.A) && ship.PlayerNum == 2)
+			{
+				cosAngle = Math.Cos (-angle / 5);
+				sinAngle = Math.Sin (-angle / 5);
+
+				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+			}
+			ship.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
 		}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+																					//PEWPEW
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		void processInput(Ship ship)
 		{
@@ -169,10 +202,16 @@ namespace GXPEngine
 
 		}
 
+
+
+
 		public List<Projectile> Projectiles
 		{
 			get { return this._projectiles; }
 		}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+																			//LEVELS
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		void ReadLevel(int level)
 		{
@@ -192,7 +231,56 @@ namespace GXPEngine
 				}
 			}
 
+
 		}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+																	    	//CA
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		void addAsteroid (int x, int y, int tile)
+		{
+
+			switch (tile) {
+
+			case 1: 
+				Asteroid asteroidfull = new Asteroid (0);
+				AddChild (asteroidfull);
+				asteroidfull.SetXY (x+580, y+140);
+				_asteroids.Add (asteroidfull);
+				break;
+
+			case 2:
+				Asteroid asteroidhalf = new Asteroid (1);
+				AddChild (asteroidhalf);
+				asteroidhalf.SetXY (x+580, y+140);
+				_asteroids.Add (asteroidhalf);
+				break;
+
+			case 3:
+				Asteroid asteroid = new Asteroid (2);
+				AddChild (asteroid);
+				asteroid.SetXY (x+580, y+140);
+				_asteroids.Add (asteroid);
+				break;
+				
+
+			}
+
+		}
+	 
+
+
+
+
+
+
+
+
 	}
+
 }
+
+
+
 
