@@ -15,6 +15,7 @@ namespace GXPEngine
 		private Color _ballColor;
 		private int _playNum;
 		private int _laserTimer;
+		private int _stunTimer;
 
 		public Ship (int pRadius, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius*2, pRadius*2)
 		{
@@ -64,7 +65,7 @@ namespace GXPEngine
 
 		public void Fire()
 		{
-			if (LaserTimer == 0) {
+			if (LaserTimer == 0 & StunTimer == 0) {
 				_laserTimer = 100;
 				Projectile bullet = new Projectile (10, _MG, _level, this.PlayerNum);
 				bullet.position = this.position.Clone ();
@@ -89,9 +90,16 @@ namespace GXPEngine
 			set { this._laserTimer = value; }
 		}
 
+		public int StunTimer {
+			get { return this._stunTimer; }
+			set { this._stunTimer = value; }
+		}
+
 		public void Step () {
 			if (LaserTimer > 0)
 				_laserTimer--;
+			if (StunTimer > 0)
+				_stunTimer--;
 			_position.Add (_velocity);
 			x = (float)_position.x;
 			y = (float)_position.y;

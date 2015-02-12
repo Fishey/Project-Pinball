@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Collections.Generic;
 
 namespace GXPEngine
 {
 	public class Level : GameObject
 	{
-		private string _state = "";
+		private const int HEIGHT 	= 10;
+		private const int WIDTH		= 10;
+		private const int TILESIZE 	= 64;
+
 		private List<Ship> _ships;
 		private List<Projectile> _projectiles;
 		private List<Asteroid> _asteroids;
@@ -14,9 +18,11 @@ namespace GXPEngine
 		private Ship _ship2 = null;
 		private Vec2 _center = null;
 		private Titlescreen _titleScreen;
+		private int[,] _data = new int[WIDTH,HEIGHT];
+
 		MyGame _mg;
 
-		public Level (MyGame MG)
+		public Level (MyGame MG, int level)
 		{
 			_mg = MG;
 
@@ -65,7 +71,18 @@ namespace GXPEngine
 			{
 				if (_projectiles [i].Step ()) { // if object destroyed
 					continue;
+				} else {
+					foreach (Projectile projectile in _projectiles) {
+						if (_projectiles [i].HitTest (projectile)) {
+							if (projectile != _projectiles[i])
+							{
+								projectile.Destroy ();
+								_projectiles [i].Destroy ();
+							}
+						}
+					}
 				}
+
 				if (_projectiles.Count > 0) {
 					foreach (Asteroid asteroid in _asteroids) {
 						if (_projectiles [i].HitTest (asteroid)) {
@@ -82,6 +99,7 @@ namespace GXPEngine
 					foreach (Ship ship in _ships) {
 						if (_projectiles [i].HitTest (ship) && _projectiles[i].PlayerNum != ship.PlayerNum) {
 							ship.LaserTimer = 100;
+							ship.StunTimer = 100;
 						}
 					}
 				}
@@ -128,10 +146,9 @@ namespace GXPEngine
 
 		void processInput(Ship ship)
 		{
-
 			switch (ship.PlayerNum) {
 			case 1:
-				if (Input.GetKeyDown (Key.UP)) {
+				if (Input.GetKeyDown (Key.UP) && ship.StunTimer == 0) {
 					ship.Fire ();
 				}
 				break;
@@ -149,6 +166,26 @@ namespace GXPEngine
 		public List<Projectile> Projectiles
 		{
 			get { return this._projectiles; }
+		}
+
+		void ReadLevel(int level)
+		{
+			string path = "level" + level + ".txt";
+			StreamReader reader = new StreamReader (path);
+			string fileData = reader.ReadToEnd ();
+			reader.Close ();
+
+			string[] lines = fileData.Split ('\n');
+
+			for (int i = 0; i < HEIGHT; i++) {
+				string[] cols = lines [i].Split (',');
+
+				for (int j = 0; j < WIDTH; j++) {
+					string col = cols [j];
+					_data [j, i] = int.Parse (col);
+				}
+			}
+
 		}
 	}
 }

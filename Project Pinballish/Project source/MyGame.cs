@@ -44,7 +44,13 @@ namespace GXPEngine
 				_level = new Level (this);
 				AddChild (_level);
 				break;
-			}	
+			case "level2":
+				SoundManager.PlayMusic (SoundFile.MUSIC2);
+				_level = new Level (this, 2);
+				AddChild (_level);
+				break;
+			}
+		
 		}
 
 		void stopState ()
