@@ -7,11 +7,21 @@ namespace GXPEngine
 		private int _timer;
 		private Level _level;
 
-		public Trail (Level level) : base ("trail.png",1,1)
+		private AnimSprite graphic;
+
+		public Trail (Level level, int player) : base ("Images/LaserHitbox.png",1,1)
 		{
+			if (player == 1)
+				graphic = new AnimSprite ("Images/BlueLaser.png", 2, 1);
+			else if (player == 2)
+				graphic = new AnimSprite ("Images/RedLaser.png", 2, 1);
+			graphic.SetFrame (1);
+			this.AddChild (graphic);
 			_timer = 100;
 			_level = level;
-			SetScaleXY (0.2, 0.2);
+			graphic.SetScaleXY (0.5, 0.5);
+			graphic.SetXY (-25, -20);
+			graphic.rotation += 90;
 			SetOrigin (this.width / 2, 38);
 		}
 

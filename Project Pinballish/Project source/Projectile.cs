@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace GXPEngine
 {
-	public class Projectile : Canvas
+	public class Projectile : Sprite
 	{
 		public readonly int radius;
 		private Vec2 _position;
@@ -12,37 +12,29 @@ namespace GXPEngine
 		private MyGame _MG;
 		private Level _level;
 
-		private Color _ballColor;
-		private int _timer;
 		private int _playerNum;
+		private AnimSprite graphic;
 
-		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius*2, pRadius*2)
+		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base ("Images/LaserHitbox.png")
 		{
+			this.SetOrigin (this.width / 2, this.height / 2);
+			if (playerNum == 1)
+				graphic = new AnimSprite ("Images/BlueLaser.png", 2, 1);
+			else if (playerNum == 2)
+				graphic = new AnimSprite ("Images/RedLaser.png", 2, 1);
+			this.AddChild (graphic);
+
+			graphic.SetXY (-this.width/2-10, -this.height/2+-10);
+			graphic.SetScaleXY (0.9, 0.9);
 			radius = pRadius;
 			position = pPosition;
 			velocity = pVelocity;
-			_timer = 200;
 			_MG = MG;
 			_level = level;
 			_playerNum = playerNum;
-			_ballColor = pColor ?? Color.SaddleBrown;
 
-			draw ();
 			x = (float)position.x;
 			y = (float)position.y;
-		}
-			
-		private void draw() {
-			SetOrigin (radius, radius);
-
-			graphics.FillPolygon (
-				new SolidBrush (_ballColor),
-				new PointF[] {
-					new PointF (2*radius, radius),
-					new PointF (0, 2*radius),
-					new PointF (0, 0)
-				}
-			);
 		}
 
 		public Vec2 position {
@@ -69,10 +61,9 @@ namespace GXPEngine
 
 		public bool Step () {
 			_position.Add (_velocity);
-			_timer--;
 			x = (float)_position.x;
 			y = (float)_position.y;
-			Trail trail = new Trail (_level);
+			Trail trail = new Trail (_level, PlayerNum);
 			trail.SetXY (this.x, this.y);
 			trail.rotation = this.rotation;
 			_level.AddChild (trail);

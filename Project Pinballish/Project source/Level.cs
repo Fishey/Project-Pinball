@@ -5,8 +5,12 @@ using System.Collections.Generic;
 
 namespace GXPEngine
 {
-	public class Level : GameObject
+	public enum ShipSprites
+	{
+		NULL, REDSHARK, BLUESHARK, REDSHIP, BLUESHIP
+	}
 
+	public class Level : GameObject
 	{
 		private const int HEIGHT 	= 10;
 		private const int WIDTH		= 10;
@@ -31,12 +35,12 @@ namespace GXPEngine
 			_projectiles = new List<Projectile> (); // pew pews go here
 			_asteroids = new List<Asteroid> (); // things to pew pew at go here
 			//Create ships
-			_ship = new Ship("BlueShark.png", 1, MG, this)	;
+			_ship = new Ship(ShipSprites.BLUESHARK, 1, MG, this)	;
 			_ship.position.x = _mg.width/2 + _mg.width/4;
 			_ship.position.y = _mg.height/2 - 50;
 			_ships.Add (_ship);
 
-			_ship2 = new Ship ("RedShark.png", 2, MG, this, Vec2.zero, Vec2.zero);
+			_ship2 = new Ship (ShipSprites.REDSHARK, 2, MG, this, Vec2.zero, Vec2.zero);
 			_ship2.position.x = _mg.width / 2 - _mg.width / 4;
 			_ship2.position.y = _mg.height / 2 - 50;
 			_ships.Add (_ship2);
@@ -53,13 +57,10 @@ namespace GXPEngine
 				
 			foreach(Ship ship in _ships)
 				AddChild (ship); // add the ships to the game
-
-
-
+				
 			foreach (Asteroid asteroid in _asteroids)
 				AddChild (asteroid);
-
-
+				
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
 		}
 
@@ -104,7 +105,6 @@ namespace GXPEngine
 					for (int y = _asteroids.Count - 1; y >= 0; y--)
 					{
 						if (_projectiles [i].HitTest (_asteroids[y])) {
-							SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
 							SoundManager.PlaySound (SoundFile.RICOCHET);
 							float dx = _asteroids[y].x - _projectiles [i].position.x;
 							float dy = _asteroids[y].y - _projectiles [i].position.y;
@@ -113,6 +113,7 @@ namespace GXPEngine
 							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
 
 							if (_asteroids [y].TakeDamage ()) {
+								SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
 								_asteroids.Remove (_asteroids [y]);
 							}
 						}
@@ -125,6 +126,9 @@ namespace GXPEngine
 						}
 					}
 				}
+
+				if (_asteroids.Count == 0)
+					_mg.SetState ("level2");
 			}
 		}
 

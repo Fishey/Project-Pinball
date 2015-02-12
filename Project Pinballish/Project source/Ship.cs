@@ -1,10 +1,22 @@
 ﻿using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace GXPEngine
 {
 	public class Ship : Sprite
 	{
+
+		public static readonly Dictionary<ShipSprites, String> SHIP_DICT
+		= new Dictionary<ShipSprites, String>
+		{
+			{ShipSprites.REDSHARK ,  		"Images/RedShark.png"},
+			{ShipSprites.BLUESHARK,  		"Images/BlueShark.png"},
+			{ShipSprites.REDSHIP,  			"Images/RedShip.png"},
+			{ShipSprites.BLUESHIP, 	 		"Images/BlueShip.png"},
+
+		};
+
 		private Vec2 _position;
 		private Vec2 _velocity;
 
@@ -15,17 +27,23 @@ namespace GXPEngine
 		private int _laserTimer;
 		private int _stunTimer;
 
-		public Ship (string imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null) : base (imagepath)
+		private Sprite _graphic;
+
+		public Ship (ShipSprites imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Hitboxshark.png")
 		{
+			_graphic = new Sprite (SHIP_DICT [imagepath]);
+			_graphic.SetScaleXY (0.1, 0.1);
+			_graphic.SetXY (-165, -47);
+			this.AddChild (_graphic);
+
 			position = pPosition;
 			velocity = pVelocity;
 			_playNum = playNum;
 			_MG = MG;
 			_level = level;
 			this.SetOrigin (this.width, this.height / 2);
-			if (PlayerNum == 1)
+			if (PlayerNum == 2)
 				this.Mirror (true, false);
-			this.SetScaleXY (0.1, 0.1);
 			x = (float)position.x;
 			y = (float)position.y;
 		}
