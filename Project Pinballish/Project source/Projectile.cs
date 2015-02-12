@@ -76,7 +76,7 @@ namespace GXPEngine
 			trail.SetXY (this.x, this.y);
 			trail.rotation = this.rotation;
 			_level.AddChild (trail);
-			if (_timer == 0 || this.position.x < 0 || this.position.x > _MG.width || this.position.y < 0 || this.position.y > _MG.height) {
+			if ( this.position.x < 0 || this.position.x > _MG.width || this.position.y < 0 || this.position.y > _MG.height) {
 				_level.RemoveChild (this);
 				_level.Projectiles.Remove (this);
 				this.Destroy ();
