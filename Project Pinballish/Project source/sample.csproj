@@ -125,6 +125,7 @@
     <Compile Include="Trail.cs" />
     <Compile Include="ControlButton.cs" />
     <Compile Include="SoundManager.cs" />
+    <Compile Include="HUD.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

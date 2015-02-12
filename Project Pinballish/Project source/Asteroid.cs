@@ -4,9 +4,17 @@ namespace GXPEngine
 {
 	public class Asteroid : AnimSprite
 	{
-		public Asteroid () : base("placeholder.png", 8, 1)
+		int _damagecounter;
+
+		public Asteroid (int damage) : base("placeholder.png", 8, 1)
 		{
+			_damagecounter = 0;
 			SetFrame (0);
+		}
+
+		public void TakeDamage()
+		{
+
 		}
 	}
 }

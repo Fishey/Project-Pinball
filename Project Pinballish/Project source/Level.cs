@@ -22,7 +22,7 @@ namespace GXPEngine
 
 		MyGame _mg;
 
-		public Level (MyGame MG, int level)
+		public Level (MyGame MG, int level = 1)
 		{
 			_mg = MG;
 
@@ -31,22 +31,22 @@ namespace GXPEngine
 			_projectiles = new List<Projectile> (); // pew pews go here
 			_asteroids = new List<Asteroid> (); // things to pew pew at go here
 			//Create ships
-			_ship = new Ship(18, 1, MG, this)	;
+			_ship = new Ship("BlueShark.png", 1, MG, this)	;
 			_ship.position.x = _mg.width/2 + _mg.width/4;
 			_ship.position.y = _mg.height/2 - 50;
 			_ships.Add (_ship);
 
-			_ship2 = new Ship (18, 2, MG, this, Vec2.zero, Vec2.zero, Color.Red);
+			_ship2 = new Ship ("RedShark.png", 2, MG, this, Vec2.zero, Vec2.zero);
 			_ship2.position.x = _mg.width / 2 - _mg.width / 4;
 			_ship2.position.y = _mg.height / 2 - 50;
 			_ships.Add (_ship2); //uncomment this to add a second ship
 
-			Asteroid asteroid1 = new Asteroid ();
+			Asteroid asteroid1 = new Asteroid (0);
 			asteroid1.SetXY (_mg.width / 2, _mg.height / 2);
 			asteroid1.y = asteroid1.y + 50;
 			_asteroids.Add (asteroid1);
 
-			Asteroid asteroid2 = new Asteroid ();
+			Asteroid asteroid2 = new Asteroid (0);
 			asteroid2.SetXY (_mg.width / 2, _mg.height / 2);
 			asteroid2.y = asteroid2.y - 50;
 			asteroid2.x = asteroid2.x - 50;
@@ -61,6 +61,7 @@ namespace GXPEngine
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
 		}
 		void Update() {
+			Console.WriteLine (_ships [1].position);
 			foreach (Ship ship in _ships) {
 				rotateAroundPoint (ship, _center, (float)(5 * Math.PI / 180.0f)); // make the ships turn around the center of the screen
 				processInput (ship);
@@ -71,21 +72,29 @@ namespace GXPEngine
 			{
 				if (_projectiles [i].Step ()) { // if object destroyed
 					continue;
-				} else {
-					foreach (Projectile projectile in _projectiles) {
-						if (_projectiles [i].HitTest (projectile)) {
-							if (projectile != _projectiles[i])
+				} 
+/*
+				else {
+					for (int y = _projectiles.Count - 1; y >= 0; y--)
+					{
+						if (_projectiles [i].HitTest (_projectiles[y])) {
+							if (_projectiles[y] != _projectiles[i])
 							{
-								projectile.Destroy ();
+								_projectiles[y].Destroy ();
+								_projectiles.Remove (_projectiles [y]);
 								_projectiles [i].Destroy ();
+								_projectiles.Remove (_projectiles [i]);
+								break;
 							}
 						}
 					}
 				}
-
-				if (_projectiles.Count > 0) {
+*/ // Derpy projectile collision
+					if (_projectiles.Count > 0) {
 					foreach (Asteroid asteroid in _asteroids) {
 						if (_projectiles [i].HitTest (asteroid)) {
+							SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
+							SoundManager.PlaySound (SoundFile.RICOCHET);
 							asteroid.Destroy ();
 							asteroid.SetXY (-1500, -1500);
 							float dx = asteroid.x - _projectiles [i].position.x;
@@ -106,59 +115,56 @@ namespace GXPEngine
 			}
 		}
 
-		void rotateAroundPoint(Ship sprite, Vec2 center, float angle) {
-			double dx = sprite.x - center.x;
-			double dy = sprite.y - center.y;
+		void rotateAroundPoint(Ship ship, Vec2 center, float angle) {
+			if (ship.StunTimer == 0) {
+				double dx = ship.x - center.x;
+				double dy = ship.y - center.y;
 
-			double cosAngle = Math.Cos (angle/5);
-			double sinAngle = Math.Sin (angle/5);
-			// player1 controls
-			if (Input.GetKey(Key.RIGHT) && sprite.PlayerNum == 1)
-			{
-				sprite.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-				sprite.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-			}
-			else if (Input.GetKey(Key.LEFT) && sprite.PlayerNum == 1)
-			{
-				cosAngle = Math.Cos (-angle / 5);
-				sinAngle = Math.Sin (-angle / 5);
+				double cosAngle = Math.Cos (angle / 5);
+				double sinAngle = Math.Sin (angle / 5);
+				// player1 controls
+				if (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 1) {
+					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+				} else if (Input.GetKey (Key.LEFT) && ship.PlayerNum == 1) {
+					cosAngle = Math.Cos (-angle / 5);
+					sinAngle = Math.Sin (-angle / 5);
 
-				sprite.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-				sprite.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-			}
-			//player2 controls
-			if (Input.GetKey(Key.D) && sprite.PlayerNum == 2)
-			{
-				sprite.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-				sprite.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-			}
-			else if (Input.GetKey(Key.A) && sprite.PlayerNum == 2)
-			{
-				cosAngle = Math.Cos (-angle / 5);
-				sinAngle = Math.Sin (-angle / 5);
+					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+				}
+				//player2 controls
+				if (Input.GetKey (Key.D) && ship.PlayerNum == 2) {
+					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+				} else if (Input.GetKey (Key.A) && ship.PlayerNum == 2) {
+					cosAngle = Math.Cos (-angle / 5);
+					sinAngle = Math.Sin (-angle / 5);
 
-				sprite.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-				sprite.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+				}
+				ship.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
 			}
-
-			sprite.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
 		}
 
 		void processInput(Ship ship)
 		{
-			switch (ship.PlayerNum) {
-			case 1:
-				if (Input.GetKeyDown (Key.UP) && ship.StunTimer == 0) {
-					ship.Fire ();
+			if (ship.StunTimer == 0) {
+				switch (ship.PlayerNum) {
+				case 1:
+					if (Input.GetKeyDown (Key.UP) && ship.StunTimer == 0) {
+						ship.Fire ();
+					}
+					break;
+				case 2:
+					if (Input.GetKeyDown (Key.W)) {
+						ship.Fire ();
+					}
+					break;
+				default:
+					break;
 				}
-				break;
-			case 2:
-				if (Input.GetKeyDown (Key.W)) {
-					ship.Fire ();
-				}
-				break;
-			default:
-				break;
 			}
 
 		}

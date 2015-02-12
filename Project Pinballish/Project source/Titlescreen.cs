@@ -48,12 +48,12 @@ namespace GXPEngine
 			{
 				if (_levelselector.y == _startbutton.y)
 				{
-
+					SoundManager.PlaySound (SoundFile.SELECTION, 0.5f);
 					_levelselector.SetXY (450, 350);
 				}
 				else if (_levelselector.y == _controlbutton.y) 
 				{
-
+					SoundManager.PlaySound (SoundFile.SELECTION, 0.5f);
 					_levelselector.SetXY (450, 500);
 				}
 		    }
@@ -63,10 +63,12 @@ namespace GXPEngine
 			{
 				if (_levelselector.y == _quitbutton.y) 
 				{
+					SoundManager.PlaySound (SoundFile.SELECTION);
 					_levelselector.SetXY (450, 350);
 				}
 				else if (_levelselector.y == _controlbutton.y) 
 				{
+					SoundManager.PlaySound (SoundFile.SELECTION);
 					_levelselector.SetXY (450, 200);
 				}
 			

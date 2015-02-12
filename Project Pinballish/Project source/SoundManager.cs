@@ -8,7 +8,7 @@ namespace GXPEngine
 
 	public enum SoundFile
 	{
-		NULL, PEW1, PEW2, MUSIC1, MUSIC2, MUSIC3, MUSICMENU
+		NULL, PEW1, PEW2, MUSIC1, MUSIC2, MUSIC3, MUSICMENU, SELECTION, RICOCHET, ASTEROIDBREAK
 	}
 
 	public class SoundManager
@@ -25,9 +25,12 @@ namespace GXPEngine
 			{SoundFile.PEW1 ,  		new Sound(@"Sounds/laser1.wav")},
 			{SoundFile.PEW2,  		new Sound(@"Sounds/laser2.wav")},
 			{SoundFile.MUSIC1,  	new Sound(@"Sounds/Space odyssey.wav", true, true)},
-			{SoundFile.MUSIC2, 	 	new Sound(@"Sounds/Space odyssey 2.wav", true, true)},
-			{SoundFile.MUSIC3,  	new Sound(@"Sounds/Space odyssey 3.wav", true, true)},
-			{SoundFile.MUSICMENU,  	new Sound(@"Sounds/menu.wav", true, true)}
+			{SoundFile.MUSIC2, 	 	new Sound(@"Sounds/Space odyssey2.wav", true, true)},
+			{SoundFile.MUSIC3,  	new Sound(@"Sounds/Space odyssey3.wav", true, true)},
+			{SoundFile.MUSICMENU,  	new Sound(@"Sounds/menu.wav", true, true)},
+			{SoundFile.SELECTION ,  new Sound(@"Sounds/selection.wav")},
+			{SoundFile.RICOCHET ,  new Sound(@"Sounds/ricochet.wav")},
+			{SoundFile.ASTEROIDBREAK ,  new Sound(@"Sounds/asteroidbreak.wav")},
 
 		};
 
