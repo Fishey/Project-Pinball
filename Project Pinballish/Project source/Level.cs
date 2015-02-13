@@ -12,9 +12,9 @@ namespace GXPEngine
 
 	public class Level : GameObject
 	{
-		private const int HEIGHT 	= 10;
-		private const int WIDTH		= 10;
-		private const int TILESIZE 	= 80;
+		private const int HEIGHT 	= 40;
+		private const int WIDTH		= 40;
+		private const int TILESIZE 	= 20;
 
 		private List<Ship> _ships;
 		private List<Projectile> _projectiles;
@@ -35,13 +35,11 @@ namespace GXPEngine
 
 			AddChild(new Sprite("background.png")); // add a beautiful background
 
-
-
 			_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
 			_projectiles = new List<Projectile> (); // pew pews go here
 			_asteroids = new List<Asteroid> (); // things to pew pew at go here
 			//Create ships
-			_ship = new Ship(ShipSprites.BLUESHARK, 1, MG, this)	;
+			_ship = new Ship(ShipSprites.BLUESHIP, 1, MG, this)	;
 			_ship.position.x = _mg.width/2 + _mg.width/4;
 			_ship.position.y = _mg.height/2 - 50;
 			_ships.Add (_ship);
@@ -109,7 +107,7 @@ namespace GXPEngine
 				}
 
 				foreach (Ship ship in _ships) {
-					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum) {
+					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum && _projectiles[i].CatchTimer ==0) {
 						ship.LaserTimer = 100;
 						ship.StunTimer = 100;
 						_ships [_projectiles [i].PlayerNum].addscore (-10);
@@ -190,32 +188,28 @@ namespace GXPEngine
 			double cosAngle = Math.Cos (angle/5);
 			double sinAngle = Math.Sin (angle/5);
 			// player1 controls
-			if (Input.GetKey(Key.RIGHT) && ship.PlayerNum == 1)
-			{
-				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-			}
-			else if (Input.GetKey(Key.LEFT) && ship.PlayerNum == 1)
-			{
-				cosAngle = Math.Cos (-angle / 5);
-				sinAngle = Math.Sin (-angle / 5);
+			if (ship.StunTimer == 0) {
+				if (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 1) {
+					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+				} else if (Input.GetKey (Key.LEFT) && ship.PlayerNum == 1) {
+					cosAngle = Math.Cos (-angle / 5);
+					sinAngle = Math.Sin (-angle / 5);
 
-				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-			}
-			//player2 controls
-			if (Input.GetKey(Key.D) && ship.PlayerNum == 2)
-			{
-				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-			}
-			else if (Input.GetKey(Key.A) && ship.PlayerNum == 2)
-			{
-				cosAngle = Math.Cos (-angle / 5);
-				sinAngle = Math.Sin (-angle / 5);
+					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+				}
+				//player2 controls
+				if (Input.GetKey (Key.D) && ship.PlayerNum == 2) {
+					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+				} else if (Input.GetKey (Key.A) && ship.PlayerNum == 2) {
+					cosAngle = Math.Cos (-angle / 5);
+					sinAngle = Math.Sin (-angle / 5);
 
-				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+				}
 			}
 			ship.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
 		}
@@ -286,27 +280,27 @@ namespace GXPEngine
 
 		void addAsteroid (int x, int y, int tile)
 		{
-
+			int yplus = 160;
 			switch (tile) {
 
 			case 1: 
 				Asteroid asteroidfull = new Asteroid (2);
 				AddChild (asteroidfull);
-				asteroidfull.SetXY (x+580, y+140);
+				asteroidfull.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroidfull);
 				break;
 
 			case 2:
 				Asteroid asteroidhalf = new Asteroid (1);
 				AddChild (asteroidhalf);
-				asteroidhalf.SetXY (x+580, y+140);
+				asteroidhalf.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroidhalf);
 				break;
 
 			case 3:
 				Asteroid asteroid = new Asteroid (0);
 				AddChild (asteroid);
-				asteroid.SetXY (x+580, y+140);
+				asteroid.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroid);
 				break;
 				

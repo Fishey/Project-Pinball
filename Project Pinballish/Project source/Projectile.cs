@@ -22,13 +22,13 @@ namespace GXPEngine
 			_catchTimer = 50;
 			this.SetOrigin (this.width / 2, this.height / 2);
 			if (playerNum == 1)
-				graphic = new AnimSprite ("Images/BlueLaser.png", 2, 1);
+				graphic = new AnimSprite ("Images/Blue Laser.png", 2, 1);
 			else if (playerNum == 2)
-				graphic = new AnimSprite ("Images/RedLaser.png", 2, 1);
+				graphic = new AnimSprite ("Images/Red Laser.png", 2, 1);
 			this.AddChild (graphic);
 
-			graphic.SetXY (-this.width/2-10, -this.height/2+-10);
-			graphic.SetScaleXY (0.9, 0.9);
+			graphic.SetXY (-this.width/2, -this.height/2);
+			graphic.SetScaleXY (0.5, 0.5);
 			radius = pRadius;
 			position = pPosition;
 			velocity = pVelocity;
