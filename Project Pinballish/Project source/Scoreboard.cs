@@ -10,10 +10,10 @@ namespace GXPEngine
 		PointF ScoreboardPosition;
 
 
-		public Scoreboard (PointF pointy) : base (2000,800)
+		public Scoreboard (PointF pointy, SolidBrush brushy) : base (2000,800)
 		{
 			ScoreboardFont = new Font ("Induction", 30 , FontStyle.Regular);
-			ScoreboardBrush = new SolidBrush (Color.Red);
+			ScoreboardBrush = brushy;
 			ScoreboardPosition = pointy;
 
 		}
@@ -25,7 +25,7 @@ namespace GXPEngine
 
 			graphics.Clear (Color.Transparent);
 
-			graphics.DrawString(scoreMessage, ScoreboardFont, new SolidBrush(Color.Red), ScoreboardPosition);
+			graphics.DrawString(scoreMessage, ScoreboardFont, ScoreboardBrush, ScoreboardPosition);
 
 
 		}

@@ -69,11 +69,11 @@ namespace GXPEngine
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
 
 
-			_scoreboard = new Scoreboard (new PointF (-45,100));
+			_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue));
 			this.AddChild (_scoreboard);
 
 
-			_scoreboard2 = new Scoreboard (new PointF (1690,100));
+			_scoreboard2 = new Scoreboard (new PointF (1690,100), new SolidBrush(Color.Red));
 			this.AddChild (_scoreboard2);
 		
 
@@ -110,7 +110,7 @@ namespace GXPEngine
 					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum && _projectiles[i].CatchTimer ==0) {
 						ship.LaserTimer = 100;
 						ship.StunTimer = 100;
-						_ships [_projectiles [i].PlayerNum].addscore (-10);
+						_ships [_projectiles [i].PlayerNum].addscore (-50);
 						_projectiles [i].Destroy ();
 						_projectiles.Remove (_projectiles [i]);
 						if (i > 0)
