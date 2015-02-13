@@ -24,6 +24,9 @@ namespace GXPEngine
 		private Vec2 _center = null;
 		private int[,] _data = new int[WIDTH,HEIGHT];
 		private HUD _hud;
+		Scoreboard _scoreboard;
+		Scoreboard _scoreboard2;
+
 
 		MyGame _mg;
 
@@ -67,9 +70,24 @@ namespace GXPEngine
 			_hud = new HUD (_mg, this, _ships);
 			this.AddChild (_hud);
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
+
+
+			_scoreboard = new Scoreboard (new PointF (-50,100));
+			this.AddChild (_scoreboard);
+
+
+			_scoreboard2 = new Scoreboard (new PointF (1700,100));
+			this.AddChild (_scoreboard2);
+		
+
+
 		}
 
-
+		public void Scoreboard()
+		{
+			_scoreboard.DrawScore (50);
+			_scoreboard2.DrawScore (50);
+		}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 																//ROTATION AND HIT TEST
@@ -135,6 +153,8 @@ namespace GXPEngine
 				if (_asteroids.Count == 0)
 					_mg.SetState ("level2");
 			}
+			Scoreboard ();
+
 		}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
