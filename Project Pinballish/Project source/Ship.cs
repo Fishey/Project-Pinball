@@ -27,10 +27,10 @@ namespace GXPEngine
 		private int _laserTimer;
 		private int _stunTimer;
 		private int _energy;
-		private int _score;
+		public int _score;
 
 		private Sprite _graphic;
-		private Sprite _shield;
+	//	private Sprite _shield;
 
 		public Ship (ShipSprites imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Hitboxshark.png")
 		{
@@ -70,6 +70,11 @@ namespace GXPEngine
 				return _velocity;
 			}
 		}
+		public void addscore (int score)
+		{
+			_score += score;
+		}
+
 
 		public void Fire()
 		{

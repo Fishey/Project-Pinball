@@ -27,7 +27,6 @@ namespace GXPEngine
 		Scoreboard _scoreboard;
 		Scoreboard _scoreboard2;
 
-
 		MyGame _mg;
 
 		public Level (MyGame MG, int level = 1)
@@ -83,8 +82,9 @@ namespace GXPEngine
 
 		public void Scoreboard()
 		{
-			_scoreboard.DrawScore (50);
-			_scoreboard2.DrawScore (50);
+
+			_scoreboard.DrawScore (_ship._score);
+			_scoreboard2.DrawScore (_ship2._score);
 		}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,10 +155,13 @@ namespace GXPEngine
 							_projectiles [i].velocity.Reflect (normal);
 							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
 							_projectiles[i].HitTimer = 5;
+							_ships [_projectiles [i].PlayerNum - 1].addscore (10);
+
 
 							if (_asteroids [y].TakeDamage ()) {
 								SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
 								_asteroids.Remove (_asteroids [y]);
+								_ships [_projectiles [i].PlayerNum - 1].addscore (10);
 							}
 						}
 					}

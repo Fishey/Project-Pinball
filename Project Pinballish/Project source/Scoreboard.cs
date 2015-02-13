@@ -21,7 +21,7 @@ namespace GXPEngine
 		public void DrawScore (int score)
 		{
 		
-			string scoreMessage = "    " + score;
+			string scoreMessage = "   " + score;
 
 			graphics.Clear (Color.Transparent);
 
