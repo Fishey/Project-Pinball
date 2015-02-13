@@ -5,21 +5,25 @@ namespace GXPEngine
 {
 	public class HUD : GameObject
 	{
-		private AnimSprite shell1;
-		private AnimSprite shell2;
+		private Sprite shell1;
+		private Sprite shell2;
 		private Level _level;
 		private MyGame _game;
 		private List<Ship> _shipList;
+		private List<Sprite> _hpBar1;
+		private List<Sprite> _hpBar2;
 		public HUD (MyGame game, Level level, List<Ship> shipList) : base ()
 		{
 			_level = level;
 			_game = game;
 			_shipList = shipList;
-			shell1 = new AnimSprite ("Images/Shell.png", 1, 1);
+			_hpBar1 = new List<Sprite> ();
+			_hpBar2 = new List<Sprite> ();
+			shell1 = new Sprite ("Images/Shell.png");
 			shell1.SetOrigin (shell1.width, shell1.height);
 			shell1.SetXY(2+shell1.width, this._game.height-shell1.height/2);
 			this.AddChild (shell1);
-			shell2 = new AnimSprite ("Images/Shell.png", 1, 1);
+			shell2 = new Sprite ("Images/Shell.png");
 			shell2.SetOrigin (shell2.width, shell2.height);
 			shell2.SetXY(this._game.width-5, this._game.height-shell2.height/2);
 			this.AddChild (shell2);
@@ -39,6 +43,7 @@ namespace GXPEngine
 							energy = new Sprite ("Images/Mid Energy.png");
 						}
 						shell1.AddChild (energy);
+						_hpBar1.Add (energy);
 						energy.SetXY (-shell1.width+18, -60-position);
 						position += energy.height;
 					}
@@ -54,6 +59,7 @@ namespace GXPEngine
 							energy = new Sprite ("Images/Mid Energy 2.png");
 						}
 						shell2.AddChild (energy);
+						_hpBar2.Add (energy);
 						energy.SetXY (-shell2.width+18, -60-position);
 						position += energy.height;
 					}
@@ -61,10 +67,15 @@ namespace GXPEngine
 				position = 0;
 			}
 		}
-
-		public void Update()
+		public void removeEnergy(Ship ship)
 		{
-		
+			if (ship.PlayerNum == 1) {
+				_hpBar1 [ship.Energy - 1].Destroy ();
+				this.RemoveChild (_hpBar1 [ship.Energy-1]);
+			} else if (ship.PlayerNum == 2) {
+				_hpBar2 [ship.Energy - 1].Destroy ();
+				this.RemoveChild (_hpBar2 [ship.Energy-1]);
+			}
 		}
 	}
 }

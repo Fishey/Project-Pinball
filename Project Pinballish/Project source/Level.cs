@@ -23,6 +23,7 @@ namespace GXPEngine
 		private Ship _ship2 = null;
 		private Vec2 _center = null;
 		private int[,] _data = new int[WIDTH,HEIGHT];
+		private HUD _hud;
 
 		MyGame _mg;
 
@@ -63,8 +64,8 @@ namespace GXPEngine
 			foreach (Asteroid asteroid in _asteroids)
 				AddChild (asteroid);
 				
-			HUD hud = new HUD (_mg, this, _ships);
-			this.AddChild (hud);
+			_hud = new HUD (_mg, this, _ships);
+			this.AddChild (_hud);
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
 		}
 
@@ -203,7 +204,10 @@ namespace GXPEngine
 		}
 
 
-
+		public HUD Hud
+		{
+			get { return this._hud; }
+		}
 
 		public List<Projectile> Projectiles
 		{

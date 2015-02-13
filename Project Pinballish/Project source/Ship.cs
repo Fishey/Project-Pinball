@@ -70,7 +70,8 @@ namespace GXPEngine
 
 		public void Fire()
 		{
-			if (LaserTimer == 0 & StunTimer == 0) {
+			if (LaserTimer == 0 & StunTimer == 0 && Energy > 0) {
+				_level.Hud.removeEnergy (this);
 				_energy--;
 				_laserTimer = 100;
 				Projectile bullet = new Projectile (10, _MG, _level, this.PlayerNum);
