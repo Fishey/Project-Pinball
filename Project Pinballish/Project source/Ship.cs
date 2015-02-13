@@ -27,12 +27,15 @@ namespace GXPEngine
 		private int _laserTimer;
 		private int _stunTimer;
 		private int _energy;
+		private int _score;
 
 		private Sprite _graphic;
+		private Sprite _shield;
 
 		public Ship (ShipSprites imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Hitboxshark.png")
 		{
 			_energy = 10;
+
 			_graphic = new Sprite (SHIP_DICT [imagepath]);
 			_graphic.SetScaleXY (0.1, 0.1);
 			_graphic.SetXY (-165, -47);
@@ -86,6 +89,11 @@ namespace GXPEngine
 				else if (PlayerNum == 2)
 					SoundManager.PlaySound (SoundFile.PEW2);
 			}
+		}
+
+		public void Shield()
+		{
+
 		}
 
 		public int PlayerNum {

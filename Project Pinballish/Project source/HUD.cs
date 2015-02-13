@@ -76,6 +76,7 @@ namespace GXPEngine
 			} else if (ship.PlayerNum == 2) {
 				_hpBar2 [ship.Energy - 1].Destroy ();
 				this.RemoveChild (_hpBar2 [ship.Energy-1]);
+				_hpBar2.Remove (_hpBar2 [ship.Energy - 1]);
 			}
 		}
 
@@ -101,6 +102,22 @@ namespace GXPEngine
 				foreach(Sprite _energy in _hpBar1)
 					Console.WriteLine ("{0},{1}",_energy.x, _energy.y);
 			} else if (ship.PlayerNum == 2) {
+				Sprite energy;
+				if (_hpBar2.Count == 9) {
+					energy = new Sprite ("Images/Top Energy 2.png");
+				} else if (_hpBar2.Count < 9 && _hpBar2.Count > 0) {
+					energy = new Sprite ("Images/Mid Energy 2.png");
+				} else {
+					energy = new Sprite ("Images/Bottom Energy 2.png");
+				}
+				if (_hpBar2.Count > 0)
+					energy.SetXY (_hpBar2 [ship.Energy - 2].x, _hpBar2 [ship.Energy - 2].y - energy.height);
+				else {
+					energy.SetXY (-shell2.width+18, -60);
+
+				}
+				_hpBar2.Add (energy);
+				shell2.AddChild (energy);
 			}
 
 		}

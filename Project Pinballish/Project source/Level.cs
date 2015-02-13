@@ -103,6 +103,7 @@ namespace GXPEngine
 
 			for (int i = _projectiles.Count - 1; i >= 0; i--)
 			{
+				bool projectilebroken;
 				if (_projectiles [i].Step ()) { // if object destroyed
 					continue;
 				}
@@ -113,6 +114,8 @@ namespace GXPEngine
 						ship.StunTimer = 100;
 						_projectiles [i].Destroy ();
 						_projectiles.Remove (_projectiles [i]);
+						if (i > 0)
+						i--;
 						break;
 					} else if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum == ship.PlayerNum && Projectiles[i].CatchTimer == 0)
 					{
@@ -121,6 +124,8 @@ namespace GXPEngine
 						_projectiles [i].CatchTimer = 50;
 						_projectiles [i].Destroy ();
 						_projectiles.Remove (_projectiles [i]);
+						if (i > 0)
+						i--;
 						break;
 					}
 				}
@@ -144,13 +149,14 @@ namespace GXPEngine
 					if (_projectiles.Count > 0) {
 					for (int y = _asteroids.Count - 1; y >= 0; y--)
 					{
-						if (_projectiles [i].HitTest (_asteroids[y])) {
+						if (_projectiles [i].HitTest (_asteroids[y]) && _projectiles[i].HitTimer == 0) {
 							SoundManager.PlaySound (SoundFile.RICOCHET);
 							float dx = _asteroids[y].x - _projectiles [i].position.x;
 							float dy = _asteroids[y].y - _projectiles [i].position.y;
 							Vec2 normal = new Vec2 (dx, dy).Normalize ();
 							_projectiles [i].velocity.Reflect (normal);
 							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
+							_projectiles[i].HitTimer = 5;
 
 							if (_asteroids [y].TakeDamage ()) {
 								SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);

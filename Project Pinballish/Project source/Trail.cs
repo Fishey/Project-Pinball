@@ -14,14 +14,13 @@ namespace GXPEngine
 			if (player == 1)
 				graphic = new AnimSprite ("Images/BlueLaser.png", 2, 1);
 			else if (player == 2)
-				graphic = new AnimSprite ("Images/RedLaser.png", 2, 1);
+				graphic = new AnimSprite ("Images/Red Laser.png", 2, 1);
 			graphic.SetFrame (1);
 			this.AddChild (graphic);
 			_timer = 100;
 			_level = level;
 			graphic.SetScaleXY (0.5, 0.5);
 			graphic.SetXY (-25, -20);
-			graphic.rotation += 90;
 			SetOrigin (this.width / 2, 38);
 		}
 

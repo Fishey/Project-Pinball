@@ -14,6 +14,7 @@ namespace GXPEngine
 
 		private int _playerNum;
 		private int _catchTimer;
+		private int _hitTimer;
 		private AnimSprite graphic;
 
 		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base ("Images/LaserHitbox.png")
@@ -66,6 +67,11 @@ namespace GXPEngine
 			set { this._catchTimer = value; }
 		}
 
+		public int HitTimer {
+			get { return this._hitTimer; }
+			set { this._hitTimer = value; }
+		}
+
 		public bool Step () {
 			_position.Add (_velocity);
 			x = (float)_position.x;
@@ -76,6 +82,8 @@ namespace GXPEngine
 			_level.AddChild (trail);
 			if (_catchTimer > 0)
 				_catchTimer--;
+			if (_hitTimer > 0)
+				_hitTimer--;
 			if ( this.position.x < 0 || this.position.x > _MG.width || this.position.y < 0 || this.position.y > _MG.height) {
 				_level.RemoveChild (this);
 				_level.Projectiles.Remove (this);
