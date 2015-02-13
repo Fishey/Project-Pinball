@@ -12,12 +12,12 @@ namespace GXPEngine
 		public Trail (Level level, int player) : base ("Images/LaserHitbox.png",1,1)
 		{
 			if (player == 1)
-				graphic = new AnimSprite ("Images/BlueLaser.png", 2, 1);
+				graphic = new AnimSprite ("Images/Blue Laser.png", 2, 1);
 			else if (player == 2)
 				graphic = new AnimSprite ("Images/Red Laser.png", 2, 1);
 			graphic.SetFrame (1);
 			this.AddChild (graphic);
-			_timer = 100;
+			_timer = 50;
 			_level = level;
 			graphic.SetScaleXY (0.5, 0.5);
 			graphic.SetXY (-25, -20);
