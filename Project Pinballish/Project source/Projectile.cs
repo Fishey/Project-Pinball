@@ -13,10 +13,12 @@ namespace GXPEngine
 		private Level _level;
 
 		private int _playerNum;
+		private int _catchTimer;
 		private AnimSprite graphic;
 
 		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base ("Images/LaserHitbox.png")
 		{
+			_catchTimer = 50;
 			this.SetOrigin (this.width / 2, this.height / 2);
 			if (playerNum == 1)
 				graphic = new AnimSprite ("Images/BlueLaser.png", 2, 1);
@@ -59,6 +61,11 @@ namespace GXPEngine
 			get { return this._playerNum; }
 		}
 
+		public int CatchTimer {
+			get { return this._catchTimer; }
+			set { this._catchTimer = value; }
+		}
+
 		public bool Step () {
 			_position.Add (_velocity);
 			x = (float)_position.x;
@@ -67,6 +74,8 @@ namespace GXPEngine
 			trail.SetXY (this.x, this.y);
 			trail.rotation = this.rotation;
 			_level.AddChild (trail);
+			if (_catchTimer > 0)
+				_catchTimer--;
 			if ( this.position.x < 0 || this.position.x > _MG.width || this.position.y < 0 || this.position.y > _MG.height) {
 				_level.RemoveChild (this);
 				_level.Projectiles.Remove (this);

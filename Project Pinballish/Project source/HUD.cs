@@ -72,10 +72,37 @@ namespace GXPEngine
 			if (ship.PlayerNum == 1) {
 				_hpBar1 [ship.Energy - 1].Destroy ();
 				this.RemoveChild (_hpBar1 [ship.Energy-1]);
+				_hpBar1.Remove (_hpBar1 [ship.Energy - 1]);
 			} else if (ship.PlayerNum == 2) {
 				_hpBar2 [ship.Energy - 1].Destroy ();
 				this.RemoveChild (_hpBar2 [ship.Energy-1]);
 			}
+		}
+
+		public void addEnergy(Ship ship)
+		{
+			if (ship.PlayerNum == 1) {
+				Sprite energy;
+				if (_hpBar1.Count == 9) {
+					energy = new Sprite ("Images/Top Energy.png");
+				} else if (_hpBar1.Count < 9 && _hpBar1.Count > 0) {
+					energy = new Sprite ("Images/Mid Energy.png");
+				} else {
+					energy = new Sprite ("Images/Bottom Energy.png");
+				}
+				if (_hpBar1.Count > 0)
+					energy.SetXY (_hpBar1 [ship.Energy - 2].x, _hpBar1 [ship.Energy - 2].y - energy.height);
+				else {
+					energy.SetXY (-shell1.width+18, -60);
+
+				}
+				_hpBar1.Add (energy);
+				shell1.AddChild (energy);
+				foreach(Sprite _energy in _hpBar1)
+					Console.WriteLine ("{0},{1}",_energy.x, _energy.y);
+			} else if (ship.PlayerNum == 2) {
+			}
+
 		}
 	}
 }

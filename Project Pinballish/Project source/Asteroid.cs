@@ -10,7 +10,7 @@ namespace GXPEngine
 		{
 			_graphic = new AnimSprite ("Images/Asteroid.png", 1, 1);
 			this.SetOrigin (this.width / 2, this.height / 2);
-			this.AddChild (_graphic);
+			//this.AddChild (_graphic);
 			_graphic.SetXY (-110, -100);
 			_damagecounter = damage;
 			this.SetScaleXY (0.5, 0.5);

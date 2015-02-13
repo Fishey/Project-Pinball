@@ -76,7 +76,6 @@ namespace GXPEngine
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		void Update() {
-			Console.WriteLine (_ships [1].position);
 			foreach (Ship ship in _ships) {
 				rotateAroundPoint (ship, _center, (float)(5 * Math.PI / 180.0f)); // make the ships turn around the center of the screen
 				processInput (ship);
@@ -88,7 +87,25 @@ namespace GXPEngine
 			{
 				if (_projectiles [i].Step ()) { // if object destroyed
 					continue;
-				} 
+				}
+
+				foreach (Ship ship in _ships) {
+					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum) {
+						ship.LaserTimer = 100;
+						ship.StunTimer = 100;
+						_projectiles [i].Destroy ();
+						_projectiles.Remove (_projectiles [i]);
+						break;
+					} else if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum == ship.PlayerNum && Projectiles[i].CatchTimer == 0)
+					{
+						ship.Energy++;
+						this.Hud.addEnergy (ship);
+						_projectiles [i].CatchTimer = 50;
+						_projectiles [i].Destroy ();
+						_projectiles.Remove (_projectiles [i]);
+						break;
+					}
+				}
 /*
 				else {
 					for (int y = _projectiles.Count - 1; y >= 0; y--)
@@ -124,12 +141,7 @@ namespace GXPEngine
 						}
 					}
 
-					foreach (Ship ship in _ships) {
-						if (_projectiles [i].HitTest (ship) && _projectiles[i].PlayerNum != ship.PlayerNum) {
-							ship.LaserTimer = 100;
-							ship.StunTimer = 100;
-						}
-					}
+
 				}
 
 				if (_asteroids.Count == 0)
