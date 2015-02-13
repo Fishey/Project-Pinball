@@ -26,11 +26,13 @@ namespace GXPEngine
 		private int _playNum;
 		private int _laserTimer;
 		private int _stunTimer;
+		private int _energy;
 
 		private Sprite _graphic;
 
 		public Ship (ShipSprites imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Hitboxshark.png")
 		{
+			_energy = 10;
 			_graphic = new Sprite (SHIP_DICT [imagepath]);
 			_graphic.SetScaleXY (0.1, 0.1);
 			_graphic.SetXY (-165, -47);
@@ -42,8 +44,8 @@ namespace GXPEngine
 			_MG = MG;
 			_level = level;
 			this.SetOrigin (this.width, this.height / 2);
-			if (PlayerNum == 2)
-				this.Mirror (true, false);
+			if (PlayerNum == 1)
+				this.Mirror (false, true);
 			x = (float)position.x;
 			y = (float)position.y;
 		}
@@ -69,10 +71,11 @@ namespace GXPEngine
 		public void Fire()
 		{
 			if (LaserTimer == 0 & StunTimer == 0) {
+				_energy--;
 				_laserTimer = 100;
 				Projectile bullet = new Projectile (10, _MG, _level, this.PlayerNum);
 				bullet.position = this.position.Clone ();
-				bullet.velocity = new Vec2 (5, 0);
+				bullet.velocity = new Vec2 (15, 0);
 				bullet.velocity.SetAngleDegrees (this.rotation);
 				bullet.rotation = this.rotation;
 				_level.Projectiles.Add (bullet);
@@ -96,6 +99,10 @@ namespace GXPEngine
 		public int StunTimer {
 			get { return this._stunTimer; }
 			set { this._stunTimer = value; }
+		}
+
+		public int Energy {
+			get { return this._energy;}
 		}
 
 		public void Step () {

@@ -31,6 +31,9 @@ namespace GXPEngine
 			_mg = MG;
 
 			AddChild(new Sprite("background.png")); // add a beautiful background
+
+
+
 			_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
 			_projectiles = new List<Projectile> (); // pew pews go here
 			_asteroids = new List<Asteroid> (); // things to pew pew at go here
@@ -51,7 +54,6 @@ namespace GXPEngine
 					int tile = _data [j, i];
 					if (tile != 0)
 						addAsteroid (i * TILESIZE, j * TILESIZE, tile);
-
 				}
 			}
 				
@@ -61,6 +63,8 @@ namespace GXPEngine
 			foreach (Asteroid asteroid in _asteroids)
 				AddChild (asteroid);
 				
+			HUD hud = new HUD (_mg, this, _ships);
+			this.AddChild (hud);
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
 		}
 
