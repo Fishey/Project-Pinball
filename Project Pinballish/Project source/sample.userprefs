@@ -1,18 +1,17 @@
 ﻿<Properties StartupItem="sample.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Asteroid.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Level.cs">
     <Files>
-      <File FileName="MyGame.cs" Line="1" Column="1" />
-      <File FileName="Level.cs" Line="1" Column="1" />
-      <File FileName="Ship.cs" Line="2" Column="2" />
+      <File FileName="MyGame.cs" Line="4" Column="4" />
+      <File FileName="Titlescreen.cs" Line="1" Column="1" />
+      <File FileName="ControlScreen.cs" Line="1" Column="1" />
+      <File FileName="Level.cs" Line="7" Column="7" />
+      <File FileName="Ship.cs" Line="5" Column="5" />
       <File FileName="Projectile.cs" Line="1" Column="1" />
       <File FileName="Asteroid.cs" Line="1" Column="1" />
-      <File FileName="HUD.cs" Line="1" Column="1" />
-      <File FileName="SoundManager.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\Core\Texture2D.cs" Line="1" Column="1" />
+      <File FileName="StartButton.cs" Line="1" Column="1" />
       <File FileName="Trail.cs" Line="1" Column="1" />
-      <File FileName="Titlescreen.cs" Line="1" Column="1" />
-      <File FileName="..\..\Components\Ball.cs" Line="1" Column="1" />
+      <File FileName="Scoreboard.cs" Line="6" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
