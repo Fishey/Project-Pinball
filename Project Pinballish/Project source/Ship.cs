@@ -76,6 +76,7 @@ namespace GXPEngine
 		}
 
 
+
 		public void Fire()
 		{
 			if (LaserTimer == 0 & StunTimer == 0 && Energy > 0) {
