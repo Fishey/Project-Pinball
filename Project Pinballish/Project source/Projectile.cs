@@ -17,7 +17,7 @@ namespace GXPEngine
 		private int _hitTimer;
 		private AnimSprite graphic;
 
-		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius)
+		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius, null, null, Color.Transparent)
 		{
 			_catchTimer = 50;
 			this.SetOrigin (this.width / 2, this.height / 2+20);
@@ -26,7 +26,7 @@ namespace GXPEngine
 			else if (playerNum == 2)
 				graphic = new AnimSprite ("Images/Red Laser.png", 1, 1);
 			this.AddChild (graphic);
-			graphic.SetXY (-this.width/2-20, -this.height/2-18);
+			graphic.SetXY (-this.width/2, -this.height/2-30);
 			graphic.SetScaleXY (0.5, 0.5);
 			this.SetScaleXY (0.5, 0.5);
 			radius = pRadius;

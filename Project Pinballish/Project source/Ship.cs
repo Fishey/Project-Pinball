@@ -110,10 +110,10 @@ namespace GXPEngine
 				_shield = new Shield ();
 				AddChild (_shield);
 
-//				if (PlayerNum == 1)
-//					SoundManager.PlaySound (SoundFile.Voom);
-//				else if (PlayerNum == 2)
-//					SoundManager.PlaySound (SoundFile.Voom2);
+				if (PlayerNum == 1)
+					SoundManager.PlaySound (SoundFile.SHIELD1);
+				else if (PlayerNum == 2)
+					SoundManager.PlaySound (SoundFile.SHIELD2);
 				 
 			}
 		}

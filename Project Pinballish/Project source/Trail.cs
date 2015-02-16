@@ -17,17 +17,17 @@ namespace GXPEngine
 				graphic = new AnimSprite ("Images/Red Laser.png", 1, 1);
 			graphic.SetFrame (0);
 			this.AddChild (graphic);
-			_timer = 100;
+			_timer = 50;
 			_level = level;
 			graphic.SetScaleXY (0.25, 0.25);
-			graphic.SetXY (-25, -20);
+			graphic.SetXY (0, -20);
 			SetOrigin (this.width / 2, 38);
 		}
 
 		public void Update()
 		{
 			if (_timer > 0) {
-				this.graphic.alpha = (float)_timer / 100;
+				this.graphic.alpha = (float)_timer / 50;
 				_timer--;
 			} else {
 				_level.RemoveChild (this);

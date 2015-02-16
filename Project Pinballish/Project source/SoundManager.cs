@@ -8,7 +8,7 @@ namespace GXPEngine
 
 	public enum SoundFile
 	{
-		NULL, PEW1, PEW2, MUSIC1, MUSIC2, MUSIC3, MUSICMENU, SELECTION, RICOCHET, ASTEROIDBREAK
+		NULL, PEW1, PEW2, MUSIC1, MUSIC2, MUSIC3, MUSICMENU, SELECTION, RICOCHET, ASTEROIDBREAK, SHIELD1, SHIELD2
 	}
 
 	public class SoundManager
@@ -31,6 +31,9 @@ namespace GXPEngine
 			{SoundFile.SELECTION ,  new Sound(@"Sounds/selection.wav")},
 			{SoundFile.RICOCHET ,  new Sound(@"Sounds/ricochet.wav")},
 			{SoundFile.ASTEROIDBREAK ,  new Sound(@"Sounds/asteroidbreak.wav")},
+			{SoundFile.SHIELD1 ,  new Sound(@"Sounds/Shield 1.wav")},
+			{SoundFile.SHIELD2 ,  new Sound(@"Sounds/Shield 2.wav")},
+
 
 		};
 
