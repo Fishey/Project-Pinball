@@ -69,11 +69,11 @@ namespace GXPEngine
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
 
 
-			_scoreboard = new Scoreboard (new PointF (-50,100));
+			_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue));
 			this.AddChild (_scoreboard);
 
 
-			_scoreboard2 = new Scoreboard (new PointF (1700,100));
+			_scoreboard2 = new Scoreboard (new PointF (1690,100), new SolidBrush(Color.Red));
 			this.AddChild (_scoreboard2);
 		
 
@@ -94,6 +94,7 @@ namespace GXPEngine
 		void Update() {
 			foreach (Ship ship in _ships) {
 				rotateAroundPoint (ship, _center, (float)(5 * Math.PI / 180.0f)); // make the ships turn around the center of the screen
+				rotateAsteroids (_center);
 				processInput (ship);
 				ship.Step ();
 			}
@@ -110,6 +111,11 @@ namespace GXPEngine
 					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum && _projectiles[i].CatchTimer ==0) {
 						ship.LaserTimer = 100;
 						ship.StunTimer = 100;
+<<<<<<< HEAD
+						_ships [_projectiles [i].PlayerNum].addscore (-50);
+=======
+						_ships [_projectiles [i].PlayerNum-1].addscore (-10);
+>>>>>>> origin/master
 						_projectiles [i].Destroy ();
 						_projectiles.Remove (_projectiles [i]);
 						if (i > 0)
@@ -168,9 +174,9 @@ namespace GXPEngine
 
 
 				}
-
+				/*
 				if (_asteroids.Count == 0)
-					_mg.SetState ("level2");
+					_mg.SetState ("level2");*/
 			}
 			Scoreboard ();
 
@@ -211,6 +217,22 @@ namespace GXPEngine
 				}
 			}
 			ship.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
+		}
+
+		void rotateAsteroids(Vec2 center, float angle = 5 * (float)Math.PI / 2880.0f)
+		{
+
+			double cosAngle = Math.Cos (angle/5);
+			double sinAngle = Math.Sin (angle/5);
+			foreach (Asteroid asteroid in _asteroids) {
+				double dx = asteroid.x - center.x;
+				double dy = asteroid.y - center.y;
+
+				asteroid.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+				asteroid.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+
+
+			}
 		}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

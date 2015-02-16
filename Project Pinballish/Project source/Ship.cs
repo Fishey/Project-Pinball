@@ -76,6 +76,7 @@ namespace GXPEngine
 		}
 
 
+
 		public void Fire()
 		{
 			if (LaserTimer == 0 & StunTimer == 0 && Energy > 0) {
@@ -84,7 +85,7 @@ namespace GXPEngine
 				_laserTimer = 100;
 				Projectile bullet = new Projectile (10, _MG, _level, this.PlayerNum);
 				bullet.position = this.position.Clone ();
-				bullet.velocity = new Vec2 (5, 0);
+				bullet.velocity = new Vec2 (10, 0);
 				bullet.velocity.SetAngleDegrees (this.rotation);
 				bullet.rotation = this.rotation;
 				_level.Projectiles.Add (bullet);
