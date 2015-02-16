@@ -21,11 +21,11 @@ namespace GXPEngine
 			_hpBar2 = new List<Sprite> ();
 			shell1 = new Sprite ("Images/Shell.png");
 			shell1.SetOrigin (shell1.width, shell1.height);
-			shell1.SetXY(2+shell1.width, this._game.height-shell1.height/2);
+			shell1.SetXY(2 + shell1.width, this._game.height - shell1.height/3.5  );
 			this.AddChild (shell1);
 			shell2 = new Sprite ("Images/Shell.png");
 			shell2.SetOrigin (shell2.width, shell2.height);
-			shell2.SetXY(this._game.width-5, this._game.height-shell2.height/2);
+			shell2.SetXY(this._game.width - 5, this._game.height - shell2.height/3.5);
 			this.AddChild (shell2);
 
 			for (int i = 0; i < _shipList.Count; i++) {
