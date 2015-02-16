@@ -14,12 +14,12 @@ namespace GXPEngine
 			if (player == 1)
 				graphic = new AnimSprite ("Images/Blue Laser.png", 2, 1);
 			else if (player == 2)
-				graphic = new AnimSprite ("Images/Red Laser.png", 2, 1);
-			graphic.SetFrame (1);
+				graphic = new AnimSprite ("Images/Red Laser.png", 1, 1);
+			graphic.SetFrame (0);
 			this.AddChild (graphic);
 			_timer = 50;
 			_level = level;
-			graphic.SetScaleXY (0.5, 0.5);
+			graphic.SetScaleXY (0.25, 0.25);
 			graphic.SetXY (-25, -20);
 			SetOrigin (this.width / 2, 38);
 		}
@@ -27,7 +27,7 @@ namespace GXPEngine
 		public void Update()
 		{
 			if (_timer > 0) {
-				this.alpha = (float)_timer / 100;
+				this.graphic.alpha = (float)_timer / 50;
 				_timer--;
 			} else {
 				_level.RemoveChild (this);

@@ -290,7 +290,7 @@ namespace GXPEngine
 				break;
 
 			case 2:
-				Asteroid asteroidhalf = new Asteroid (1);
+				Asteroid asteroidhalf = new Asteroid (1, 40);
 				AddChild (asteroidhalf);
 				asteroidhalf.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroidhalf);

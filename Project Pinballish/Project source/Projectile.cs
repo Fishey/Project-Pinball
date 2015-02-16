@@ -20,15 +20,15 @@ namespace GXPEngine
 		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base ("Images/LaserHitbox.png")
 		{
 			_catchTimer = 50;
-			this.SetOrigin (this.width / 2, this.height / 2);
+			this.SetOrigin (this.width / 2, this.height / 2+20);
 			if (playerNum == 1)
 				graphic = new AnimSprite ("Images/Blue Laser.png", 2, 1);
 			else if (playerNum == 2)
-				graphic = new AnimSprite ("Images/Red Laser.png", 2, 1);
+				graphic = new AnimSprite ("Images/Red Laser.png", 1, 1);
 			this.AddChild (graphic);
-
-			graphic.SetXY (-this.width/2, -this.height/2);
+			graphic.SetXY (-this.width/2-20, -this.height/2-18);
 			graphic.SetScaleXY (0.5, 0.5);
+			this.SetScaleXY (0.5, 0.5);
 			radius = pRadius;
 			position = pPosition;
 			velocity = pVelocity;
@@ -38,6 +38,7 @@ namespace GXPEngine
 
 			x = (float)position.x;
 			y = (float)position.y;
+
 		}
 
 		public Vec2 position {

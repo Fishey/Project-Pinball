@@ -12,7 +12,7 @@ namespace GXPEngine
 		{
 			{ShipSprites.REDSHARK ,  		"Images/RedShark.png"},
 			{ShipSprites.BLUESHARK,  		"Images/BlueShark.png"},
-			{ShipSprites.REDSHIP,  			"Images/RedShip.png"},
+			{ShipSprites.REDSHIP,  			"Images/RedSpaceship.png"},
 			{ShipSprites.BLUESHIP, 	 		"Images/BlueSpaceship.png"},
 
 		};
