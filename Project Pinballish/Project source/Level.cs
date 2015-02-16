@@ -111,11 +111,11 @@ namespace GXPEngine
 					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum && _projectiles[i].CatchTimer ==0) {
 						ship.LaserTimer = 100;
 						ship.StunTimer = 100;
-<<<<<<< HEAD
-						_ships [_projectiles [i].PlayerNum].addscore (-50);
-=======
-						_ships [_projectiles [i].PlayerNum-1].addscore (-10);
->>>>>>> origin/master
+						if (_projectiles [i].PlayerNum == 1)
+							_ships [1].addscore (-50);
+						else
+							_ships [0].addscore (-50);
+
 						_projectiles [i].Destroy ();
 						_projectiles.Remove (_projectiles [i]);
 						if (i > 0)
