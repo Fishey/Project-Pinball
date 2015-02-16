@@ -38,7 +38,6 @@ C:\Users\Randy\Google Drive\Project Pinballish\Project-Pinball-master\Project-Pi
 C:\Users\Randy\Google Drive\Project Pinballish\Project-Pinball-master\Project-Pinball-master\Project Pinballish\Project source\bin\Debug\GXPEngine.pdb
 C:\Users\Randy\Google Drive\Project Pinballish\Project-Pinball-master\Project-Pinball-master\Project Pinballish\Project source\obj\x86\Debug\GXPEngine.exe
 C:\Users\Randy\Google Drive\Project Pinballish\Project-Pinball-master\Project-Pinball-master\Project Pinballish\Project source\obj\x86\Debug\GXPEngine.pdb
-C:\Users\Zishan\Documents\GitHub\Project-Pinball\Project Pinballish\Project source\obj\x86\Debug\sample.csprojResolveAssemblyReference.cache
 C:\Users\Zishan\Documents\GitHub\Project-Pinball\Project Pinballish\Project source\obj\x86\Debug\GXPEngine.exe
 C:\Users\Zishan\Documents\GitHub\Project-Pinball\Project Pinballish\Project source\bin\Debug\GXPEngine.exe
 C:\Users\Zishan\Documents\GitHub\Project-Pinball\Project Pinballish\Project source\bin\Debug\GXPEngine.pdb

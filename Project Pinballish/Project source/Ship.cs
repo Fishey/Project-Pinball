@@ -30,10 +30,11 @@ namespace GXPEngine
 		private int _speed;
 
 		public int _score;
+		private int _shieldTimer;
 
 
 		private Sprite _graphic;
-	//	private Sprite _shield;
+		private Shield _shield;
 
 		public Ship (ShipSprites imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Images/Hitboxshark.png")
 		{
@@ -101,7 +102,20 @@ namespace GXPEngine
 
 		public void Shield()
 		{
+			if (ShieldTimer == 0 && Energy > 0)
+			{
+				_level.Hud.removeEnergy (this);
+				_energy--;
+				_shieldTimer = 200;
+				_shield = new Shield ();
+				AddChild (_shield);
 
+//				if (PlayerNum == 1)
+//					SoundManager.PlaySound (SoundFile.Voom);
+//				else if (PlayerNum == 2)
+//					SoundManager.PlaySound (SoundFile.Voom2);
+				 
+			}
 		}
 
 		public int PlayerNum {
@@ -117,6 +131,12 @@ namespace GXPEngine
 			get { return this._stunTimer; }
 			set { this._stunTimer = value; }
 		}
+
+		public int ShieldTimer {
+			get { return this._shieldTimer; }
+			set { this._shieldTimer = value; }
+
+			}
 
 		public int Energy {
 			get { return this._energy;}
@@ -134,6 +154,12 @@ namespace GXPEngine
 				_laserTimer--;
 			if (StunTimer > 0)
 				_stunTimer--;
+			if (ShieldTimer > 0)
+				_shieldTimer--;
+			if (_shieldTimer <100 && this.HasChild(_shield))
+				this.RemoveChild (_shield);
+
+
 			_position.Add (_velocity);
 			x = (float)_position.x;
 			y = (float)_position.y;
