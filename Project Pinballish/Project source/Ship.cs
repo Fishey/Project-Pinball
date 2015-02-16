@@ -44,10 +44,12 @@ namespace GXPEngine
 		{
 			_energy = 10;
 			_speed = 1;
+			
 			_firstFrame = SHIP_DICT [imagepath][0];
 			_lastFrame = SHIP_DICT [imagepath] [1];
 			_graphic = new AnimSprite ("Images/SpriteSheet.png", 16, 16);	
-			_graphic.SetXY (-165, -47);
+			_graphic.SetXY (-140, -80);
+			_graphic.SetScaleXY (0.8, 0.8);
 			this._graphic.SetFrame (_firstFrame);
 			this.AddChild (_graphic);
 			this._laser = new AnimSprite ("Images/SpriteSheet.png", 16, 16);

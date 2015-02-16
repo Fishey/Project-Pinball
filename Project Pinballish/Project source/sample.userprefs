@@ -2,14 +2,17 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Ship.cs">
     <Files>
-      <File FileName="Level.cs" Line="51" Column="51" />
-      <File FileName="Ship.cs" Line="7" Column="7" />
-      <File FileName="Projectile.cs" Line="14" Column="14" />
-      <File FileName="Asteroid.cs" Line="4" Column="4" />
+      <File FileName="Level.cs" Line="77" Column="77" />
+      <File FileName="Ship.cs" Line="138" Column="138" />
+      <File FileName="Projectile.cs" Line="32" Column="32" />
+      <File FileName="Asteroid.cs" Line="99" Column="99" />
       <File FileName="HUD.cs" Line="1" Column="1" />
-      <File FileName="Trail.cs" Line="15" Column="15" />
+      <File FileName="Trail.cs" Line="20" Column="20" />
       <File FileName="Titlescreen.cs" Line="1" Column="1" />
-      <File FileName="MyGame.cs" Line="2" Column="2" />
+      <File FileName="MyGame.cs" Line="6" Column="6" />
+      <File FileName="SoundManager.cs" Line="54" Column="54" />
+      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\Sprite.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\AnimSprite.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
