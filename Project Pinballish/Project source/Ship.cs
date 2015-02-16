@@ -7,13 +7,13 @@ namespace GXPEngine
 	public class Ship : Sprite
 	{
 
-		public static readonly Dictionary<ShipSprites, String> SHIP_DICT
-		= new Dictionary<ShipSprites, String>
+		public static readonly Dictionary<ShipSprites, int[]> SHIP_DICT
+		= new Dictionary<ShipSprites, int[]>
 		{
-			{ShipSprites.REDSHARK ,  		"Images/RedShark.png"},
-			{ShipSprites.BLUESHARK,  		"Images/BlueShark.png"},
-			{ShipSprites.REDSHIP,  			"Images/RedSpaceship.png"},
-			{ShipSprites.BLUESHIP, 	 		"Images/BlueSpaceship.png"},
+			{ShipSprites.REDSHARK ,  		new int[2]{0,1}},
+			{ShipSprites.BLUESHARK,  		new int[2]{2,3}},
+			{ShipSprites.REDSHIP,  			new int[2]{4,5}},
+			{ShipSprites.BLUESHIP, 	 		new int[2]{6,7}},
 
 		};
 
@@ -28,23 +28,37 @@ namespace GXPEngine
 		private int _stunTimer;
 		private int _energy;
 		private int _speed;
+		private int _firstFrame;
+		private int _lastFrame;
+		private float _frame; 
 
 		public int _score;
 		private int _shieldTimer;
 
 
-		private Sprite _graphic;
+		private AnimSprite _graphic;
 		private Shield _shield;
+		private AnimSprite _laser;
 
 		public Ship (ShipSprites imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Images/Hitboxshark.png")
 		{
 			_energy = 10;
 			_speed = 1;
-
-			_graphic = new Sprite (SHIP_DICT [imagepath]);
-			_graphic.SetScaleXY (0.1, 0.1);
+			_firstFrame = SHIP_DICT [imagepath][0];
+			_lastFrame = SHIP_DICT [imagepath] [1];
+			_graphic = new AnimSprite ("Images/SpriteSheet.png", 16, 16);	
 			_graphic.SetXY (-165, -47);
+			this._graphic.SetFrame (_firstFrame);
 			this.AddChild (_graphic);
+			this._laser = new AnimSprite ("Images/SpriteSheet.png", 16, 16);
+
+			if (PlayerNum == 1) {
+				this._laser.SetFrame (6);
+				this.AddChild (_laser);
+			} else if (PlayerNum == 2) {
+				this._laser.SetFrame (7);
+				this.AddChild (_laser);
+			}
 
 			position = pPosition;
 			velocity = pVelocity;
@@ -52,8 +66,7 @@ namespace GXPEngine
 			_MG = MG;
 			_level = level;
 			this.SetOrigin (this.width, this.height / 2);
-			if (PlayerNum == 1)
-				this.Mirror (false, true);
+
 			x = (float)position.x;
 			y = (float)position.y;
 		}
@@ -97,6 +110,8 @@ namespace GXPEngine
 					SoundManager.PlaySound (SoundFile.PEW1);
 				else if (PlayerNum == 2)
 					SoundManager.PlaySound (SoundFile.PEW2);
+			} else {
+				SoundManager.PlaySound (SoundFile.ENERGYLOW);
 			}
 		}
 
@@ -116,6 +131,11 @@ namespace GXPEngine
 					SoundManager.PlaySound (SoundFile.SHIELD2);
 				 
 			}
+		}
+
+		public void Flip(bool horizontal = false, bool vertical = false)
+		{
+			_graphic.Mirror (horizontal, vertical);
 		}
 
 		public int PlayerNum {
@@ -149,14 +169,26 @@ namespace GXPEngine
 
 		}
 
+		public void UpdateAnimation() // Continuously loop through the frames based on the maximum and
+		{
+			_frame = _frame + 0.1f;
+			if (_frame >= _lastFrame + 1)
+				_frame = _firstFrame;
+			if (_frame < _firstFrame)
+				_frame = _firstFrame;
+			_graphic.SetFrame ((int)_frame);
+		}
+
 		public void Step () {
+
+			UpdateAnimation ();
 			if (LaserTimer > 0)
 				_laserTimer--;
 			if (StunTimer > 0)
 				_stunTimer--;
 			if (ShieldTimer > 0)
 				_shieldTimer--;
-			if (_shieldTimer <100 && this.HasChild(_shield))
+			if (_shieldTimer < 100 && this.HasChild(_shield))
 				this.RemoveChild (_shield);
 
 

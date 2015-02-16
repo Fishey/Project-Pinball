@@ -23,9 +23,6 @@ namespace GXPEngine
 		private Ship _ship2 = null;
 		private Vec2 _center = null;
 		private int[,] _data = new int[WIDTH,HEIGHT];
-		private HUD _hud;
-		Scoreboard _scoreboard;
-		Scoreboard _scoreboard2;
 
 		MyGame _mg;
 
@@ -40,13 +37,13 @@ namespace GXPEngine
 			_asteroids = new List<Asteroid> (); // things to pew pew at go here
 			//Create ships
 			_ship = new Ship(ShipSprites.BLUESHIP, 1, MG, this)	;
-			_ship.position.x = _mg.width/2 + _mg.width/4;
-			_ship.position.y = _mg.height/2 - 50;
+			_ship.position.x = _mg.width / 2 - _mg.width / 4;
+			_ship.position.y = _mg.height / 2 - 50;
 			_ships.Add (_ship);
 
 			_ship2 = new Ship (ShipSprites.REDSHARK, 2, MG, this, Vec2.zero, Vec2.zero);
-			_ship2.position.x = _mg.width / 2 - _mg.width / 4;
-			_ship2.position.y = _mg.height / 2 - 50;
+			_ship2.position.x = _mg.width/2 + _mg.width/4;
+			_ship2.position.y = _mg.height/2 - 50;
 			_ships.Add (_ship2);
 
 			ReadLevel (level);
@@ -182,9 +179,12 @@ namespace GXPEngine
 			// player1 controls
 			if (ship.StunTimer == 0) {
 				if (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 1) {
+					ship.Flip (false, false);
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
 				} else if (Input.GetKey (Key.LEFT) && ship.PlayerNum == 1) {
+					ship.Flip (true, true);
+
 					cosAngle = Math.Cos (-angle / 5);
 					sinAngle = Math.Sin (-angle / 5);
 
@@ -193,9 +193,13 @@ namespace GXPEngine
 				}
 				//player2 controls
 				if (Input.GetKey (Key.D) && ship.PlayerNum == 2) {
+					ship.Flip (false, false);
+
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
 				} else if (Input.GetKey (Key.A) && ship.PlayerNum == 2) {
+					ship.Flip (true, true);
+
 					cosAngle = Math.Cos (-angle / 5);
 					sinAngle = Math.Sin (-angle / 5);
 
