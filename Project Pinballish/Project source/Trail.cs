@@ -17,7 +17,7 @@ namespace GXPEngine
 				graphic = new AnimSprite ("Images/Red Laser.png", 1, 1);
 			graphic.SetFrame (0);
 			this.AddChild (graphic);
-			_timer = 50;
+			_timer = 100;
 			_level = level;
 			graphic.SetScaleXY (0.25, 0.25);
 			graphic.SetXY (-25, -20);
@@ -27,7 +27,7 @@ namespace GXPEngine
 		public void Update()
 		{
 			if (_timer > 0) {
-				this.graphic.alpha = (float)_timer / 50;
+				this.graphic.alpha = (float)_timer / 100;
 				_timer--;
 			} else {
 				_level.RemoveChild (this);

@@ -27,14 +27,18 @@ namespace GXPEngine
 		private int _laserTimer;
 		private int _stunTimer;
 		private int _energy;
+		private int _speed;
+
 		public int _score;
+
 
 		private Sprite _graphic;
 	//	private Sprite _shield;
 
-		public Ship (ShipSprites imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Hitboxshark.png")
+		public Ship (ShipSprites imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Images/Hitboxshark.png")
 		{
 			_energy = 10;
+			_speed = 1;
 
 			_graphic = new Sprite (SHIP_DICT [imagepath]);
 			_graphic.SetScaleXY (0.1, 0.1);
@@ -74,8 +78,6 @@ namespace GXPEngine
 		{
 			_score += score;
 		}
-
-
 
 		public void Fire()
 		{
@@ -119,6 +121,12 @@ namespace GXPEngine
 		public int Energy {
 			get { return this._energy;}
 			set { this._energy = value; }
+		}
+
+		public int Speed {
+			get { return this._speed; }
+			set { this._speed = value; }
+
 		}
 
 		public void Step () {

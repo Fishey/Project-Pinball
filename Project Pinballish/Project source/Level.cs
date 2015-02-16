@@ -64,27 +64,15 @@ namespace GXPEngine
 			foreach (Asteroid asteroid in _asteroids)
 				AddChild (asteroid);
 				
-			_hud = new HUD (_mg, this, _ships);
-			this.AddChild (_hud);
+
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
-
-
-			_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue));
-			this.AddChild (_scoreboard);
-
-
-			_scoreboard2 = new Scoreboard (new PointF (1690,100), new SolidBrush(Color.Red));
-			this.AddChild (_scoreboard2);
-		
-
 
 		}
 
 		public void Scoreboard()
 		{
-
-			_scoreboard.DrawScore (_ship._score);
-			_scoreboard2.DrawScore (_ship2._score);
+			_mg.Scoreboard.DrawScore (_ship._score);
+			_mg.Scoreboard2.DrawScore (_ship2._score);
 		}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,7 +90,6 @@ namespace GXPEngine
 
 			for (int i = _projectiles.Count - 1; i >= 0; i--)
 			{
-				bool projectilebroken;
 				if (_projectiles [i].Step ()) { // if object destroyed
 					continue;
 				}
@@ -157,7 +144,7 @@ namespace GXPEngine
 							SoundManager.PlaySound (SoundFile.RICOCHET);
 							float dx = _asteroids[y].x - _projectiles [i].position.x;
 							float dy = _asteroids[y].y - _projectiles [i].position.y;
-							Vec2 normal = new Vec2 (dx, dy).Normalize ();
+							Vec2 normal = new Vec2 (dx, dy).Normalize();
 							_projectiles [i].velocity.Reflect (normal);
 							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
 							_projectiles[i].HitTimer = 5;
@@ -190,8 +177,8 @@ namespace GXPEngine
 			double dx = ship.x - center.x;
 			double dy = ship.y - center.y;
 
-			double cosAngle = Math.Cos (angle/5);
-			double sinAngle = Math.Sin (angle/5);
+			double cosAngle = Math.Cos (angle/(5-ship.Speed));
+			double sinAngle = Math.Sin (angle/(5-ship.Speed));
 			// player1 controls
 			if (ship.StunTimer == 0) {
 				if (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 1) {
@@ -259,10 +246,14 @@ namespace GXPEngine
 
 		}
 
+		public List<Ship> Ships
+		{
+			get { return this._ships; }
+		}
 
 		public HUD Hud
 		{
-			get { return this._hud; }
+			get { return this._mg.Hud; }
 		}
 
 		public List<Projectile> Projectiles
@@ -311,7 +302,7 @@ namespace GXPEngine
 				break;
 
 			case 2:
-				Asteroid asteroidhalf = new Asteroid (1, 40);
+				Asteroid asteroidhalf = new Asteroid (1, 60);
 				AddChild (asteroidhalf);
 				asteroidhalf.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroidhalf);

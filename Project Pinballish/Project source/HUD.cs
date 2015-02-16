@@ -99,8 +99,6 @@ namespace GXPEngine
 				}
 				_hpBar1.Add (energy);
 				shell1.AddChild (energy);
-				foreach(Sprite _energy in _hpBar1)
-					Console.WriteLine ("{0},{1}",_energy.x, _energy.y);
 			} else if (ship.PlayerNum == 2) {
 				Sprite energy;
 				if (_hpBar2.Count == 9) {

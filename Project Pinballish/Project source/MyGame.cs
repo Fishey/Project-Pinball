@@ -10,6 +10,9 @@ namespace GXPEngine
 		private Titlescreen _titleScreen;
 		private Level _level;
 		private ControlScreen _controlscreen;
+		private HUD _hud;
+		private Scoreboard _scoreboard;
+		private Scoreboard _scoreboard2;
 
 		//pink fluffy unicorns with lasers
 
@@ -50,7 +53,16 @@ namespace GXPEngine
 			case "level":
 				SoundManager.PlayMusic (SoundFile.MUSIC1);
 				_level = new Level (this);
+				_hud = new HUD (this, _level, _level.Ships);
 				AddChild (_level);
+				this.AddChild (_hud);
+
+				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue));
+				this.AddChild (_scoreboard);
+
+
+				_scoreboard2 = new Scoreboard (new PointF (1690,100), new SolidBrush(Color.Red));
+				this.AddChild (_scoreboard2);
 				break;
 			case "level2":
 				SoundManager.PlayMusic (SoundFile.MUSIC2);
@@ -79,17 +91,20 @@ namespace GXPEngine
 
 			case "level":
 				_level.Destroy ();
-
+				_hud.Destroy ();
+				this.RemoveChild (_hud);
 				break;
 			
 			case "level2":
 				_level.Destroy ();
-
+				_hud.Destroy ();
+				this.RemoveChild (_hud);
 				break;
 
 			case "level3":
 				_level.Destroy ();
-
+				_hud.Destroy ();
+				this.RemoveChild (_hud);
 				break;
 			}
 		}
@@ -101,6 +116,21 @@ namespace GXPEngine
 
 			new MyGame ().Start ();
 
+		}
+
+		public Scoreboard Scoreboard
+		{
+			get { return this._scoreboard; }
+		}
+
+		public Scoreboard Scoreboard2
+		{
+			get { return this._scoreboard2; }
+		}
+
+		public HUD Hud
+		{
+			get { return this._hud; }
 		}
 	}
 }

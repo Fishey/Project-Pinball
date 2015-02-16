@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace GXPEngine
 {
-	public class Projectile : Sprite
+	public class Projectile : Ball
 	{
 		public readonly int radius;
 		private Vec2 _position;
@@ -17,7 +17,7 @@ namespace GXPEngine
 		private int _hitTimer;
 		private AnimSprite graphic;
 
-		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base ("Images/LaserHitbox.png")
+		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius)
 		{
 			_catchTimer = 50;
 			this.SetOrigin (this.width / 2, this.height / 2+20);
