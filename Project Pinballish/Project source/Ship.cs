@@ -7,13 +7,13 @@ namespace GXPEngine
 	public class Ship : Sprite
 	{
 
-		public static readonly Dictionary<ShipSprites, int[]> SHIP_DICT
-		= new Dictionary<ShipSprites, int[]>
+		public static readonly Dictionary<ShipType, int[]> SHIP_DICT
+		= new Dictionary<ShipType, int[]>
 		{
-			{ShipSprites.REDSHARK ,  		new int[2]{0,1}},
-			{ShipSprites.BLUESHARK,  		new int[2]{2,3}},
-			{ShipSprites.REDSHIP,  			new int[2]{4,5}},
-			{ShipSprites.BLUESHIP, 	 		new int[2]{6,7}},
+			{ShipType.REDSHARK ,  		new int[2]{0,1}},
+			{ShipType.BLUESHARK,  		new int[2]{2,3}},
+			{ShipType.REDSHIP,  			new int[2]{4,5}},
+			{ShipType.BLUESHIP, 	 		new int[2]{6,7}},
 
 		};
 
@@ -40,7 +40,7 @@ namespace GXPEngine
 		private Shield _shield;
 		private AnimSprite _laser;
 
-		public Ship (ShipSprites imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Images/Hitboxshark.png")
+		public Ship (ShipType imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Images/Hitboxshark.png")
 		{
 			_energy = 10;
 			_speed = 1;

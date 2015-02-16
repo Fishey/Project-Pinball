@@ -129,6 +129,7 @@
     <Compile Include="ControlScreen.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="Shield.cs" />
+    <Compile Include="PowerUp.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

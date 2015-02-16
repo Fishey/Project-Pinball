@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample", "sample.csproj", "{92D1A815-3E9A-4FB2-963D-13C4C50B2305}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Space Out", "Space Out.csproj", "{92D1A815-3E9A-4FB2-963D-13C4C50B2305}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +13,5 @@ Global
 		{92D1A815-3E9A-4FB2-963D-13C4C50B2305}.Debug|x86.Build.0 = Debug|x86
 		{92D1A815-3E9A-4FB2-963D-13C4C50B2305}.Release|x86.ActiveCfg = Release|x86
 		{92D1A815-3E9A-4FB2-963D-13C4C50B2305}.Release|x86.Build.0 = Release|x86
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = sample.csproj
 	EndGlobalSection
 EndGlobal

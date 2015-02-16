@@ -13,6 +13,7 @@ namespace GXPEngine
 		private HUD _hud;
 		private Scoreboard _scoreboard;
 		private Scoreboard _scoreboard2;
+		private List<Ship> _savedShips;
 
 		//pink fluffy unicorns with lasers
 
@@ -49,7 +50,6 @@ namespace GXPEngine
 				AddChild (_controlscreen);
 				break;
 
-
 			case "level":
 				SoundManager.PlayMusic (SoundFile.MUSIC1);
 				_level = new Level (this);
@@ -66,13 +66,33 @@ namespace GXPEngine
 				break;
 			case "level2":
 				SoundManager.PlayMusic (SoundFile.MUSIC2);
-				_level = new Level (this, 2);
+				foreach (Ship ship in _savedShips)
+					ship.Energy = 10;
+				_level = new Level (this, 2, _savedShips);
 				AddChild (_level);
+				_hud = new HUD (this, _level, _level.Ships);
+				this.AddChild (_hud);
+
+				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue));
+				this.AddChild (_scoreboard);
+
+
+				_scoreboard2 = new Scoreboard (new PointF (1690,100), new SolidBrush(Color.Red));
+				this.AddChild (_scoreboard2);
 				break;
 			case "level3":
 				SoundManager.PlayMusic (SoundFile.MUSIC3);
 				_level = new Level (this, 3);
 				AddChild (_level);
+				_hud = new HUD (this, _level, _level.Ships);
+				this.AddChild (_hud);
+
+				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue));
+				this.AddChild (_scoreboard);
+
+
+				_scoreboard2 = new Scoreboard (new PointF (1690,100), new SolidBrush(Color.Red));
+				this.AddChild (_scoreboard2);
 				break;
 			}
 		
@@ -90,21 +110,25 @@ namespace GXPEngine
 				break;
 
 			case "level":
+				_savedShips = _level.Ships;
 				_level.Destroy ();
 				_hud.Destroy ();
 				this.RemoveChild (_hud);
+				this.RemoveChild (_level);
 				break;
 			
 			case "level2":
 				_level.Destroy ();
 				_hud.Destroy ();
 				this.RemoveChild (_hud);
+				this.RemoveChild (_level);
 				break;
 
 			case "level3":
 				_level.Destroy ();
 				_hud.Destroy ();
 				this.RemoveChild (_hud);
+				this.RemoveChild (_level);
 				break;
 			}
 		}

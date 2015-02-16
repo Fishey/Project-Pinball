@@ -41,7 +41,7 @@ namespace GXPEngine
 
 		}
 
-		public Vec2 position {
+		public new Vec2 position {
 			set {
 				_position = value ?? Vec2.zero;
 			}
@@ -50,7 +50,7 @@ namespace GXPEngine
 			}
 		}
 
-		public Vec2 velocity {
+		public new Vec2 velocity {
 			set {
 				_velocity = value ?? Vec2.zero;
 			}

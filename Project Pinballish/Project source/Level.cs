@@ -5,9 +5,14 @@ using System.Collections.Generic;
 
 namespace GXPEngine
 {
-	public enum ShipSprites
+	public enum ShipType
 	{
 		NULL, REDSHARK, BLUESHARK, REDSHIP, BLUESHIP
+	}
+
+	public enum PowerUpType
+	{
+		NULL, ENERGYUP, MULTIPLIER, SPEEDUP, SPEEDDOWN
 	}
 
 	public class Level : GameObject
@@ -16,35 +21,53 @@ namespace GXPEngine
 		private const int WIDTH		= 40;
 		private const int TILESIZE 	= 20;
 
+		private int _level;
 		private List<Ship> _ships;
 		private List<Projectile> _projectiles;
 		private List<Asteroid> _asteroids;
+		private List<PowerUp> _powerUps;
 		private Ship _ship = null;
 		private Ship _ship2 = null;
 		private Vec2 _center = null;
+		private MyGame _mg;
+
 		private int[,] _data = new int[WIDTH,HEIGHT];
 
-		MyGame _mg;
-
-		public Level (MyGame MG, int level = 1)
+		public Level (MyGame MG, int level = 1, List<Ship> ships = null)
 		{
+			_level = level;
 			_mg = MG;
+			if (ships != null) {
+				_ships = ships;
+				foreach (Ship ship in _ships)
+					this.AddChild (ship);
+				_ship = _ships [0];
+				_ship.position.x = _mg.width / 2 - _mg.width / 4;
+				_ship.position.y = _mg.height / 2 - 50;
+				_ship2 = ships [1];
+				_ship2.position.x = _mg.width/2 + _mg.width/4;
+				_ship2.position.y = _mg.height/2 - 50;
+			} else {
+				_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
+
+				//Create ships
+				_ship = new Ship(ShipType.BLUESHIP, 1, MG, this)	;
+				_ship.position.x = _mg.width / 2 - _mg.width / 4;
+				_ship.position.y = _mg.height / 2 - 50;
+				_ships.Add (_ship);
+
+				_ship2 = new Ship (ShipType.REDSHARK, 2, MG, this, Vec2.zero, Vec2.zero);
+				_ship2.position.x = _mg.width/2 + _mg.width/4;
+				_ship2.position.y = _mg.height/2 - 50;
+				_ships.Add (_ship2);
+			}
+			_projectiles = new List<Projectile> (); // pew pews go here
+			_asteroids = new List<Asteroid> (); // things to pew pew at go here
+			_powerUps = new List<PowerUp> (); // things that make you pew pew even more go here
 
 			AddChild(new Sprite("background.png")); // add a beautiful background
 
-			_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
-			_projectiles = new List<Projectile> (); // pew pews go here
-			_asteroids = new List<Asteroid> (); // things to pew pew at go here
-			//Create ships
-			_ship = new Ship(ShipSprites.BLUESHIP, 1, MG, this)	;
-			_ship.position.x = _mg.width / 2 - _mg.width / 4;
-			_ship.position.y = _mg.height / 2 - 50;
-			_ships.Add (_ship);
 
-			_ship2 = new Ship (ShipSprites.REDSHARK, 2, MG, this, Vec2.zero, Vec2.zero);
-			_ship2.position.x = _mg.width/2 + _mg.width/4;
-			_ship2.position.y = _mg.height/2 - 50;
-			_ships.Add (_ship2);
 
 			ReadLevel (level);
 			for (int j = 0; j < HEIGHT; j++) {
@@ -68,8 +91,8 @@ namespace GXPEngine
 
 		public void Scoreboard()
 		{
-			_mg.Scoreboard.DrawScore (_ship._score);
-			_mg.Scoreboard2.DrawScore (_ship2._score);
+			_mg.Scoreboard.DrawScore (_ships[0]._score);
+			_mg.Scoreboard2.DrawScore (_ships[1]._score);
 		}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,86 +107,23 @@ namespace GXPEngine
 				ship.Step ();
 			}
 
-
-			for (int i = _projectiles.Count - 1; i >= 0; i--)
-			{
-				if (_projectiles [i].Step ()) { // if object destroyed
-					continue;
-				}
-
-				foreach (Ship ship in _ships) {
-					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum && _projectiles[i].CatchTimer ==0) {
-						ship.LaserTimer = 100;
-						ship.StunTimer = 100;
-						if (_projectiles [i].PlayerNum == 1)
-							_ships [1].addscore (-50);
-						else
-							_ships [0].addscore (-50);
-
-						_projectiles [i].Destroy ();
-						_projectiles.Remove (_projectiles [i]);
-						if (i > 0)
-						i--;
-						break;
-					} else if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum == ship.PlayerNum && Projectiles[i].CatchTimer == 0)
-					{
-						ship.Energy++;
-						this.Hud.addEnergy (ship);
-						_projectiles [i].CatchTimer = 50;
-						_projectiles [i].Destroy ();
-						_projectiles.Remove (_projectiles [i]);
-						if (i > 0)
-						i--;
-						break;
-					}
-				}
-/*
-				else {
-					for (int y = _projectiles.Count - 1; y >= 0; y--)
-					{
-						if (_projectiles [i].HitTest (_projectiles[y])) {
-							if (_projectiles[y] != _projectiles[i])
-							{
-								_projectiles[y].Destroy ();
-								_projectiles.Remove (_projectiles [y]);
-								_projectiles [i].Destroy ();
-								_projectiles.Remove (_projectiles [i]);
-								break;
-							}
-						}
-					}
-				}
-*/ // Derpy projectile collision
-					if (_projectiles.Count > 0) {
-					for (int y = _asteroids.Count - 1; y >= 0; y--)
-					{
-						if (_projectiles [i].HitTest (_asteroids[y]) && _projectiles[i].HitTimer == 0) {
-							SoundManager.PlaySound (SoundFile.RICOCHET);
-							float dx = _asteroids[y].x - _projectiles [i].position.x;
-							float dy = _asteroids[y].y - _projectiles [i].position.y;
-							Vec2 normal = new Vec2 (dx, dy).Normalize();
-							_projectiles [i].velocity.Reflect (normal);
-							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
-							_projectiles[i].HitTimer = 5;
-							_ships [_projectiles [i].PlayerNum - 1].addscore (10);
-
-
-							if (_asteroids [y].TakeDamage ()) {
-								SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
-								_asteroids.Remove (_asteroids [y]);
-								_ships [_projectiles [i].PlayerNum - 1].addscore (10);
-							}
-						}
-					}
-
-
-				}
-				/*
-				if (_asteroids.Count == 0)
-					_mg.SetState ("level2");*/
+			foreach (PowerUp powerup in _powerUps) {
+				powerup.Step ();
+				if (powerup.x > _mg.width)
+					powerup.velocity.Reflect (new Vec2 (_mg.width, 0).Normal ());
+				else if (powerup.x < 0)
+					powerup.velocity.Reflect (new Vec2 (0, 0).Normal ());
+				else if (powerup.y < 0)
+					powerup.velocity.Reflect (new Vec2 (0, 0).Normal ());
+				else if (powerup.y > _mg.height)
+					powerup.velocity.Reflect (new Vec2 (0, _mg.height).Normal ());
 			}
+
+			resolveCollisions ();
 			Scoreboard ();
 
+			if (_asteroids.Count == 0 || _ships[0].Energy + _ships[1].Energy == 0)
+				_mg.SetState ("level" + (_level+1));
 		}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -296,6 +256,97 @@ namespace GXPEngine
 			}
 
 
+		}
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+																			//Collisions
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		void resolveCollisions()
+		{
+			for (int i = _powerUps.Count - 1; i >= 0; i--)
+			{
+
+			}
+
+			for (int i = _projectiles.Count - 1; i >= 0; i--)
+			{
+				if (_projectiles [i].Step ()) { // if object destroyed
+					continue;
+				}
+
+				foreach (Ship ship in _ships) {
+					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum && _projectiles[i].CatchTimer ==0) {
+						ship.LaserTimer = 100;
+						ship.StunTimer = 100;
+						if (_projectiles [i].PlayerNum == 1)
+							_ships [1].addscore (-50);
+						else
+							_ships [0].addscore (-50);
+
+						_projectiles [i].Destroy ();
+						_projectiles.Remove (_projectiles [i]);
+						if (i > 0)
+							i--;
+						break;
+					} else if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum == ship.PlayerNum && Projectiles[i].CatchTimer == 0)
+					{
+						ship.Energy++;
+						this.Hud.addEnergy (ship);
+						_projectiles [i].CatchTimer = 50;
+						_projectiles [i].Destroy ();
+						_projectiles.Remove (_projectiles [i]);
+						if (i > 0)
+							i--;
+						break;
+					}
+				}
+
+				if (_projectiles.Count > 0) {
+					for (int y = _asteroids.Count - 1; y >= 0; y--)
+					{
+						if (_projectiles [i].HitTest (_asteroids[y]) && _projectiles[i].HitTimer == 0) {
+							SoundManager.PlaySound (SoundFile.RICOCHET);
+							float dx = _asteroids[y].x - _projectiles [i].position.x;
+							float dy = _asteroids[y].y - _projectiles [i].position.y;
+							Vec2 normal = new Vec2 (dx, dy).Normalize();
+							_projectiles [i].velocity.Reflect (normal);
+							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
+							_projectiles[i].HitTimer = 5;
+							_ships [_projectiles [i].PlayerNum - 1].addscore (10);
+
+
+							if (_asteroids [y].TakeDamage ()) {
+								SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
+								int randomNum = Utils.Random (0, 100);
+								PowerUp newPowerUp;
+								if (randomNum >= 90) {
+									newPowerUp = new PowerUp (PowerUpType.ENERGYUP, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
+								} else if (randomNum >= 80) {
+									newPowerUp = new PowerUp (PowerUpType.MULTIPLIER, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
+								} else if (randomNum >= 70) {
+									newPowerUp = new PowerUp (PowerUpType.SPEEDDOWN, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
+								} else if (randomNum >= 60) {
+									newPowerUp = new PowerUp (PowerUpType.SPEEDUP, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
+								} else {
+									newPowerUp = new PowerUp (PowerUpType.NULL, this);
+								}
+
+								if (newPowerUp.PowerUpType != PowerUpType.NULL) {
+									this.AddChild (newPowerUp);
+									_powerUps.Add (newPowerUp);
+								}
+								_asteroids.Remove (_asteroids [y]);
+								_ships [_projectiles [i].PlayerNum - 1].addscore (10);
+
+							}
+						}
+					}
+
+
+				}
+
+			}
 		}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
