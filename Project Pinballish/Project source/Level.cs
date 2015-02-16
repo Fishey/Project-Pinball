@@ -243,13 +243,22 @@ namespace GXPEngine
 			if (ship.StunTimer == 0) {
 				switch (ship.PlayerNum) {
 				case 1:
-					if (Input.GetKeyDown (Key.UP) && ship.StunTimer == 0) {
+					if (Input.GetKeyDown (Key.UP)) {
 						ship.Fire ();
 					}
+
+					 if (Input.GetKeyDown (Key.DOWN) && ship.ShieldTimer == 0) {
+						ship.Shield ();
+					}
 					break;
+
 				case 2:
 					if (Input.GetKeyDown (Key.W)) {
 						ship.Fire ();
+					}
+
+					if (Input.GetKeyDown (Key.S) && ship.ShieldTimer == 0) {
+						ship.Shield ();
 					}
 					break;
 				default:

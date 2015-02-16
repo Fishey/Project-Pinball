@@ -128,6 +128,7 @@
     <Compile Include="HUD.cs" />
     <Compile Include="ControlScreen.cs" />
     <Compile Include="Scoreboard.cs" />
+    <Compile Include="Shield.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />
