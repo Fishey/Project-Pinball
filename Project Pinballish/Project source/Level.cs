@@ -230,8 +230,7 @@ namespace GXPEngine
 
 				asteroid.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 				asteroid.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-
-
+				//asteroid.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
 			}
 		}
 

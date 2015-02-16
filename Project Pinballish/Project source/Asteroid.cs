@@ -18,6 +18,13 @@ namespace GXPEngine
 				_graphic.SetXY (-50, -60);
 				_graphic.SetScaleXY (0.6, 0.6);
 			}
+
+			if (_damagecounter >= 3 && _radius == 70) {
+				_graphic.SetFrame (_damagecounter);
+			} else if (_damagecounter < 3 && _radius == 40)
+			{
+				_graphic.SetFrame (_damagecounter + 4);
+			}
 			this.SetOrigin (this.width / 2, this.height / 2);
 			this.AddChild (_graphic);
 			_damagecounter = damage;
@@ -25,22 +32,21 @@ namespace GXPEngine
 
 		private void Update()
 		{
-			if (_damagecounter < 3 && _radius == 70) { // I love you too, code
-				_graphic.SetFrame (_damagecounter);
-			} else if (_damagecounter < 3 && _radius == 40) {
-				_graphic.SetFrame (_damagecounter + 4);
-			}
-				else
-				this.Destroy ();
+
 		}
 
 		public bool TakeDamage()
 		{
 			_damagecounter++;
-			if (_damagecounter >= 3)
-				return true;
-			else
+			if (_damagecounter <= 3 && _radius == 70) {
+				_graphic.SetFrame (_damagecounter);
 				return false;
+			} else if (_damagecounter <= 2 && _radius == 40) {
+				_graphic.SetFrame (_damagecounter + 4);
+				return false;
+			} else
+				this.Destroy ();
+				return true;
 		}
 	}
 }
