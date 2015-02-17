@@ -62,7 +62,7 @@ namespace GXPEngine
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1685,100), new SolidBrush(Color.Red));
+				_scoreboard2 = new Scoreboard (new PointF (1670,100), new SolidBrush(Color.Red));
 				this.AddChild (_scoreboard2);
 				break;
 
