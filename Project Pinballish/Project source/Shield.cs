@@ -4,9 +4,16 @@ namespace GXPEngine
 {
 	public class Shield : Sprite
 	{
-		public Shield () : base ("Hitboxsharkdebug.png") 
-		{
+		private Sprite _graphic;
 
+		public Shield () : base ("Images/Shieldhitboxdebug.png") 
+		{
+			SetScaleXY (1.3, 1.3);
+			SetXY (-80, -80);
+			_graphic = new Sprite ("Images/Shield.png");
+			_graphic.SetScaleXY (0.6, 0.6);
+			_graphic.SetXY (-20, -20);
+			AddChild (_graphic);
 
 
 

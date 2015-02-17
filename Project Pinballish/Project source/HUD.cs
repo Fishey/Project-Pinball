@@ -42,6 +42,7 @@ namespace GXPEngine
 						} else {
 							energy = new Sprite ("Images/Mid Energy.png");
 						}
+
 						shell1.AddChild (energy);
 						_hpBar1.Add (energy);
 						energy.SetXY (-shell1.width+18, -60-position);
@@ -67,6 +68,7 @@ namespace GXPEngine
 				position = 0;
 			}
 		}
+
 		public void removeEnergy(Ship ship)
 		{
 			if (ship.PlayerNum == 1) {

@@ -20,8 +20,8 @@ namespace GXPEngine
 	
 		public MyGame ():base (1920,1080, false) 
 		{
-			//scaleX = 0.5f;
-			//scaleY = 0.5f;
+			scaleX = 0.5f;
+			scaleY = 0.5f;
 
 			SetState ("titleScreen");
 		}
@@ -51,6 +51,7 @@ namespace GXPEngine
 				break;
 
 			case "level":
+
 				SoundManager.PlayMusic (SoundFile.MUSIC1);
 				_level = new Level (this);
 				_hud = new HUD (this, _level, _level.Ships);
@@ -61,10 +62,12 @@ namespace GXPEngine
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1690,100), new SolidBrush(Color.Red));
+				_scoreboard2 = new Scoreboard (new PointF (1685,100), new SolidBrush(Color.Red));
 				this.AddChild (_scoreboard2);
 				break;
+
 			case "level2":
+
 				SoundManager.PlayMusic (SoundFile.MUSIC2);
 				foreach (Ship ship in _savedShips) {
 					_savedShips = new List<Ship> ();
@@ -80,10 +83,12 @@ namespace GXPEngine
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1690,100), new SolidBrush(Color.Red));
+				_scoreboard2 = new Scoreboard (new PointF (1685,100), new SolidBrush(Color.Red));
 				this.AddChild (_scoreboard2);
 				break;
+
 			case "level3":
+
 				SoundManager.PlayMusic (SoundFile.MUSIC3);
 				_level = new Level (this, 3);
 				AddChild (_level);
@@ -94,7 +99,7 @@ namespace GXPEngine
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1690,100), new SolidBrush(Color.Red));
+				_scoreboard2 = new Scoreboard (new PointF (1685,100), new SolidBrush(Color.Red));
 				this.AddChild (_scoreboard2);
 				break;
 			}

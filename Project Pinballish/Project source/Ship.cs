@@ -92,11 +92,13 @@ namespace GXPEngine
 			}
 		}
 		public void addscore (int score)
+
 		{
 			_score += score;
 		}
 
 		public void Fire()
+
 		{
 			if (LaserTimer == 0 & StunTimer == 0 && Energy > 0) {
 				_level.Hud.removeEnergy (this);
@@ -179,16 +181,17 @@ namespace GXPEngine
 		public void UpdateAnimation() // Continuously loop through the frames based on the maximum and
 		{
 			_frame = _frame + 0.1f;
+
 			if (_frame >= _lastFrame + 1)
 				_frame = _firstFrame;
 			if (_frame < _firstFrame)
 				_frame = _firstFrame;
 			_graphic.SetFrame ((int)_frame);
+
 		}
 
 		public void Step () {
 
-			UpdateAnimation ();
 			if (LaserTimer > 0)
 				_laserTimer--;
 			if (StunTimer > 0)

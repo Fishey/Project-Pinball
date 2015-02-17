@@ -60,6 +60,7 @@ namespace GXPEngine
 				_ship2.position.y = _mg.height/2 - 50;
 				_ships.Add (_ship2);
 			}
+
 			_projectiles = new List<Projectile> (); // pew pews go here
 			_asteroids = new List<Asteroid> (); // things to pew pew at go here
 			_powerUps = new List<PowerUp> (); // things that make you pew pew even more go here
@@ -141,6 +142,8 @@ namespace GXPEngine
 					ship.Flip (false, false);
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+					ship.UpdateAnimation ();
+
 				} else if (Input.GetKey (Key.LEFT) && ship.PlayerNum == 1) {
 					ship.Flip (true, true);
 
@@ -149,6 +152,7 @@ namespace GXPEngine
 
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+					ship.UpdateAnimation ();
 				}
 				//player2 controls
 				if (Input.GetKey (Key.D) && ship.PlayerNum == 2) {
@@ -156,6 +160,8 @@ namespace GXPEngine
 
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+					ship.UpdateAnimation ();
+
 				} else if (Input.GetKey (Key.A) && ship.PlayerNum == 2) {
 					ship.Flip (true, true);
 
@@ -164,6 +170,7 @@ namespace GXPEngine
 
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+					ship.UpdateAnimation ();
 				}
 			}
 			ship.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
