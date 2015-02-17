@@ -66,8 +66,11 @@ namespace GXPEngine
 				break;
 			case "level2":
 				SoundManager.PlayMusic (SoundFile.MUSIC2);
-				foreach (Ship ship in _savedShips)
-					ship.Energy = 10;
+				foreach (Ship ship in _savedShips) {
+					_savedShips = new List<Ship> ();
+					_savedShips.Add(new Ship(_level.Ships[0].Type, 1, this, this._level, _level.Ships[0]._score));
+					_savedShips.Add (new Ship (_level.Ships [1].Type, 2, this, this._level, _level.Ships [1]._score));
+				}
 				_level = new Level (this, 2, _savedShips);
 				AddChild (_level);
 				_hud = new HUD (this, _level, _level.Ships);
@@ -110,6 +113,7 @@ namespace GXPEngine
 				break;
 
 			case "level":
+
 				_savedShips = _level.Ships;
 				_level.Destroy ();
 				_hud.Destroy ();

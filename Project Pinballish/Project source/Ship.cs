@@ -35,13 +35,14 @@ namespace GXPEngine
 		public int _score;
 		private int _shieldTimer;
 
-
 		private AnimSprite _graphic;
 		private Shield _shield;
 		private AnimSprite _laser;
+		private ShipType _shipType;
 
-		public Ship (ShipType imagepath, int playNum, MyGame MG, Level level, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Images/Hitboxshark.png")
+		public Ship (ShipType imagepath, int playNum, MyGame MG, Level level, int score = 0, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Images/Hitboxshark.png")
 		{
+			_shipType = imagepath;
 			_energy = 10;
 			_speed = 1;
 			
@@ -169,6 +170,10 @@ namespace GXPEngine
 			get { return this._speed; }
 			set { this._speed = value; }
 
+		}
+
+		public ShipType Type{
+			get { return this._shipType; }
 		}
 
 		public void UpdateAnimation() // Continuously loop through the frames based on the maximum and

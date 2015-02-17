@@ -39,8 +39,7 @@ namespace GXPEngine
 			_mg = MG;
 			if (ships != null) {
 				_ships = ships;
-				foreach (Ship ship in _ships)
-					this.AddChild (ship);
+
 				_ship = _ships [0];
 				_ship.position.x = _mg.width / 2 - _mg.width / 4;
 				_ship.position.y = _mg.height / 2 - 50;
@@ -51,12 +50,12 @@ namespace GXPEngine
 				_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
 
 				//Create ships
-				_ship = new Ship(ShipType.BLUESHIP, 1, MG, this)	;
+				_ship = new Ship(ShipType.BLUESHIP, 1, MG, this);
 				_ship.position.x = _mg.width / 2 - _mg.width / 4;
 				_ship.position.y = _mg.height / 2 - 50;
 				_ships.Add (_ship);
 
-				_ship2 = new Ship (ShipType.REDSHARK, 2, MG, this, Vec2.zero, Vec2.zero);
+				_ship2 = new Ship (ShipType.REDSHARK, 2, MG, this);
 				_ship2.position.x = _mg.width/2 + _mg.width/4;
 				_ship2.position.y = _mg.height/2 - 50;
 				_ships.Add (_ship2);
@@ -80,7 +79,6 @@ namespace GXPEngine
 				
 			foreach(Ship ship in _ships)
 				AddChild (ship); // add the ships to the game
-				
 			foreach (Asteroid asteroid in _asteroids)
 				AddChild (asteroid);
 				
@@ -100,6 +98,7 @@ namespace GXPEngine
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		void Update() {
+
 			foreach (Ship ship in _ships) {
 				rotateAroundPoint (ship, _center, (float)(5 * Math.PI / 180.0f)); // make the ships turn around the center of the screen
 				rotateAsteroids (_center);
