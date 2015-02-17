@@ -33,33 +33,24 @@ namespace GXPEngine
 
 		private int[,] _data = new int[WIDTH,HEIGHT];
 
-		public Level (MyGame MG, int level = 1, List<Ship> ships = null)
+		public Level (MyGame MG, int level = 1)
 		{
 			_level = level;
 			_mg = MG;
-			if (ships != null) {
-				_ships = ships;
 
-				_ship = _ships [0];
-				_ship.position.x = _mg.width / 2 - _mg.width / 4;
-				_ship.position.y = _mg.height / 2 - 50;
-				_ship2 = ships [1];
-				_ship2.position.x = _mg.width/2 + _mg.width/4;
-				_ship2.position.y = _mg.height/2 - 50;
-			} else {
 				_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
 
 				//Create ships
 				_ship = new Ship(ShipType.BLUESHIP, 1, MG, this);
 				_ship.position.x = _mg.width / 2 - _mg.width / 4;
 				_ship.position.y = _mg.height / 2 - 50;
+				_ship.Idle ();
 				_ships.Add (_ship);
 
 				_ship2 = new Ship (ShipType.REDSHARK, 2, MG, this);
 				_ship2.position.x = _mg.width/2 + _mg.width/4;
 				_ship2.position.y = _mg.height/2 - 50;
 				_ships.Add (_ship2);
-			}
 
 			_projectiles = new List<Projectile> (); // pew pews go here
 			_asteroids = new List<Asteroid> (); // things to pew pew at go here
@@ -70,16 +61,19 @@ namespace GXPEngine
 
 
 			ReadLevel (level);
-			for (int j = 0; j < HEIGHT; j++) {
-				for (int i = 0; i < WIDTH; i++) {
+			for (int i = 0; i < HEIGHT; i++) {
+				for (int j = 0; j < WIDTH; j++) {
 					int tile = _data [j, i];
-					if (tile != 0)
-						addAsteroid (i * TILESIZE, j * TILESIZE, tile);
+					if (tile != 0) {
+						addAsteroid (j * TILESIZE, i * TILESIZE, tile);
+					}
 				}
 			}
 				
-			foreach(Ship ship in _ships)
+			foreach (Ship ship in _ships) {
 				AddChild (ship); // add the ships to the game
+				ship.StunTimer = 60;
+			}
 			foreach (Asteroid asteroid in _asteroids)
 				AddChild (asteroid);
 				
@@ -109,14 +103,14 @@ namespace GXPEngine
 
 			foreach (PowerUp powerup in _powerUps) {
 				powerup.Step ();
-				if (powerup.x > _mg.width)
-					powerup.velocity.Reflect (new Vec2 (_mg.width, 0).Normal ());
-				else if (powerup.x < 0)
-					powerup.velocity.Reflect (new Vec2 (0, 0).Normal ());
+				if (powerup.x > _mg.width-150)
+					powerup.velocity = powerup.velocity.Scale (-1);
+				else if (powerup.x < 150)
+					powerup.velocity = powerup.velocity.Scale (-1);
 				else if (powerup.y < 0)
-					powerup.velocity.Reflect (new Vec2 (0, 0).Normal ());
+					powerup.velocity = powerup.velocity.Scale (-1);
 				else if (powerup.y > _mg.height)
-					powerup.velocity.Reflect (new Vec2 (0, _mg.height).Normal ());
+					powerup.velocity = powerup.velocity.Scale (-1);
 			}
 
 			resolveCollisions ();
@@ -147,12 +141,14 @@ namespace GXPEngine
 				} else if (Input.GetKey (Key.LEFT) && ship.PlayerNum == 1) {
 					ship.Flip (true, true);
 
-					cosAngle = Math.Cos (-angle / 5);
-					sinAngle = Math.Sin (-angle / 5);
+					cosAngle = Math.Cos (-angle / (5 - ship.Speed));
+					sinAngle = Math.Sin (-angle / (5 - ship.Speed));
 
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
 					ship.UpdateAnimation ();
+				} else if (ship.PlayerNum == 1) {
+					ship.Idle ();
 				}
 				//player2 controls
 				if (Input.GetKey (Key.D) && ship.PlayerNum == 2) {
@@ -165,12 +161,14 @@ namespace GXPEngine
 				} else if (Input.GetKey (Key.A) && ship.PlayerNum == 2) {
 					ship.Flip (true, true);
 
-					cosAngle = Math.Cos (-angle / 5);
-					sinAngle = Math.Sin (-angle / 5);
+					cosAngle = Math.Cos (-angle / (5 - ship.Speed));
+					sinAngle = Math.Sin (-angle / (5 - ship.Speed));
 
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
 					ship.UpdateAnimation ();
+				} else if (ship.PlayerNum == 2){
+					ship.Idle ();
 				}
 			}
 			ship.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
@@ -272,7 +270,22 @@ namespace GXPEngine
 		{
 			for (int i = _powerUps.Count - 1; i >= 0; i--)
 			{
-
+				foreach (Ship ship in _ships) {
+					if (ship.HitTest(_powerUps[i]))
+						{
+						if (_powerUps [i].PowerUpType != PowerUpType.SPEEDDOWN)
+							ship.AddPowerUp (_powerUps [i]);
+						else {
+							if (ship.PlayerNum == 1)
+								_ships [1].AddPowerUp (_powerUps [i]);
+							else
+								_ships [0].AddPowerUp (_powerUps [i]);
+						}
+							_powerUps [i].Destroy ();
+							_powerUps.Remove (_powerUps [i]);
+						break;
+						}
+				}
 			}
 
 			for (int i = _projectiles.Count - 1; i >= 0; i--)
@@ -282,7 +295,7 @@ namespace GXPEngine
 				}
 
 				foreach (Ship ship in _ships) {
-					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum && _projectiles[i].CatchTimer ==0) {
+					if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum != ship.PlayerNum && _projectiles [i].CatchTimer == 0) {
 						ship.LaserTimer = 100;
 						ship.StunTimer = 100;
 						if (_projectiles [i].PlayerNum == 1)
@@ -295,10 +308,11 @@ namespace GXPEngine
 						if (i > 0)
 							i--;
 						break;
-					} else if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum == ship.PlayerNum && Projectiles[i].CatchTimer == 0)
-					{
-						ship.Energy++;
+					} else if (_projectiles [i].HitTest (ship) && _projectiles [i].PlayerNum == ship.PlayerNum && Projectiles [i].CatchTimer == 0) {
+						if (ship.Energy < 10){
+							ship.Energy++;
 						this.Hud.addEnergy (ship);
+					}
 						_projectiles [i].CatchTimer = 50;
 						_projectiles [i].Destroy ();
 						_projectiles.Remove (_projectiles [i]);
@@ -319,20 +333,20 @@ namespace GXPEngine
 							_projectiles [i].velocity.Reflect (normal);
 							_projectiles [i].rotation = _projectiles [i].velocity.GetAngleDegrees ();
 							_projectiles[i].HitTimer = 5;
-							_ships [_projectiles [i].PlayerNum - 1].addscore (10);
+							_ships [_projectiles [i].PlayerNum - 1].addscore (10 * _ships [_projectiles [i].PlayerNum - 1].Multiplier);
 
 
 							if (_asteroids [y].TakeDamage ()) {
 								SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
 								int randomNum = Utils.Random (0, 100);
 								PowerUp newPowerUp;
-								if (randomNum >= 90) {
+								if (randomNum >= 95) {
 									newPowerUp = new PowerUp (PowerUpType.ENERGYUP, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
-								} else if (randomNum >= 80) {
+								} else if (randomNum >= 90) {
 									newPowerUp = new PowerUp (PowerUpType.MULTIPLIER, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
-								} else if (randomNum >= 70) {
+								} else if (randomNum >= 85) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDDOWN, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
-								} else if (randomNum >= 60) {
+								} else if (randomNum >= 80) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDUP, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else {
 									newPowerUp = new PowerUp (PowerUpType.NULL, this);
@@ -343,7 +357,7 @@ namespace GXPEngine
 									_powerUps.Add (newPowerUp);
 								}
 								_asteroids.Remove (_asteroids [y]);
-								_ships [_projectiles [i].PlayerNum - 1].addscore (10);
+								_ships [_projectiles [i].PlayerNum - 1].addscore (10 * _ships [_projectiles [i].PlayerNum - 1].Multiplier);
 
 							}
 						}
