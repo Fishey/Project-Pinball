@@ -7,9 +7,11 @@ namespace GXPEngine
 		PowerUpType _type;
 		Vec2 _position, _velocity;
 		Level _level;
+		int _timer;
 
 		public PowerUp (PowerUpType type, Level level, Vec2 position = null, Vec2 velocity = null) : base ("Images/EnergyUpSheet.png", 4, 1)
 		{
+			_timer = 100;
 			_type = type;
 			_position = position;
 			if (velocity == null)
@@ -59,7 +61,14 @@ namespace GXPEngine
 			get { return this._type; }
 		}
 
+		public int Timer{
+			get { return this._timer; }
+			set { this._timer = value; }
+		}
+
 		public void Step () {
+			if (Timer > 0)
+				Timer--;
 			_position.Add (_velocity);
 			x = (float)_position.x;
 			y = (float)_position.y;

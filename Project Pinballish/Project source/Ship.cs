@@ -28,6 +28,7 @@ namespace GXPEngine
 		private int _stunTimer;
 		private int _energy;
 		private int _speed;
+		private int _multiplier;
 		private int _firstFrame;
 		private int _lastFrame;
 		private float _frame; 
@@ -39,12 +40,14 @@ namespace GXPEngine
 		private Shield _shield;
 		private AnimSprite _laser;
 		private ShipType _shipType;
+		private List<PowerUp> _powerUps;
 
 		public Ship (ShipType imagepath, int playNum, MyGame MG, Level level, int score = 0, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Images/Hitboxshark.png")
 		{
 			_shipType = imagepath;
 			_energy = 10;
 			_speed = 1;
+			_powerUps = new List<PowerUp> ();
 			
 			_firstFrame = SHIP_DICT [imagepath][0];
 			_lastFrame = SHIP_DICT [imagepath] [1];
@@ -137,6 +140,51 @@ namespace GXPEngine
 				 
 			}
 		}
+		public void AddPowerUp(PowerUp powerUp)
+		{
+			switch (powerUp.PowerUpType) {
+			case PowerUpType.ENERGYUP:
+				if (Energy < 9)
+					this.Energy += 2;
+				else
+					Energy = 10;
+				break;
+			case PowerUpType.MULTIPLIER:
+				this.Multiplier = 2;
+				break;
+			case PowerUpType.SPEEDDOWN:
+				this.Speed = 0;
+				break;
+			case PowerUpType.SPEEDUP:
+				this.Speed = 2;
+				break;
+			default:
+				break;
+			}
+			_powerUps.Add (powerUp);
+		}
+
+		public void RemovePowerUp(PowerUp powerUp)
+		{
+			switch (powerUp.PowerUpType) {
+			case PowerUpType.ENERGYUP:
+				break;
+			case PowerUpType.MULTIPLIER:
+				this.Multiplier = 1;
+				break;
+			case PowerUpType.SPEEDDOWN:
+				this.Speed = 1;
+				break;
+			case PowerUpType.SPEEDUP:
+				this.Speed = 1;
+				break;
+			default:
+				break;
+			}
+
+			_powerUps.Remove (powerUp);
+
+		}
 
 		public void Flip(bool horizontal = false, bool vertical = false)
 		{
@@ -174,6 +222,11 @@ namespace GXPEngine
 
 		}
 
+		public int Multiplier {
+			get { return this._multiplier; }
+			set { this._multiplier = value; }
+		}
+
 		public ShipType Type{
 			get { return this._shipType; }
 		}
@@ -201,7 +254,10 @@ namespace GXPEngine
 			if (_shieldTimer < 100 && this.HasChild(_shield))
 				this.RemoveChild (_shield);
 
-
+			foreach (PowerUp powerup in _powerUps) {
+				if (powerup.Timer == 0)
+					this.RemovePowerUp (powerup);
+			}
 			_position.Add (_velocity);
 			x = (float)_position.x;
 			y = (float)_position.y;

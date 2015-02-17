@@ -122,7 +122,7 @@ namespace GXPEngine
 			resolveCollisions ();
 			Scoreboard ();
 
-			if (_asteroids.Count == 0 || _ships[0].Energy + _ships[1].Energy == 0)
+			if (_asteroids.Count == 0 || _ships[0].Energy + _ships[1].Energy == 0 & _projectiles.Count == 0 && _level < 3)
 				_mg.SetState ("level" + (_level+1));
 		}
 
@@ -365,21 +365,21 @@ namespace GXPEngine
 			switch (tile) {
 
 			case 1: 
-				Asteroid asteroidfull = new Asteroid (2);
+				Asteroid asteroidfull = new Asteroid (0);
 				AddChild (asteroidfull);
 				asteroidfull.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroidfull);
 				break;
 
 			case 2:
-				Asteroid asteroidhalf = new Asteroid (1, 60);
+				Asteroid asteroidhalf = new Asteroid (0, 60);
 				AddChild (asteroidhalf);
 				asteroidhalf.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroidhalf);
 				break;
 
 			case 3:
-				Asteroid asteroid = new Asteroid (0);
+				Asteroid asteroid = new Asteroid (0, 40);
 				AddChild (asteroid);
 				asteroid.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroid);
