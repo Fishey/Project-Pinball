@@ -273,6 +273,7 @@ namespace GXPEngine
 			for (int i = _powerUps.Count - 1; i >= 0; i--)
 			{
 
+
 			}
 
 			for (int i = _projectiles.Count - 1; i >= 0; i--)

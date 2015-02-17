@@ -19,6 +19,7 @@ namespace GXPEngine
 			velocity.SetAngleDegrees (Utils.Random (0.0f, 360.0f));
 			_velocity = velocity;
 			switch (type) {
+
 			case PowerUpType.ENERGYUP:
 				SetFrame (0);
 				break;
