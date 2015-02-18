@@ -26,7 +26,7 @@ namespace GXPEngine
 			}
 
 
-			if (Input.GetKeyDown (Key.BACKSPACE)) {
+			if (Input.GetKeyDown (Key.X)) {
 				_game.SetState ("titleScreen");
 			}
 		}

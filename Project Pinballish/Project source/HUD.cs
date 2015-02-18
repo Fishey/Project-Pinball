@@ -15,6 +15,7 @@ namespace GXPEngine
 		private List<Sprite> _hpBar1;
 		private List<Sprite> _hpBar2;
 		private TextField _energytf = null;
+		private TextField _energytf2 = null;
 
 		public HUD (MyGame game, Level level, List<Ship> shipList) : base ()
 
@@ -74,10 +75,17 @@ namespace GXPEngine
 				position = 0;
 			}
 
-			_energytf = TextField.CreateTextField ("Energy");
+			_energytf = TextField.CreateTextField ("Energy               . ");
 			_energytf.backgroundColor = Color.Transparent;
-			_energytf.SetXY (100, 900);
+			_energytf.SetXY (5, 900);
+			_energytf.font = new Font ("Good Times RG", 24);
 			AddChild (_energytf);
+
+			_energytf2 = TextField.CreateTextField ("Energy               . ");
+			_energytf2.backgroundColor = Color.Transparent;
+			_energytf2.SetXY (1735, 900);
+			_energytf2.font = new Font ("Good Times RG", 24);
+			AddChild (_energytf2);
 		}
 
 		public void removeEnergy(Ship ship)

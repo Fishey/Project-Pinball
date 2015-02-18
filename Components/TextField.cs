@@ -12,7 +12,7 @@ namespace GXPEngine
 		private string _text = "";							
 		private Color _backgroundColor = Color.Empty;		
 		private Color _borderColor = Color.Empty;
-		private Color _textColor = Color.MediumSpringGreen;
+		private Color _textColor = Color.MediumSeaGreen;
 
 		//underlying properties to draw the visible properties
 		private Pen _borderPen = null;
@@ -67,7 +67,7 @@ namespace GXPEngine
 				_textColor = value;
 				_invalidate = true;
 			}
-		}
+	}
 
 		public int borderSize {
 			get {
@@ -117,6 +117,7 @@ namespace GXPEngine
 		/// <returns>The text field.</returns>
 		/// <param name="text">Text.</param>
 		public static TextField CreateTextField (string text) {
+
 			SizeF size = _stubGraphics.MeasureString (text, _font);
 			TextField result = new TextField ((int)(size.Width + 5), (int)(size.Height+5));
 			result.backgroundColor = Color.White;

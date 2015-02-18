@@ -14,6 +14,7 @@ namespace GXPEngine
 		private string _state = "";
 		private Titlescreen _titleScreen;
 		private Level _level;
+		private BLevel _blevel;
 		private ControlScreen _controlscreen;
 		private HelpScreen _helpscreen;
 		private HUD _hud;
@@ -61,7 +62,22 @@ namespace GXPEngine
 				AddChild (_helpscreen);
 				break;
 
-			case "level":
+			case "blevel1":
+
+				_blevel = new BLevel (this, 1);
+				AddChild (_blevel);
+				break;
+			case "blevel2":
+				_blevel = new BLevel (this, 2);
+				AddChild (_blevel);
+				break;
+
+			case "blevel3":
+				_blevel = new BLevel (this, 3);
+				AddChild (_blevel);
+				break;
+
+			case "level1":
 
 				SoundManager.PlayMusic (SoundFile.MUSIC1);
 				_level = new Level (this);
@@ -73,7 +89,7 @@ namespace GXPEngine
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1670,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
+				_scoreboard2 = new Scoreboard (new PointF (1680,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
 				this.AddChild (_scoreboard2);
 				break;
 
@@ -90,7 +106,7 @@ namespace GXPEngine
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1670,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
+				_scoreboard2 = new Scoreboard (new PointF (1680,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
 				this.AddChild (_scoreboard2);
 				break;
 
@@ -106,7 +122,7 @@ namespace GXPEngine
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1670,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
+				_scoreboard2 = new Scoreboard (new PointF (1680,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
 				this.AddChild (_scoreboard2);
 				break;
 			}

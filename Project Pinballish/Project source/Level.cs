@@ -122,7 +122,8 @@ namespace GXPEngine
 					_mg.LevelWinners [_level - 1] = LevelWinner.RED;
 				else
 					_mg.LevelWinners [_level - 1] = LevelWinner.NULL;
-				_mg.SetState ("level" + (_level + 1));
+				_mg.SetState ("blevel" + (_level + 1));
+
 			} else if (_asteroids.Count == 0 || _ships [0].Energy + _ships [1].Energy == 0 & _projectiles.Count == 0 && _level == 3) {
 				if (Ships [0].Score > Ships [1].Score)
 					_mg.LevelWinners [_level - 1] = LevelWinner.BLUE;

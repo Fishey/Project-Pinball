@@ -98,7 +98,7 @@ namespace GXPEngine
 
 
 				if (Input.GetKey (Key.SPACE)) {
-					_game.SetState ("level");
+					_game.SetState ("blevel1");
 				}
 			} 
 
