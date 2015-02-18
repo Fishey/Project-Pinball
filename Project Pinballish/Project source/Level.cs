@@ -59,7 +59,6 @@ namespace GXPEngine
 			AddChild(new Sprite("background.png")); // add a beautiful background
 
 
-
 			ReadLevel (level);
 			for (int i = 0; i < HEIGHT; i++) {
 				for (int j = 0; j < WIDTH; j++) {
@@ -72,13 +71,13 @@ namespace GXPEngine
 				
 			foreach (Ship ship in _ships) {
 				AddChild (ship); // add the ships to the game
-				ship.StunTimer = 60;
+				ship.StunTimer = 180;
 			}
 			foreach (Asteroid asteroid in _asteroids)
 				AddChild (asteroid);
 				
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
-
+			AddChild(new BLevel(_mg, _level, this));
 		}
 
 		public void Scoreboard()
@@ -122,7 +121,7 @@ namespace GXPEngine
 					_mg.LevelWinners [_level - 1] = LevelWinner.RED;
 				else
 					_mg.LevelWinners [_level - 1] = LevelWinner.NULL;
-				_mg.SetState ("blevel" + (_level + 1));
+				_mg.SetState ("level" + (_level + 1));
 
 			} else if (_asteroids.Count == 0 || _ships [0].Energy + _ships [1].Energy == 0 & _projectiles.Count == 0 && _level == 3) {
 				if (Ships [0].Score > Ships [1].Score)
@@ -361,13 +360,13 @@ namespace GXPEngine
 								SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
 								int randomNum = Utils.Random (0, 100);
 								PowerUp newPowerUp;
-								if (randomNum >= 95) {
+								if (randomNum >= 0) {
 									newPowerUp = new PowerUp (PowerUpType.ENERGYUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else if (randomNum >= 90) {
 									newPowerUp = new PowerUp (PowerUpType.MULTIPLIER, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else if (randomNum >= 85) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDDOWN, new Vec2(_asteroids[y].x, _asteroids[y].y));
-								} else if (randomNum >= 0) {
+								} else if (randomNum >= 80) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else {
 									newPowerUp = new PowerUp (PowerUpType.NULL);
@@ -383,7 +382,6 @@ namespace GXPEngine
 							}
 						}
 					}
-
 
 				}
 

@@ -27,8 +27,8 @@ namespace GXPEngine
 	
 		public MyGame ():base (1920,1080, false) 
 		{
-			scaleX = 0.5f;
-			scaleY = 0.5f;
+			//scaleX = 0.5f;
+			//scaleY = 0.5f;
 
 			SetState ("titleScreen");
 		}
@@ -60,21 +60,6 @@ namespace GXPEngine
 			case "help":
 				_helpscreen = new HelpScreen (this);
 				AddChild (_helpscreen);
-				break;
-
-			case "blevel1":
-
-				_blevel = new BLevel (this, 1);
-				AddChild (_blevel);
-				break;
-			case "blevel2":
-				_blevel = new BLevel (this, 2);
-				AddChild (_blevel);
-				break;
-
-			case "blevel3":
-				_blevel = new BLevel (this, 3);
-				AddChild (_blevel);
 				break;
 
 			case "level1":
