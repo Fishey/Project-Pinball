@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 namespace GXPEngine
 {
+	public enum LevelWinner
+	{
+		NULL, RED, BLUE
+	}
+
 	public class MyGame : Game
 	{ 
 		private string _state = "";
@@ -21,8 +26,8 @@ namespace GXPEngine
 	
 		public MyGame ():base (1920,1080, false) 
 		{
-			scaleX = 0.5f;
-			scaleY = 0.5f;
+			//scaleX = 0.5f;
+			//scaleY = 0.5f;
 
 			SetState ("titleScreen");
 		}

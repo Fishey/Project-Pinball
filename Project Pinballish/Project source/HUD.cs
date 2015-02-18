@@ -82,12 +82,13 @@ namespace GXPEngine
 			}
 		}
 
-		public void addEnergy(Ship ship)
+		public void addEnergy(Ship ship, int amount = 1)
 		{
 			if (ship.PlayerNum == 1) {
+				if (_hpBar1.Count < 10){
 				Sprite energy;
 				if (_hpBar1.Count == 9) {
-					energy = new Sprite ("Images/Top Energy.png");
+						energy = new Sprite ("Images/Top Energy.png");
 				} else if (_hpBar1.Count < 9 && _hpBar1.Count > 0) {
 					energy = new Sprite ("Images/Mid Energy.png");
 				} else {
@@ -99,25 +100,30 @@ namespace GXPEngine
 					energy.SetXY (-shell1.width+18, -60);
 
 				}
+
 				_hpBar1.Add (energy);
 				shell1.AddChild (energy);
+			}
 			} else if (ship.PlayerNum == 2) {
-				Sprite energy;
-				if (_hpBar2.Count == 9) {
-					energy = new Sprite ("Images/Top Energy 2.png");
-				} else if (_hpBar2.Count < 9 && _hpBar2.Count > 0) {
-					energy = new Sprite ("Images/Mid Energy 2.png");
-				} else {
-					energy = new Sprite ("Images/Bottom Energy 2.png");
-				}
-				if (_hpBar2.Count > 0)
-					energy.SetXY (_hpBar2 [ship.Energy - 2].x, _hpBar2 [ship.Energy - 2].y - energy.height);
-				else {
-					energy.SetXY (-shell2.width+18, -60);
+				if (_hpBar2.Count < 10) {
 
+					Sprite energy;
+					if (_hpBar2.Count == 9) {
+						energy = new Sprite ("Images/Top Energy 2.png");
+					} else if (_hpBar2.Count < 9 && _hpBar2.Count > 0) {
+						energy = new Sprite ("Images/Mid Energy 2.png");
+					} else {
+						energy = new Sprite ("Images/Bottom Energy 2.png");
+					}
+					if (_hpBar2.Count > 0)
+						energy.SetXY (_hpBar2 [ship.Energy - 2].x, _hpBar2 [ship.Energy - 2].y - energy.height);
+					else {
+						energy.SetXY (-shell2.width + 18, -60);
+
+					}
+					_hpBar2.Add (energy);
+					shell2.AddChild (energy);
 				}
-				_hpBar2.Add (energy);
-				shell2.AddChild (energy);
 			}
 
 		}

@@ -12,8 +12,8 @@ namespace GXPEngine
 		{
 			{ShipType.REDSHARK ,  		new int[2]{0,1}},
 			{ShipType.BLUESHARK,  		new int[2]{2,3}},
-			{ShipType.REDSHIP,  			new int[2]{4,5}},
-			{ShipType.BLUESHIP, 	 		new int[2]{6,7}},
+			{ShipType.REDSHIP,  		new int[2]{4,5}},
+			{ShipType.BLUESHIP, 	 	new int[2]{7,8}},
 
 		};
 
@@ -48,7 +48,7 @@ namespace GXPEngine
 			_energy = 10;
 			_speed = 1;
 			_powerUps = new List<PowerUp> ();
-			
+			_multiplier = 1;
 			_firstFrame = SHIP_DICT [imagepath][0];
 			_lastFrame = SHIP_DICT [imagepath] [1];
 			_graphic = new AnimSprite ("Images/SpriteSheet.png", 16, 16);	
@@ -58,19 +58,22 @@ namespace GXPEngine
 			this.AddChild (_graphic);
 			this._laser = new AnimSprite ("Images/SpriteSheet.png", 16, 16);
 
-			if (PlayerNum == 1) {
-				this._laser.SetFrame (6);
-				this.AddChild (_laser);
-			} else if (PlayerNum == 2) {
-				this._laser.SetFrame (7);
-				this.AddChild (_laser);
-			}
 
 			position = pPosition;
 			velocity = pVelocity;
 			_playNum = playNum;
 			_MG = MG;
 			_level = level;
+
+			if (PlayerNum == 1) {
+				this._laser.SetFrame (11);
+				_graphic.AddChild (_laser);
+			} else if (PlayerNum == 2) {
+				this._laser.SetFrame (10);
+				_graphic.AddChild (_laser);
+			}
+			//this._laser.SetOrigin (_laser.width / 2, -100);
+			//this._laser.SetXY (-_laser.width / 2+70, -180);
 			this.SetOrigin (this.width, this.height / 2);
 
 			x = (float)position.x;
@@ -142,30 +145,39 @@ namespace GXPEngine
 		}
 		public void AddPowerUp(PowerUp powerUp)
 		{
+			powerUp.Timer = 100;
 			switch (powerUp.PowerUpType) {
 			case PowerUpType.ENERGYUP:
-				if (Energy < 9)
-					this.Energy += 2;
-				else
-					Energy = 10;
+				if (Energy < 9) {
+					this.Energy ++;
+					_MG.Hud.addEnergy (this);
+				} else if (Energy == 9) {
+					Energy++;
+					_MG.Hud.addEnergy (this);
+				} else {
+					//Console.WriteLine ("already full");
+				}
 				break;
 			case PowerUpType.MULTIPLIER:
 				this.Multiplier = 2;
 				break;
 			case PowerUpType.SPEEDDOWN:
-				this.Speed = 0;
+				this.Speed = -2;
 				break;
 			case PowerUpType.SPEEDUP:
-				this.Speed = 2;
+				this.Speed = 3;
 				break;
 			default:
 				break;
 			}
+
 			_powerUps.Add (powerUp);
 		}
 
 		public void RemovePowerUp(PowerUp powerUp)
 		{
+			_powerUps.Remove (powerUp);
+
 			switch (powerUp.PowerUpType) {
 			case PowerUpType.ENERGYUP:
 				break;
@@ -182,13 +194,13 @@ namespace GXPEngine
 				break;
 			}
 
-			_powerUps.Remove (powerUp);
 
 		}
 
 		public void Flip(bool horizontal = false, bool vertical = false)
 		{
 			_graphic.Mirror (horizontal, vertical);
+			_laser.Mirror (horizontal, vertical);
 		}
 
 		public int PlayerNum {
@@ -231,6 +243,11 @@ namespace GXPEngine
 			get { return this._shipType; }
 		}
 
+		public AnimSprite Laser{
+			get { return this._laser; }
+			set { this._laser = value; }
+		}
+
 		public void UpdateAnimation() // Continuously loop through the frames based on the maximum and
 		{
 			_frame = _frame + 0.1f;
@@ -243,8 +260,13 @@ namespace GXPEngine
 
 		}
 
-		public void Step () {
+		public void Idle()
+		{
+			if (this._shipType == ShipType.REDSHIP || this._shipType == ShipType.BLUESHIP)
+				_graphic.SetFrame (_lastFrame + 1);
+		}
 
+		public void Step () {
 			if (LaserTimer > 0)
 				_laserTimer--;
 			if (StunTimer > 0)
@@ -254,9 +276,11 @@ namespace GXPEngine
 			if (_shieldTimer < 100 && this.HasChild(_shield))
 				this.RemoveChild (_shield);
 
-			foreach (PowerUp powerup in _powerUps) {
-				if (powerup.Timer == 0)
-					this.RemovePowerUp (powerup);
+			for (int i = _powerUps.Count - 1; i >= 0; i--)
+			{
+				_powerUps [i].Step ();
+				if (_powerUps[i].Timer == 0)
+					this.RemovePowerUp (_powerUps[i]);
 			}
 			_position.Add (_velocity);
 			x = (float)_position.x;
