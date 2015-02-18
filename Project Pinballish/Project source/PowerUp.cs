@@ -6,14 +6,14 @@ namespace GXPEngine
 	{
 		PowerUpType _type;
 		Vec2 _position, _velocity;
-		Level _level;
 		int _timer;
 
-		public PowerUp (PowerUpType type, Level level, Vec2 position = null, Vec2 velocity = null) : base ("Images/EnergyUpSheet.png", 4, 1)
+		public PowerUp (PowerUpType type, Vec2 position = null, Vec2 velocity = null) : base ("Images/SpriteSheet.png", 16, 16)
 		{
 			_timer = 120;
 			_type = type;
 			_position = position;
+			this.SetScaleXY (0.5, 0.5);
 			if (velocity == null)
 				velocity = new Vec2 (3, 0);
 			velocity.SetAngleDegrees (Utils.Random (0.0f, 360.0f));
@@ -21,16 +21,16 @@ namespace GXPEngine
 			switch (type) {
 
 			case PowerUpType.ENERGYUP:
-				SetFrame (0);
+				SetFrame (24);
 				break;
 			case PowerUpType.MULTIPLIER:
-				SetFrame (1);
+				SetFrame (25);
 				break;
 			case PowerUpType.SPEEDUP:
-				SetFrame (2);
+				SetFrame (26);
 				break;
 			case PowerUpType.SPEEDDOWN:
-				SetFrame (3);
+				SetFrame (27);				
 				break;
 			default:
 

@@ -127,6 +127,11 @@ namespace GXPEngine
 			}
 
 		}
+
+		public void addPowerup(Ship ship, PowerUp powerup)
+		{
+			this.AddChild (powerup);	
+		}
 	}
 }
 

@@ -17,7 +17,7 @@ namespace GXPEngine
 		{
 			_ship = ship;
 			_levelWinners = levelWinners;
-			_scoreboardFont = new Font ("Induction", 30 , FontStyle.Regular);
+			_scoreboardFont = new Font ("Good Times Rg", 30 , FontStyle.Regular);
 			_scoreboardBrush = brushy;
 			_scoreboardPosition = pointy;
 			_levelWinnerPosition = new PointF (pointy.X+50, pointy.Y-100);
@@ -27,7 +27,7 @@ namespace GXPEngine
 
 		public void DrawScore (int score)
 		{
-			string scoreMessage = "   " + score;
+			string scoreMessage = "   " + score + " x" + _ship.Multiplier;
 
 			graphics.Clear (Color.Transparent);
 

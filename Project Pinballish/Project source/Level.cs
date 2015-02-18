@@ -361,15 +361,15 @@ namespace GXPEngine
 								int randomNum = Utils.Random (0, 100);
 								PowerUp newPowerUp;
 								if (randomNum >= 95) {
-									newPowerUp = new PowerUp (PowerUpType.ENERGYUP, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
+									newPowerUp = new PowerUp (PowerUpType.ENERGYUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else if (randomNum >= 90) {
-									newPowerUp = new PowerUp (PowerUpType.MULTIPLIER, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
+									newPowerUp = new PowerUp (PowerUpType.MULTIPLIER, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else if (randomNum >= 85) {
-									newPowerUp = new PowerUp (PowerUpType.SPEEDDOWN, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
+									newPowerUp = new PowerUp (PowerUpType.SPEEDDOWN, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else if (randomNum >= 80) {
-									newPowerUp = new PowerUp (PowerUpType.SPEEDUP, this, new Vec2(_asteroids[y].x, _asteroids[y].y));
+									newPowerUp = new PowerUp (PowerUpType.SPEEDUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else {
-									newPowerUp = new PowerUp (PowerUpType.NULL, this);
+									newPowerUp = new PowerUp (PowerUpType.NULL);
 								}
 
 								if (newPowerUp.PowerUpType != PowerUpType.NULL) {
