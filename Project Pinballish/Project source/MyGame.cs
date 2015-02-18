@@ -85,11 +85,11 @@ namespace GXPEngine
 				AddChild (_level);
 				this.AddChild (_hud);
 
-				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue), _levelWinners, _level.Ships[0]);
+				_scoreboard = new Scoreboard (new PointF (-30,250), new SolidBrush (Color.Blue), _levelWinners, _level.Ships[0]);
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1680,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
+				_scoreboard2 = new Scoreboard (new PointF (1700,250), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
 				this.AddChild (_scoreboard2);
 				break;
 
@@ -102,7 +102,7 @@ namespace GXPEngine
 				_hud = new HUD (this, _level, _level.Ships);
 				this.AddChild (_hud);
 
-				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue), _levelWinners, _level.Ships[0]);
+				_scoreboard = new Scoreboard (new PointF (-30,250), new SolidBrush (Color.Blue), _levelWinners, _level.Ships[0]);
 				this.AddChild (_scoreboard);
 
 
@@ -118,7 +118,7 @@ namespace GXPEngine
 				_hud = new HUD (this, _level, _level.Ships);
 				this.AddChild (_hud);
 
-				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue), _levelWinners, _level.Ships[0]);
+				_scoreboard = new Scoreboard (new PointF (-30,250), new SolidBrush (Color.Blue), _levelWinners, _level.Ships[0]);
 				this.AddChild (_scoreboard);
 
 

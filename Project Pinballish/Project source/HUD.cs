@@ -96,7 +96,7 @@ namespace GXPEngine
 				_hpBar1.Remove (_hpBar1 [ship.Energy - 1]);
 			} else if (ship.PlayerNum == 2) {
 				_hpBar2 [ship.Energy - 1].Destroy ();
-				this.RemoveChild (_hpBar2 [ship.Energy-1]);
+				this.RemoveChild (_hpBar2 [ship.Energy - 1]);
 				_hpBar2.Remove (_hpBar2 [ship.Energy - 1]);
 			}
 		}
@@ -107,7 +107,7 @@ namespace GXPEngine
 				if (_hpBar1.Count < 10){
 				Sprite energy;
 				if (_hpBar1.Count == 9) {
-						energy = new Sprite ("Images/Top Energy.png");
+					energy = new Sprite ("Images/Top Energy.png");
 				} else if (_hpBar1.Count < 9 && _hpBar1.Count > 0) {
 					energy = new Sprite ("Images/Mid Energy.png");
 				} else {

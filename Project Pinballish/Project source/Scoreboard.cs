@@ -20,7 +20,7 @@ namespace GXPEngine
 			_scoreboardFont = new Font ("Good Times Rg", 30 , FontStyle.Regular);
 			_scoreboardBrush = brushy;
 			_scoreboardPosition = pointy;
-			_levelWinnerPosition = new PointF (pointy.X+50, pointy.Y-100);
+			_levelWinnerPosition = new PointF (pointy.X+30, pointy.Y-240);
 			DrawLevelScore ();
 
 		}
