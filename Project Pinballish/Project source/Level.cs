@@ -91,7 +91,7 @@ namespace GXPEngine
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		void Update() {
-
+			Console.WriteLine (_ship.Energy + _ship2.Energy);
 			foreach (Ship ship in _ships) {
 				rotateAroundPoint (ship, _center, (float)(5 * Math.PI / 180.0f)); // make the ships turn around the center of the screen
 				rotateAsteroids (_center);
@@ -119,9 +119,10 @@ namespace GXPEngine
 					_mg.LevelWinners [_level - 1] = LevelWinner.BLUE;
 				else if (Ships [0].Score < Ships [1].Score)
 					_mg.LevelWinners [_level - 1] = LevelWinner.RED;
-				else
+				else 
 					_mg.LevelWinners [_level - 1] = LevelWinner.NULL;
 				_mg.SetState ("level" + (_level + 1));
+
 
 			} else if (_asteroids.Count == 0 || _ships [0].Energy + _ships [1].Energy == 0 & _projectiles.Count == 0 && _level == 3) {
 				if (Ships [0].Score > Ships [1].Score)
@@ -360,7 +361,7 @@ namespace GXPEngine
 								SoundManager.PlaySound (SoundFile.ASTEROIDBREAK);
 								int randomNum = Utils.Random (0, 100);
 								PowerUp newPowerUp;
-								if (randomNum >= 0) {
+								if (randomNum >= 95) {
 									newPowerUp = new PowerUp (PowerUpType.ENERGYUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else if (randomNum >= 90) {
 									newPowerUp = new PowerUp (PowerUpType.MULTIPLIER, new Vec2(_asteroids[y].x, _asteroids[y].y));

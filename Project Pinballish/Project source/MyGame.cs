@@ -135,39 +135,36 @@ namespace GXPEngine
 			case "level":
 				_level.Destroy ();
 				_hud.Destroy ();
+				_scoreboard.Destroy ();
+				_scoreboard2.Destroy ();
 				this.RemoveChild (_hud);
 				this.RemoveChild (_level);
+				_level = null;
+				this.RemoveChild (_scoreboard);
+				this.RemoveChild (_scoreboard2);
 				break;
 			
 			case "level2":
 				_level.Destroy ();
 				_hud.Destroy ();
+				_scoreboard.Destroy ();
+				_scoreboard2.Destroy ();
 				this.RemoveChild (_hud);
 				this.RemoveChild (_level);
+				this.RemoveChild (_scoreboard);
+				this.RemoveChild (_scoreboard2);
 				break;
 
 			case "level3":
 				_level.Destroy ();
 				_hud.Destroy ();
+				_scoreboard.Destroy ();
+				_scoreboard2.Destroy ();
 				this.RemoveChild (_hud);
 				this.RemoveChild (_level);
+				this.RemoveChild (_scoreboard);
+				this.RemoveChild (_scoreboard2);
 				break;
-
-			case "blevel1":
-				_blevel.Destroy ();
-				this.RemoveChild (_blevel);
-				break;
-
-			case "blevel2":
-				_blevel.Destroy ();
-				this.RemoveChild (_blevel);
-				break;
-
-			case "blevel3":
-				_blevel.Destroy ();
-				this.RemoveChild (_blevel);
-				break;
-
 			}
 		}
 	
