@@ -10,6 +10,7 @@ namespace GXPEngine
 		private Titlescreen _titleScreen;
 		private Level _level;
 		private ControlScreen _controlscreen;
+		private HelpScreen _helpscreen;
 		private HUD _hud;
 		private Scoreboard _scoreboard;
 		private Scoreboard _scoreboard2;
@@ -48,6 +49,11 @@ namespace GXPEngine
 			case "controls":
 				_controlscreen = new ControlScreen (this);
 				AddChild (_controlscreen);
+				break;
+
+			case "help":
+				_helpscreen = new HelpScreen (this);
+				AddChild (_helpscreen);
 				break;
 
 			case "level":
@@ -107,10 +113,12 @@ namespace GXPEngine
 			switch (_state) {
 			case "titleScreen":
 				_titleScreen.Destroy ();
+				this.RemoveChild (_titleScreen);
 				break;
 
 			case "controls":
 				_controlscreen.Destroy ();
+				this.RemoveChild (_controlscreen);
 				break;
 
 			case "level":
@@ -135,6 +143,10 @@ namespace GXPEngine
 				this.RemoveChild (_hud);
 				this.RemoveChild (_level);
 				break;
+
+//			case "blevel1":
+//				_level.Destroy ();
+
 			}
 		}
 	

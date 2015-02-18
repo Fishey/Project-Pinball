@@ -130,6 +130,9 @@
     <Compile Include="Scoreboard.cs" />
     <Compile Include="Shield.cs" />
     <Compile Include="PowerUp.cs" />
+    <Compile Include="BLevel.cs" />
+    <Compile Include="HelpScreen.cs" />
+    <Compile Include="HelpButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

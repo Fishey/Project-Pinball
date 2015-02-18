@@ -1,16 +1,19 @@
 ﻿<Properties StartupItem="Space Out.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MyGame.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Projectile.cs">
     <Files>
-      <File FileName="Level.cs" Line="1" Column="1" />
-      <File FileName="PowerUp.cs" Line="1" Column="1" />
-      <File FileName="Ship.cs" Line="1" Column="1" />
-      <File FileName="Projectile.cs" Line="1" Column="1" />
+      <File FileName="MyGame.cs" Line="34" Column="34" />
+      <File FileName="Level.cs" Line="20" Column="20" />
+      <File FileName="PowerUp.cs" Line="18" Column="18" />
+      <File FileName="Projectile.cs" Line="26" Column="26" />
       <File FileName="Asteroid.cs" Line="1" Column="1" />
-      <File FileName="HUD.cs" Line="1" Column="1" />
+      <File FileName="HUD.cs" Line="30" Column="30" />
       <File FileName="Trail.cs" Line="1" Column="1" />
-      <File FileName="Titlescreen.cs" Line="1" Column="1" />
-      <File FileName="MyGame.cs" Line="20" Column="20" />
+      <File FileName="Titlescreen.cs" Line="4" Column="4" />
+      <File FileName="Ship.cs" Line="24" Column="24" />
+      <File FileName="BLevel.cs" Line="20" Column="20" />
+      <File FileName="HelpScreen.cs" Line="38" Column="38" />
+      <File FileName="ControlScreen.cs" Line="4" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
