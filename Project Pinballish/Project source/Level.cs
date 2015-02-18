@@ -77,7 +77,6 @@ namespace GXPEngine
 			foreach (Asteroid asteroid in _asteroids)
 				AddChild (asteroid);
 				
-
 			_center = new Vec2 (_mg.width / 2, _mg.height / 2);
 
 		}
@@ -116,8 +115,23 @@ namespace GXPEngine
 			resolveCollisions ();
 			Scoreboard ();
 
-			if (_asteroids.Count == 0 || _ships[0].Energy + _ships[1].Energy == 0 & _projectiles.Count == 0 && _level < 3)
-				_mg.SetState ("level" + (_level+1));
+			if (_asteroids.Count == 0 || _ships [0].Energy + _ships [1].Energy == 0 & _projectiles.Count == 0 && _level < 3) {
+				if (Ships [0].Score > Ships [1].Score)
+					_mg.LevelWinners [_level - 1] = LevelWinner.BLUE;
+				else if (Ships [0].Score < Ships [1].Score)
+					_mg.LevelWinners [_level - 1] = LevelWinner.RED;
+				else
+					_mg.LevelWinners [_level - 1] = LevelWinner.NULL;
+				_mg.SetState ("level" + (_level + 1));
+			} else if (_asteroids.Count == 0 || _ships [0].Energy + _ships [1].Energy == 0 & _projectiles.Count == 0 && _level == 3) {
+				if (Ships [0].Score > Ships [1].Score)
+					_mg.LevelWinners [_level - 1] = LevelWinner.BLUE;
+				else if (Ships [0].Score < Ships [1].Score)
+					_mg.LevelWinners [_level - 1] = LevelWinner.RED;
+				else
+					_mg.LevelWinners [_level - 1] = LevelWinner.NULL;
+				_mg.SetState ("level");
+			}
 		}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -201,20 +215,22 @@ namespace GXPEngine
 					if (Input.GetKeyDown (Key.W)) {
 						ship.Fire ();
 					}
-
+					/*
 					 if (Input.GetKeyDown (Key.DOWN) && ship.ShieldTimer == 0) {
 						ship.Shield ();
 					}
+					*/
 					break;
 
 				case 2:
 					if (Input.GetKeyDown (Key.UP)) {
 						ship.Fire ();
 					}
-
+					/*
 					if (Input.GetKeyDown (Key.S) && ship.ShieldTimer == 0) {
 						ship.Shield ();
 					}
+					*/
 					break;
 				default:
 					break;

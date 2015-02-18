@@ -11,7 +11,7 @@ namespace GXPEngine
 
 		public PowerUp (PowerUpType type, Level level, Vec2 position = null, Vec2 velocity = null) : base ("Images/EnergyUpSheet.png", 4, 1)
 		{
-			_timer = 100;
+			_timer = 120;
 			_type = type;
 			_position = position;
 			if (velocity == null)

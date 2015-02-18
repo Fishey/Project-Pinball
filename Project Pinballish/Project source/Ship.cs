@@ -145,7 +145,7 @@ namespace GXPEngine
 		}
 		public void AddPowerUp(PowerUp powerUp)
 		{
-			powerUp.Timer = 100;
+			powerUp.Timer = 120;
 			switch (powerUp.PowerUpType) {
 			case PowerUpType.ENERGYUP:
 				if (Energy < 9) {
@@ -246,6 +246,11 @@ namespace GXPEngine
 		public AnimSprite Laser{
 			get { return this._laser; }
 			set { this._laser = value; }
+		}
+
+		public int Score{
+			get { return this._score; }
+			set { this._score = value; }
 		}
 
 		public void UpdateAnimation() // Continuously loop through the frames based on the maximum and

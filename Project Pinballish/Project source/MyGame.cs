@@ -19,7 +19,7 @@ namespace GXPEngine
 		private HUD _hud;
 		private Scoreboard _scoreboard;
 		private Scoreboard _scoreboard2;
-		private List<Ship> _savedShips;
+		private List<LevelWinner> _levelWinners = new List<LevelWinner> {LevelWinner.NULL, LevelWinner.NULL, LevelWinner.NULL};
 
 		//pink fluffy unicorns with lasers
 
@@ -69,11 +69,11 @@ namespace GXPEngine
 				AddChild (_level);
 				this.AddChild (_hud);
 
-				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue));
+				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue), _levelWinners, _level.Ships[0]);
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1670,100), new SolidBrush(Color.Red));
+				_scoreboard2 = new Scoreboard (new PointF (1670,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
 				this.AddChild (_scoreboard2);
 				break;
 
@@ -86,11 +86,11 @@ namespace GXPEngine
 				_hud = new HUD (this, _level, _level.Ships);
 				this.AddChild (_hud);
 
-				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue));
+				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue), _levelWinners, _level.Ships[0]);
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1685,100), new SolidBrush(Color.Red));
+				_scoreboard2 = new Scoreboard (new PointF (1670,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
 				this.AddChild (_scoreboard2);
 				break;
 
@@ -102,11 +102,11 @@ namespace GXPEngine
 				_hud = new HUD (this, _level, _level.Ships);
 				this.AddChild (_hud);
 
-				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue));
+				_scoreboard = new Scoreboard (new PointF (-45,100), new SolidBrush (Color.Blue), _levelWinners, _level.Ships[0]);
 				this.AddChild (_scoreboard);
 
 
-				_scoreboard2 = new Scoreboard (new PointF (1685,100), new SolidBrush(Color.Red));
+				_scoreboard2 = new Scoreboard (new PointF (1670,100), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
 				this.AddChild (_scoreboard2);
 				break;
 			}
@@ -127,8 +127,6 @@ namespace GXPEngine
 				break;
 
 			case "level":
-
-				_savedShips = _level.Ships;
 				_level.Destroy ();
 				_hud.Destroy ();
 				this.RemoveChild (_hud);
@@ -177,6 +175,12 @@ namespace GXPEngine
 		public HUD Hud
 		{
 			get { return this._hud; }
+		}
+
+		public List<LevelWinner> LevelWinners
+		{
+			get { return this._levelWinners; }
+			set { this._levelWinners = value; }
 		}
 	}
 }
