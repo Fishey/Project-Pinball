@@ -160,12 +160,15 @@ namespace GXPEngine
 				break;
 			case PowerUpType.MULTIPLIER:
 				this.Multiplier = 2;
+				_MG.Hud.addPowerup (this, powerUp);
 				break;
 			case PowerUpType.SPEEDDOWN:
 				this.Speed = -2;
+				_MG.Hud.addPowerup (this, powerUp);
 				break;
 			case PowerUpType.SPEEDUP:
 				this.Speed = 3;
+				_MG.Hud.addPowerup (this, powerUp);
 				break;
 			default:
 				break;
@@ -284,9 +287,12 @@ namespace GXPEngine
 			for (int i = _powerUps.Count - 1; i >= 0; i--)
 			{
 				_powerUps [i].Step ();
-				if (_powerUps[i].Timer == 0)
-					this.RemovePowerUp (_powerUps[i]);
+				if (_powerUps [i].Timer == 0) {
+					_MG.Hud.removePowerup (this, _powerUps [i]);
+					this.RemovePowerUp (_powerUps [i]);
+				}
 			}
+
 			_position.Add (_velocity);
 			x = (float)_position.x;
 			y = (float)_position.y;

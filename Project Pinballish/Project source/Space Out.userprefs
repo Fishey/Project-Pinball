@@ -1,19 +1,18 @@
 ﻿<Properties StartupItem="Space Out.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Projectile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="HUD.cs">
     <Files>
-      <File FileName="MyGame.cs" Line="34" Column="34" />
-      <File FileName="Level.cs" Line="20" Column="20" />
-      <File FileName="PowerUp.cs" Line="18" Column="18" />
-      <File FileName="Projectile.cs" Line="26" Column="26" />
+      <File FileName="Level.cs" Line="29" Column="29" />
+      <File FileName="MyGame.cs" Line="49" Column="49" />
+      <File FileName="PowerUp.cs" Line="3" Column="3" />
+      <File FileName="Ship.cs" Line="11" Column="11" />
+      <File FileName="Projectile.cs" Line="33" Column="33" />
       <File FileName="Asteroid.cs" Line="1" Column="1" />
-      <File FileName="HUD.cs" Line="30" Column="30" />
+      <File FileName="HUD.cs" Line="38" Column="38" />
       <File FileName="Trail.cs" Line="1" Column="1" />
-      <File FileName="Titlescreen.cs" Line="4" Column="4" />
-      <File FileName="Ship.cs" Line="24" Column="24" />
-      <File FileName="BLevel.cs" Line="20" Column="20" />
-      <File FileName="HelpScreen.cs" Line="38" Column="38" />
-      <File FileName="ControlScreen.cs" Line="4" Column="4" />
+      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\GameObject.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\Game.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\Core\Texture2D.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -21,5 +20,6 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="MyGame.cs" line="43" offsetX="277" offsetY="672" expression="ship" liveUpdate="False" />
+    <Watch file="HUD.cs" line="145" offsetX="585" offsetY="2304" expression="_powerupList[i]" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
 </Properties>

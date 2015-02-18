@@ -237,7 +237,7 @@ namespace GXPEngine
 				}
 			}
 
-			if (Input.GetKeyDown (Key.P)) {
+			if (Input.GetKeyDown (Key.BACKSPACE)) {
 				_mg.SetState ("titleScreen");
 			}
 
@@ -366,7 +366,7 @@ namespace GXPEngine
 									newPowerUp = new PowerUp (PowerUpType.MULTIPLIER, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else if (randomNum >= 85) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDDOWN, new Vec2(_asteroids[y].x, _asteroids[y].y));
-								} else if (randomNum >= 80) {
+								} else if (randomNum >= 0) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else {
 									newPowerUp = new PowerUp (PowerUpType.NULL);

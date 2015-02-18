@@ -11,6 +11,7 @@ namespace GXPEngine
 		private Level _level;
 		private MyGame _game;
 		private List<Ship> _shipList;
+		private List<PowerUp> _powerupList;
 		private List<Sprite> _hpBar1;
 		private List<Sprite> _hpBar2;
 		private TextField _energytf = null;
@@ -23,13 +24,14 @@ namespace GXPEngine
 			_shipList = shipList;
 			_hpBar1 = new List<Sprite> ();
 			_hpBar2 = new List<Sprite> ();
-			shell1 = new Sprite ("Images/Shell.png");
+			_powerupList = new List<PowerUp> ();
+			shell1 = new Sprite ("Images/Shell2.png");
 			shell1.SetOrigin (shell1.width, shell1.height);
-			shell1.SetXY(2 + shell1.width, this._game.height - shell1.height/3.5  );
+			shell1.SetXY(2 + shell1.width, this._game.height - shell1.height/2);
 			this.AddChild (shell1);
-			shell2 = new Sprite ("Images/Shell.png");
+			shell2 = new Sprite ("Images/Shell2.png");
 			shell2.SetOrigin (shell2.width, shell2.height);
-			shell2.SetXY(this._game.width - 5, this._game.height - shell2.height/3.5);
+			shell2.SetXY(this._game.width - 5, this._game.height - shell2.height/2);
 			this.AddChild (shell2);
 
 			for (int i = 0; i < _shipList.Count; i++) {
@@ -139,7 +141,26 @@ namespace GXPEngine
 
 		public void addPowerup(Ship ship, PowerUp powerup)
 		{
-			this.AddChild (powerup);	
+			PowerUp _powerup = new PowerUp (powerup.PowerUpType);
+			if (ship.PlayerNum == 1)
+				_powerup.SetXY (shell1.x-200+(_powerupList.Count*powerup.width), shell1.y);
+			else if (ship.PlayerNum == 2)
+				_powerup.SetXY (shell1.x-200+(_powerupList.Count*powerup.width), shell1.y);
+			_powerupList.Add (_powerup);
+			this.AddChild (_powerup);	
+		}
+
+		public void removePowerup(Ship ship, PowerUp powerup)
+		{
+
+			for (int i = _powerupList.Count - 1; y >= 0; y--) {
+				if (_powerupList[i].PowerUpType == powerup.PowerUpType) {
+					_powerupList [i].Destroy ();
+					this.RemoveChild (_powerupList[i]);
+					_powerupList.RemoveAt (i);
+				}
+			}
+
 		}
 	}
 }
