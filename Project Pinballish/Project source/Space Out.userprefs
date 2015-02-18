@@ -1,20 +1,25 @@
 ﻿<Properties StartupItem="Space Out.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MyGame.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="HUD.cs">
     <Files>
-      <File FileName="Level.cs" Line="20" Column="20" />
-      <File FileName="MyGame.cs" Line="5" Column="5" />
-      <File FileName="PowerUp.cs" Line="31" Column="31" />
+      <File FileName="Level.cs" Line="116" Column="116" />
+      <File FileName="MyGame.cs" Line="4" Column="4" />
+      <File FileName="PowerUp.cs" Line="13" Column="13" />
       <File FileName="Ship.cs" Line="1" Column="1" />
-      <File FileName="Projectile.cs" Line="31" Column="31" />
+      <File FileName="Projectile.cs" Line="1" Column="1" />
       <File FileName="Asteroid.cs" Line="1" Column="1" />
-      <File FileName="HUD.cs" Line="8" Column="8" />
+      <File FileName="HUD.cs" Line="81" Column="81" />
       <File FileName="Trail.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\GameObject.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\Game.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\Core\Texture2D.cs" Line="1" Column="1" />
-      <File FileName="QuitButton.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\Project Pinballish\Project source\Vec2.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\Game.cs" Line="2" Column="2" />
     </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>_powerUps</Value>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

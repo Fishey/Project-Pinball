@@ -284,6 +284,8 @@ namespace GXPEngine
 			if (_shieldTimer < 100 && this.HasChild(_shield))
 				this.RemoveChild (_shield);
 
+			Console.WriteLine (_powerUps.Count);
+
 			for (int i = _powerUps.Count - 1; i >= 0; i--)
 			{
 				_powerUps [i].Step ();

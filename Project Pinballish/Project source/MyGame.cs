@@ -25,7 +25,7 @@ namespace GXPEngine
 		//pink fluffy unicorns with lasers
 
 	
-		public MyGame ():base (1920,1080, false) 
+		public MyGame ():base (1920,1080, false, false) 
 		{
 			//scaleX = 0.5f;
 			//scaleY = 0.5f;
@@ -132,14 +132,13 @@ namespace GXPEngine
 				this.RemoveChild (_helpscreen);
 				break;
 
-			case "level":
+			case "level1":
 				_level.Destroy ();
 				_hud.Destroy ();
 				_scoreboard.Destroy ();
 				_scoreboard2.Destroy ();
 				this.RemoveChild (_hud);
 				this.RemoveChild (_level);
-				_level = null;
 				this.RemoveChild (_scoreboard);
 				this.RemoveChild (_scoreboard2);
 				break;

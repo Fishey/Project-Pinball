@@ -91,7 +91,6 @@ namespace GXPEngine
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		void Update() {
-			Console.WriteLine (_ship.Energy + _ship2.Energy);
 			foreach (Ship ship in _ships) {
 				rotateAroundPoint (ship, _center, (float)(5 * Math.PI / 180.0f)); // make the ships turn around the center of the screen
 				rotateAsteroids (_center);

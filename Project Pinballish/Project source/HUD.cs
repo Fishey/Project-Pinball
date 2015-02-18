@@ -74,19 +74,7 @@ namespace GXPEngine
 				}
 				position = 0;
 			}
-			/*
-			_energytf = TextField.CreateTextField ("Energy               . ");
-			_energytf.backgroundColor = Color.Transparent;
-			_energytf.SetXY (5, 900);
-			_energytf.font = new Font ("Good Times RG", 24);
-			AddChild (_energytf);
 
-			_energytf2 = TextField.CreateTextField ("Energy               . ");
-			_energytf2.backgroundColor = Color.Transparent;
-			_energytf2.SetXY (1735, 900);
-			_energytf2.font = new Font ("Good Times RG", 24);
-			AddChild (_energytf2);
-			*/
 			Sprite extension = new Sprite ("Images/Shell3a.png");
 			extension.x -= shell1.width;
 			extension.y -= 10;
@@ -162,16 +150,18 @@ namespace GXPEngine
 		{
 			PowerUp _powerup = new PowerUp (powerup.PowerUpType);
 			if (ship.PlayerNum == 1)
-				_powerup.SetXY (shell1.x-200+(_powerupList.Count*powerup.width), shell1.y);
+				_powerup.SetXY (shell1.x-200+(_powerupList.Count*powerup.width), shell2.y+120);
 			else if (ship.PlayerNum == 2)
-				_powerup.SetXY (shell1.x-200+(_powerupList.Count*powerup.width), shell1.y);
+				_powerup.SetXY (shell2.x-200+(_powerupList.Count*powerup.width), shell2.y+120);
 			_powerupList.Add (_powerup);
 			this.AddChild (_powerup);	
 		}
 
 		public void removePowerup(Ship ship, PowerUp powerup)
 		{
-			for (int i = _powerupList.Count - 1; y >= 0; y--) {
+			if (powerup.PowerUpType == PowerUpType.ENERGYUP)
+				return;
+			for (int i = _powerupList.Count - 1; i >= 0; i--) {
 				if (i >= 0) {
 					if (_powerupList [i].PowerUpType == powerup.PowerUpType) {
 						_powerupList [i].Destroy ();
