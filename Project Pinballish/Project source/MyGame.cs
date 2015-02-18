@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 namespace GXPEngine
 {
+	public enum LevelWinner
+	{
+		NULL, RED, BLUE
+	}
+
 	public class MyGame : Game
 	{ 
 		private string _state = "";
