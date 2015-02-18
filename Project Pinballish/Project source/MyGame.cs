@@ -142,6 +142,11 @@ namespace GXPEngine
 				this.RemoveChild (_controlscreen);
 				break;
 
+			case "help":
+				_helpscreen.Destroy ();
+				this.RemoveChild (_helpscreen);
+				break;
+
 			case "level":
 				_level.Destroy ();
 				_hud.Destroy ();
@@ -163,8 +168,20 @@ namespace GXPEngine
 				this.RemoveChild (_level);
 				break;
 
-//			case "blevel1":
-//				_level.Destroy ();
+			case "blevel1":
+				_blevel.Destroy ();
+				this.RemoveChild (_blevel);
+				break;
+
+			case "blevel2":
+				_blevel.Destroy ();
+				this.RemoveChild (_blevel);
+				break;
+
+			case "blevel3":
+				_blevel.Destroy ();
+				this.RemoveChild (_blevel);
+				break;
 
 			}
 		}
