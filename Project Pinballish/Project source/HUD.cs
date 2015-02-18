@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace GXPEngine
 {
@@ -12,7 +13,10 @@ namespace GXPEngine
 		private List<Ship> _shipList;
 		private List<Sprite> _hpBar1;
 		private List<Sprite> _hpBar2;
+		private TextField _energytf = null;
+
 		public HUD (MyGame game, Level level, List<Ship> shipList) : base ()
+
 		{
 			_level = level;
 			_game = game;
@@ -67,6 +71,11 @@ namespace GXPEngine
 				}
 				position = 0;
 			}
+
+			_energytf = TextField.CreateTextField ("Energy");
+			_energytf.backgroundColor = Color.Transparent;
+			_energytf.SetXY (100, 900);
+			AddChild (_energytf);
 		}
 
 		public void removeEnergy(Ship ship)

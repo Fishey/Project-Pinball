@@ -42,6 +42,7 @@ namespace GXPEngine
 		}
 
 		public new Vec2 position {
+
 			set {
 				_position = value ?? Vec2.zero;
 			}

@@ -12,7 +12,7 @@ namespace GXPEngine
 		private string _text = "";							
 		private Color _backgroundColor = Color.Empty;		
 		private Color _borderColor = Color.Empty;
-		private Color _textColor = Color.Black;
+		private Color _textColor = Color.MediumSpringGreen;
 
 		//underlying properties to draw the visible properties
 		private Pen _borderPen = null;
@@ -54,6 +54,17 @@ namespace GXPEngine
 
 			set {
 				_backgroundColor = value;
+				_invalidate = true;
+			}
+		}
+
+		public Color textColor {
+			get {
+				return _textColor;
+			}
+
+			set {
+				_textColor = value;
 				_invalidate = true;
 			}
 		}
