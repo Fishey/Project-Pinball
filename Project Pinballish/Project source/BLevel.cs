@@ -21,6 +21,8 @@ namespace GXPEngine
 
 			_mygame.Add (this);
 
+			SetXY (myGame.width / 2, myGame.height / 2);
+
 		}
 
 		void Update ()

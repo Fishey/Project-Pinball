@@ -97,7 +97,7 @@ namespace GXPEngine
 				_startbutton.SetFrame (1);
 
 
-				if (Input.GetKey (Key.SPACE)) {
+				if (Input.GetKeyDown (Key.SPACE)) {
 					_game.SetState ("blevel1");
 				}
 			} 
@@ -109,7 +109,7 @@ namespace GXPEngine
 				_controlbutton.SetFrame (1);
 
 			
-				if (Input.GetKey (Key.SPACE)) {
+				if (Input.GetKeyDown (Key.SPACE)) {
 					_game.SetState ("controls");
 				}
 			} else
@@ -119,7 +119,7 @@ namespace GXPEngine
 			if (_levelselector.y == _helpbutton.y) {
 				_helpbutton.SetFrame (1);
 
-				if (Input.GetKey (Key.SPACE)) {
+				if (Input.GetKeyDown (Key.SPACE)) {
 					_game.SetState ("help");
 				}
 			}
