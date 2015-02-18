@@ -132,13 +132,13 @@ namespace GXPEngine
 			double sinAngle = Math.Sin (angle/(5-ship.Speed));
 			// player1 controls
 			if (ship.StunTimer == 0) {
-				if (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 1) {
+				if (Input.GetKey (Key.D) && ship.PlayerNum == 1) {
 					ship.Flip (false, false);
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
 					ship.UpdateAnimation ();
 
-				} else if (Input.GetKey (Key.LEFT) && ship.PlayerNum == 1) {
+				} else if (Input.GetKey (Key.A) && ship.PlayerNum == 1) {
 					ship.Flip (true, true);
 
 					cosAngle = Math.Cos (-angle / (5 - ship.Speed));
@@ -151,14 +151,14 @@ namespace GXPEngine
 					ship.Idle ();
 				}
 				//player2 controls
-				if (Input.GetKey (Key.D) && ship.PlayerNum == 2) {
+				if (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 2) {
 					ship.Flip (false, false);
 
 					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
 					ship.UpdateAnimation ();
 
-				} else if (Input.GetKey (Key.A) && ship.PlayerNum == 2) {
+				} else if (Input.GetKey (Key.LEFT) && ship.PlayerNum == 2) {
 					ship.Flip (true, true);
 
 					cosAngle = Math.Cos (-angle / (5 - ship.Speed));
@@ -198,7 +198,7 @@ namespace GXPEngine
 			if (ship.StunTimer == 0) {
 				switch (ship.PlayerNum) {
 				case 1:
-					if (Input.GetKeyDown (Key.UP)) {
+					if (Input.GetKeyDown (Key.W)) {
 						ship.Fire ();
 					}
 
@@ -208,7 +208,7 @@ namespace GXPEngine
 					break;
 
 				case 2:
-					if (Input.GetKeyDown (Key.W)) {
+					if (Input.GetKeyDown (Key.UP)) {
 						ship.Fire ();
 					}
 
@@ -219,6 +219,10 @@ namespace GXPEngine
 				default:
 					break;
 				}
+			}
+
+			if (Input.GetKeyDown (Key.P)) {
+				_mg.SetState ("titleScreen");
 			}
 
 		}
