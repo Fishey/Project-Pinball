@@ -40,15 +40,19 @@ namespace GXPEngine
 			_damagecounter++;
 			if (_damagecounter <= 3 && _radius == 80) {
 				_graphic.SetFrame (_damagecounter + 16);
+
 				return false;
-			} else if (_damagecounter <= 2 && _radius == 60) {
+			}
+
+
+			else if (_damagecounter <= 2 && _radius == 60) {
 				_graphic.SetFrame (_damagecounter + 20);
 				return false;
 			} else if (_radius == 40 && _damagecounter < 1)
 
 				return false;
 			else 
-				this.Destroy ();
+
 				return true;
 		}
 	}
