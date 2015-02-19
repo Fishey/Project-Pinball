@@ -21,17 +21,17 @@ namespace GXPEngine
 		private Scoreboard _scoreboard2;
 		private Winscreen _winscreen;
 
-		private List<LevelWinner> _levelWinners = new List<LevelWinner> {LevelWinner.RED, LevelWinner.NULL, LevelWinner.NULL};
+		private List<LevelWinner> _levelWinners = new List<LevelWinner> {LevelWinner.NULL, LevelWinner.NULL, LevelWinner.NULL};
 
 		//pink fluffy unicorns with lasers
 
 	
-		public MyGame ():base (1920,1080, false,false) 
+		public MyGame ():base (1920,1080, false,true) 
 		{
-			scaleX = 0.5f;
-			scaleY = 0.5f;
+			//scaleX = 0.5f;
+			//scaleY = 0.5f;
 
-			SetState ("Win");
+			SetState ("titleScreen");
 		}
 
 		public void SetState (string state) // Setting which state the game should start on 

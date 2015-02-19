@@ -155,8 +155,8 @@ namespace GXPEngine
 
 			// player controls
 			if (ship.StunTimer == 0) {
-				bool leftKey = (Input.GetKey (Key.D) && ship.PlayerNum == 1) || (Input.GetKey (Key.LEFT) && ship.PlayerNum == 2);
-				bool rightKey = (Input.GetKey (Key.A) && ship.PlayerNum == 1) || (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 2);
+				bool leftKey = (Input.GetKey (Key.D) && ship.PlayerNum == 1) || (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 2);
+				bool rightKey = (Input.GetKey (Key.A) && ship.PlayerNum == 1) || (Input.GetKey (Key.LEFT) && ship.PlayerNum == 2);
 
 				if (leftKey) {
 
@@ -178,8 +178,8 @@ namespace GXPEngine
 								
 				float dx = ship.position.x - center.x;
 				float dy = ship.position.y - center.y;
-				double cosAngle = Math.Cos (ship.speed*Math.PI/180.0f);
-				double sinAngle = Math.Sin (ship.speed*Math.PI/180.0f);
+				double cosAngle = Math.Cos (ship.Speed*Math.PI/180.0f);
+				double sinAngle = Math.Sin (ship.Speed*Math.PI/180.0f);
 				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
 				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
 				ship.speed *= 0.9f;
@@ -288,6 +288,13 @@ namespace GXPEngine
 
 		void resolveCollisions()
 		{
+			if (_ship.HitTest (_ship2)) {
+				_ship.speed = -_ship.speed*1.5f -_ship2.speed;
+			}
+			if (_ship2.HitTest (_ship)) {
+				_ship2.speed = -_ship2.speed*1.5f- _ship.speed;
+			}
+
 			for (int i = _powerUps.Count - 1; i >= 0; i--)
 			{
 				foreach (Ship ship in _ships) {
@@ -370,9 +377,9 @@ namespace GXPEngine
 									newPowerUp = new PowerUp (PowerUpType.ENERGYUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else if (randomNum >= 90) {
 									newPowerUp = new PowerUp (PowerUpType.MULTIPLIER, new Vec2(_asteroids[y].x, _asteroids[y].y));
-								} else if (randomNum >= 50) {
+								} else if (randomNum >= 85) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDDOWN, new Vec2(_asteroids[y].x, _asteroids[y].y));
-								} else if (randomNum >= 0) {
+								} else if (randomNum >= 80) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else {
 									newPowerUp = new PowerUp (PowerUpType.NULL);

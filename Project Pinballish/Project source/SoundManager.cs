@@ -96,12 +96,13 @@ namespace GXPEngine
 			}
 		}
 
-		public static void PlaySound(SoundFile effect, float volumeLevel = 1.0f, float panLevel = 0.0f)
+		public static SoundChannel PlaySound(SoundFile effect, float volumeLevel = 1.0f, float panLevel = 0.0f)
 		{
 			Sound soundEffect = SOUND_FILE_DICT[effect];
 			SoundChannel soundPlayed = soundEffect.Play ();
 			soundPlayed.Volume = volumeLevel;
 			soundPlayed.Pan = panLevel;
+			return soundPlayed;
 		}
 
 		public static void PlayMusic(SoundFile song)

@@ -37,13 +37,14 @@ namespace GXPEngine
 
 		public int _score;
 		private int _shieldTimer;
-		private bool _soundPlaying;
+		private bool _soundPlayed;
 
 		private AnimSprite _graphic;
 		private Shield _shield;
 		private AnimSprite _laser;
 		private ShipType _shipType;
 		private List<PowerUp> _powerUps;
+		private SoundChannel sound;
 
 		public Ship (ShipType imagepath, int playNum, MyGame MG, Level level, int score = 0, Vec2 pPosition = null, Vec2 pVelocity = null) : base ("Images/Hitboxshark.png")
 		{
@@ -120,12 +121,18 @@ namespace GXPEngine
 				bullet.rotation = this.rotation;
 				_level.Projectiles.Add (bullet);
 				_level.AddChild (bullet);
-				if (PlayerNum == 1)
-					SoundManager.PlaySound (SoundFile.PEW1);
-				else if (PlayerNum == 2)
-					SoundManager.PlaySound (SoundFile.PEW2);
+				if (_soundPlayed) {
+					if (PlayerNum == 1)
+						SoundManager.PlaySound (SoundFile.PEW1);
+					else if (PlayerNum == 2)
+						SoundManager.PlaySound (SoundFile.PEW2);
+				}
 			} else {
-				SoundManager.PlaySound (SoundFile.ENERGYLOW);
+				if (!_soundPlayed || _soundPlayed & sound.Volume == 0) {
+					sound = SoundManager.PlaySound (SoundFile.ENERGYLOW);
+					_soundPlayed = true;
+				}
+
 			}
 		}
 
@@ -166,11 +173,11 @@ namespace GXPEngine
 				_MG.Hud.addPowerup (this, powerUp);
 				break;
 			case PowerUpType.SPEEDDOWN:
-				this.Speed = -2;
+				this.Speed = .5f;
 				_MG.Hud.addPowerup (this, powerUp);
 				break;
 			case PowerUpType.SPEEDUP:
-				this.Speed = 3;
+				this.Speed = 2;
 				_MG.Hud.addPowerup (this, powerUp);
 				break;
 			default:
@@ -235,7 +242,7 @@ namespace GXPEngine
 		}
 
 		public float Speed {
-			get { return this._speed; }
+			get { return this.speed*_speed; }
 			set { this._speed = value; }
 
 		}
@@ -286,9 +293,7 @@ namespace GXPEngine
 				_shieldTimer--;
 			if (_shieldTimer < 100 && this.HasChild(_shield))
 				this.RemoveChild (_shield);
-
-			Console.WriteLine (_powerUps.Count);
-
+				
 			for (int i = _powerUps.Count - 1; i >= 0; i--)
 			{
 				_powerUps [i].Step ();
