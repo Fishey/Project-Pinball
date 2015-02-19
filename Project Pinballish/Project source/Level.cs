@@ -30,6 +30,7 @@ namespace GXPEngine
 		private Ship _ship2 = null;
 		private Vec2 _center = null;
 		private MyGame _mg;
+	
 
 		private int[,] _data = new int[WIDTH,HEIGHT];
 
@@ -37,6 +38,8 @@ namespace GXPEngine
 		{
 			_level = level;
 			_mg = MG;
+
+
 
 				_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
 
@@ -106,12 +109,12 @@ namespace GXPEngine
 					ship.StunTimer = 320;
 			}
 			else{	
-			foreach (Ship ship in _ships) {
-				rotateAroundPoint (ship, _center, (float)(5 * Math.PI / 180.0f)); // make the ships turn around the center of the screen
-				rotateAsteroids (_center);
-				processInput (ship);
-				ship.Step ();
-			}
+				foreach (Ship ship in _ships) {
+					rotateAroundPoint (ship, _center); // make the ships turn around the center of the screen
+					rotateAsteroids (_center);
+					processInput (ship);
+					ship.Step ();
+				}
 
 			foreach (PowerUp powerup in _powerUps) {
 				powerup.Step ();
@@ -141,54 +144,41 @@ namespace GXPEngine
 																	//ROTATING AROUND A POINT
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		void rotateAroundPoint(Ship ship, Vec2 center, float angle) {
-			double dx = ship.x - center.x;
-			double dy = ship.y - center.y;
+		void rotateAroundPoint(Ship ship, Vec2 center) {
 
-			double cosAngle = Math.Cos (angle/(5-ship.Speed));
-			double sinAngle = Math.Sin (angle/(5-ship.Speed));
-			// player1 controls
+			// player controls
 			if (ship.StunTimer == 0) {
-				if (Input.GetKey (Key.D) && ship.PlayerNum == 1) {
+				bool leftKey = (Input.GetKey (Key.D) && ship.PlayerNum == 1) || (Input.GetKey (Key.LEFT) && ship.PlayerNum == 2);
+				bool rightKey = (Input.GetKey (Key.A) && ship.PlayerNum == 1) || (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 2);
+
+				if (leftKey) {
+
 					ship.Flip (false, false);
-					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+					ship.speed = ship.speed + 0.2f;
 					ship.UpdateAnimation ();
 
-				} else if (Input.GetKey (Key.A) && ship.PlayerNum == 1) {
+				} else if (rightKey) {
+
 					ship.Flip (true, true);
-
-					cosAngle = Math.Cos (-angle / (5 - ship.Speed));
-					sinAngle = Math.Sin (-angle / (5 - ship.Speed));
-
-					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+					ship.speed = ship.speed  - 0.2f ;
 					ship.UpdateAnimation ();
+
 				} else if (ship.PlayerNum == 1) {
-					ship.Idle ();
-				}
-				//player2 controls
-				if (Input.GetKey (Key.RIGHT) && ship.PlayerNum == 2) {
-					ship.Flip (false, false);
 
-					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-					ship.UpdateAnimation ();
+					ship.Idle (); 
 
-				} else if (Input.GetKey (Key.LEFT) && ship.PlayerNum == 2) {
-					ship.Flip (true, true);
+				} 
+								
+				float dx = ship.position.x - center.x;
+				float dy = ship.position.y - center.y;
+				double cosAngle = Math.Cos (ship.speed*Math.PI/180.0f);
+				double sinAngle = Math.Sin (ship.speed*Math.PI/180.0f);
+				ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
+				ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
+				ship.speed *= 0.9f;
+				ship.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
 
-					cosAngle = Math.Cos (-angle / (5 - ship.Speed));
-					sinAngle = Math.Sin (-angle / (5 - ship.Speed));
-
-					ship.position.x = (float)(center.x + dx * cosAngle - dy * sinAngle);
-					ship.position.y = (float)(center.y + dx * sinAngle + dy * cosAngle);
-					ship.UpdateAnimation ();
-				} else if (ship.PlayerNum == 2){
-					ship.Idle ();
-				}
 			}
-			ship.rotation = (float)Math.Atan2 (dy, dx) * 180 / (float)Math.PI - 180;
 		}
 
 		void rotateAsteroids(Vec2 center, float angle = 5 * (float)Math.PI / 2880.0f)

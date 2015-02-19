@@ -7,6 +7,8 @@ namespace GXPEngine
 	public class Ship : Sprite
 	{
 
+		public float speed = 0.0f;
+
 		public static readonly Dictionary<ShipType, int[]> SHIP_DICT
 		= new Dictionary<ShipType, int[]>
 		{
@@ -27,7 +29,7 @@ namespace GXPEngine
 		private int _laserTimer;
 		private int _stunTimer;
 		private int _energy;
-		private int _speed;
+		private float _speed;
 		private int _multiplier;
 		private int _firstFrame;
 		private int _lastFrame;
@@ -231,7 +233,7 @@ namespace GXPEngine
 			set { this._energy = value; }
 		}
 
-		public int Speed {
+		public float Speed {
 			get { return this._speed; }
 			set { this._speed = value; }
 
@@ -296,8 +298,8 @@ namespace GXPEngine
 			}
 
 			_position.Add (_velocity);
-			x = (float)_position.x;
-			y = (float)_position.y;
+				x = (float)_position.x;
+				y = (float)_position.y;
 		}
 	}
 }
