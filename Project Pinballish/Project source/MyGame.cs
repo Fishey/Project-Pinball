@@ -19,9 +19,9 @@ namespace GXPEngine
 		private HUD _hud;
 		private Scoreboard _scoreboard;
 		private Scoreboard _scoreboard2;
-//		private Winscreen _winscreen;
+		private Winscreen _winscreen;
 
-		private List<LevelWinner> _levelWinners = new List<LevelWinner> {LevelWinner.NULL, LevelWinner.NULL, LevelWinner.NULL};
+		private List<LevelWinner> _levelWinners = new List<LevelWinner> {LevelWinner.RED, LevelWinner.NULL, LevelWinner.NULL};
 
 		//pink fluffy unicorns with lasers
 
@@ -31,7 +31,7 @@ namespace GXPEngine
 			scaleX = 0.5f;
 			scaleY = 0.5f;
 
-			SetState ("titleScreen");
+			SetState ("Win");
 		}
 
 		public void SetState (string state) // Setting which state the game should start on 
@@ -112,11 +112,11 @@ namespace GXPEngine
 				this.AddChild (_scoreboard2);
 				break;
 
-//			case "Win":
-//
-//				_winscreen = new Winscreen (this);
-//				AddChild = (_winscreen);
-//				break;
+			case "Win":
+
+				_winscreen = new Winscreen (this, _levelWinners);
+				AddChild  (_winscreen);
+				break;
 
 
 
