@@ -220,6 +220,16 @@ namespace GXPEngine
 			_mirrorY = mirrorY;
 			setUVs();
 		}
+
+		public bool MirrorX{
+			get { return this._mirrorX; }
+			set { this._mirrorX = value; }
+		}
+
+		public bool MirrorY{
+			get { return this._mirrorY; }
+			set { this._mirrorY = value; }
+		}
 				
 		//------------------------------------------------------------------------------------------------------------------------
 		//														color

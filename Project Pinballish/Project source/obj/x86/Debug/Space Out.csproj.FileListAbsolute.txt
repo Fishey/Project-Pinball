@@ -7,4 +7,3 @@ C:\Users\Randy\Documents\GitHub\Project-Pinball\Project Pinballish\Project sourc
 C:\Users\Randy\Documents\GitHub\Project-Pinball\Project Pinballish\Project source\bin\Debug\GXPEngine.pdb
 C:\Users\Randy\Documents\GitHub\Project-Pinball\Project Pinballish\Project source\obj\x86\Debug\GXPEngine.exe
 C:\Users\Randy\Documents\GitHub\Project-Pinball\Project Pinballish\Project source\obj\x86\Debug\GXPEngine.pdb
-C:\Users\Randy\Documents\GitHub\Project-Pinball\Project Pinballish\Project source\obj\x86\Debug\Space Out.csprojResolveAssemblyReference.cache

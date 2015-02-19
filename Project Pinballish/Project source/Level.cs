@@ -243,20 +243,7 @@ namespace GXPEngine
 
 		}
 
-		public List<Ship> Ships
-		{
-			get { return this._ships; }
-		}
 
-		public HUD Hud
-		{
-			get { return this._mg.Hud; }
-		}
-
-		public List<Projectile> Projectiles
-		{
-			get { return this._projectiles; }
-		}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 																			//READLEVEL
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -388,6 +375,7 @@ namespace GXPEngine
 								if (newPowerUp.PowerUpType != PowerUpType.NULL) {
 									this.AddChild (newPowerUp);
 									_powerUps.Add (newPowerUp);
+									newPowerUp.Step ();
 								}
 								_asteroids.Remove (_asteroids [y]);
 								_ships [_projectiles [i].PlayerNum - 1].addscore (10 * _ships [_projectiles [i].PlayerNum - 1].Multiplier);
@@ -436,7 +424,20 @@ namespace GXPEngine
 
 		}
 
+		public List<Ship> Ships
+		{
+			get { return this._ships; }
+		}
 
+		public HUD Hud
+		{
+			get { return this._mg.Hud; }
+		}
+
+		public List<Projectile> Projectiles
+		{
+			get { return this._projectiles; }
+		}
 	}
 
 }

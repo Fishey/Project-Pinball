@@ -62,7 +62,7 @@ namespace GXPEngine
 			this.AddChild (_graphic);
 			this._laser = new AnimSprite ("Images/SpriteSheet.png", 16, 16);
 
-
+			_laser.MirrorX = true;
 			position = pPosition;
 			velocity = pVelocity;
 			_playNum = playNum;
@@ -168,14 +168,14 @@ namespace GXPEngine
 				break;
 			case PowerUpType.MULTIPLIER:
 				this.Multiplier = 2;
-				_MG.Hud.addPowerup (this, powerUp);
+				//_MG.Hud.addPowerup (this, powerUp);
 				break;
 			case PowerUpType.SPEEDDOWN:
 				this.Speed = .5f;
 				_MG.Hud.addPowerup (this, powerUp);
 				break;
 			case PowerUpType.SPEEDUP:
-				this.Speed = 2;
+				this.Speed = 1.5f;
 				_MG.Hud.addPowerup (this, powerUp);
 				break;
 			default:
@@ -193,7 +193,7 @@ namespace GXPEngine
 			case PowerUpType.ENERGYUP:
 				break;
 			case PowerUpType.MULTIPLIER:
-				this.Multiplier = 1;
+				//this.Multiplier = 1;
 				break;
 			case PowerUpType.SPEEDDOWN:
 				this.Speed = 1;
@@ -211,7 +211,7 @@ namespace GXPEngine
 		public void Flip(bool horizontal = false, bool vertical = false)
 		{
 			_graphic.Mirror (horizontal, vertical);
-			_laser.Mirror (horizontal, vertical);
+			_laser.Mirror (_laser.MirrorX, vertical);
 		}
 
 		public int PlayerNum {
