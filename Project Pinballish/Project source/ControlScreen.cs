@@ -9,7 +9,7 @@ namespace GXPEngine
 
 		public ControlScreen (MyGame myGame)
 		{
-			_background = new Sprite ("Controlscreen.png");
+			_background = new Sprite ("Images/Controlscreen.png");
 			AddChild (_background);
 
 			_game = myGame;

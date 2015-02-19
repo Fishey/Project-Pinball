@@ -4,7 +4,7 @@ namespace GXPEngine
 {
 	public class HelpButton : AnimSprite
 	{
-		public HelpButton () : base ("HelpButton.png",1,2)
+		public HelpButton () : base ("Images/HelpButton.png",1,2)
 		{
 
 		}

@@ -4,7 +4,7 @@ namespace GXPEngine
 {
 	public class ControlButton : AnimSprite
 	{
-		public ControlButton () : base ("ControlButton.png",1,2)
+		public ControlButton () : base ("Images/ControlButton.png",1,2)
 		{
 		}
 	}

@@ -98,6 +98,9 @@ namespace GXPEngine
 				} else if (_hpBar1.Count < 3) {
 					shell1.FirstFrame = 1;
 					shell1.LastFrame = 2;
+				} else {
+					shell1.FirstFrame = 0;
+					shell1.LastFrame = 0;
 				}
 			} else if (ship.PlayerNum == 2) {
 				_hpBar2 [ship.Energy - 1].Destroy ();
@@ -109,6 +112,9 @@ namespace GXPEngine
 				} else if (_hpBar2.Count < 3) {
 					shell2.FirstFrame = 1;
 					shell2.LastFrame = 2;
+				} else {
+					shell2.FirstFrame = 0;
+					shell2.LastFrame = 0;
 				}
 			}
 		}
@@ -129,7 +135,17 @@ namespace GXPEngine
 					energy.SetXY (_hpBar1 [ship.Energy - 2].x, _hpBar1 [ship.Energy - 2].y - energy.height);
 				else {
 					energy.SetXY (-shell1.width+18, -60);
+				}
 
+				if (_hpBar1.Count < 1) {
+						shell1.FirstFrame = 3;
+						shell1.LastFrame = 4;
+				} else if (_hpBar1.Count < 3) {
+						shell1.FirstFrame = 1;
+						shell1.LastFrame = 2;
+				} else {
+						shell1.FirstFrame = 0;
+						shell1.LastFrame = 0;
 				}
 
 				_hpBar1.Add (energy);
@@ -151,6 +167,18 @@ namespace GXPEngine
 						energy.SetXY (-shell2.width + 18, -60);
 
 					}
+
+					if (_hpBar2.Count < 1) {
+						shell2.FirstFrame = 3;
+						shell2.LastFrame = 4;
+					} else if (_hpBar2.Count < 3) {
+						shell2.FirstFrame = 1;
+						shell2.LastFrame = 2;
+					} else {
+						shell2.FirstFrame = 0;
+						shell2.LastFrame = 0;
+					}
+
 					_hpBar2.Add (energy);
 					shell2.AddChild (energy);
 				}

@@ -8,8 +8,11 @@ namespace GXPEngine
 		int _damagecounter;
 		int _radius;
 		AnimSprite _graphic;
-		public Asteroid (int damage = 0, int pradius = 80) : base(pradius, null, null, Color.Transparent)
+		Level _level;
+
+		public Asteroid (Level level, int damage = 0, int pradius = 80) : base(pradius, null, null, Color.Transparent)
 		{
+			_level = level;
 			_radius = pradius;
 			_graphic = new AnimSprite ("Images/SpriteSheet.png", 16, 16);
 			this.SetScaleXY (0.5, 0.5);
@@ -38,22 +41,20 @@ namespace GXPEngine
 		public bool TakeDamage()
 		{
 			_damagecounter++;
-			if (_damagecounter <= 3 && _radius == 80) {
+			if (_damagecounter <= 2 && _radius == 80) {
 				_graphic.SetFrame (_damagecounter + 16);
-
 				return false;
-			}
-
-
-			else if (_damagecounter <= 2 && _radius == 60) {
+			} else if (_damagecounter <= 2 && _radius == 60) {
 				_graphic.SetFrame (_damagecounter + 20);
 				return false;
-			} else if (_radius == 40 && _damagecounter < 1)
-
+			} else if (_radius == 40 && _damagecounter < 1) {
 				return false;
-			else 
-
+			} else {
+				BrokenAsteroid newbroken = new BrokenAsteroid (_radius, _level, new Vec2(this.x, this.y));
+				_level.AddChild (newbroken);
+				this.Destroy ();
 				return true;
+			}
 		}
 	}
 }

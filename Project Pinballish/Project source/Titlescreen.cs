@@ -16,7 +16,7 @@ namespace GXPEngine
 
 		public Titlescreen (MyGame myGame)
 		{
-			_background = new Sprite ("Titlescreen.png");
+			_background = new Sprite ("Images/Titlescreen.png");
 			AddChild (_background);
 
 			_game = myGame;

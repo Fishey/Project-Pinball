@@ -22,7 +22,7 @@ namespace GXPEngine
 			_catchTimer = 50;
 			this.SetOrigin (this.width / 2, this.height / 2+20);
 			if (playerNum == 1)
-				graphic = new AnimSprite ("Images/Blue Laser.png", 2, 1);
+				graphic = new AnimSprite ("Images/Blue Laser.png", 1, 1);
 			else if (playerNum == 2)
 				graphic = new AnimSprite ("Images/Red Laser.png", 1, 1);
 			this.AddChild (graphic);

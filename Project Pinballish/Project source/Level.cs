@@ -38,28 +38,25 @@ namespace GXPEngine
 		{
 			_level = level;
 			_mg = MG;
+			_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
 
+			//Create ships
+			_ship = new Ship(ShipType.BLUESHIP, 1, MG, this);
+			_ship.position.x = _mg.width / 2 - _mg.width / 4;
+			_ship.position.y = _mg.height / 2 - 50;
+			_ship.Idle ();
+			_ships.Add (_ship);
 
-
-				_ships = new List<Ship> (); // create the list for ships (Player 1 & 2 go here)
-
-				//Create ships
-				_ship = new Ship(ShipType.BLUESHIP, 1, MG, this);
-				_ship.position.x = _mg.width / 2 - _mg.width / 4;
-				_ship.position.y = _mg.height / 2 - 50;
-				_ship.Idle ();
-				_ships.Add (_ship);
-
-				_ship2 = new Ship (ShipType.REDSHARK, 2, MG, this);
-				_ship2.position.x = _mg.width/2 + _mg.width/4;
-				_ship2.position.y = _mg.height/2 - 50;
-				_ships.Add (_ship2);
+			_ship2 = new Ship (ShipType.REDSHARK, 2, MG, this);
+			_ship2.position.x = _mg.width/2 + _mg.width/4;
+			_ship2.position.y = _mg.height/2 - 50;
+			_ships.Add (_ship2);
 
 			_projectiles = new List<Projectile> (); // pew pews go here
 			_asteroids = new List<Asteroid> (); // things to pew pew at go here
 			_powerUps = new List<PowerUp> (); // things that make you pew pew even more go here
 
-			AddChild(new Sprite("background.png")); // add a beautiful background
+			AddChild(new Sprite("Images/background.png")); // add a beautiful background
 
 
 			ReadLevel (level);
@@ -399,21 +396,21 @@ namespace GXPEngine
 			switch (tile) {
 
 			case 1: 
-				Asteroid asteroidfull = new Asteroid (0);
+				Asteroid asteroidfull = new Asteroid (this, 0);
 				AddChild (asteroidfull);
 				asteroidfull.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroidfull);
 				break;
 
 			case 2:
-				Asteroid asteroidhalf = new Asteroid (0, 60);
+				Asteroid asteroidhalf = new Asteroid (this, 0, 60);
 				AddChild (asteroidhalf);
 				asteroidhalf.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroidhalf);
 				break;
 
 			case 3:
-				Asteroid asteroid = new Asteroid (0, 40);
+				Asteroid asteroid = new Asteroid (this, 0, 40);
 				AddChild (asteroid);
 				asteroid.SetXY (x+580, y+yplus);
 				_asteroids.Add (asteroid);

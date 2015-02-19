@@ -76,8 +76,7 @@ namespace GXPEngine
 				this._laser.SetFrame (10);
 				_graphic.AddChild (_laser);
 			}
-			//this._laser.SetOrigin (_laser.width / 2, -100);
-			//this._laser.SetXY (-_laser.width / 2+70, -180);
+
 			this.SetOrigin (this.width, this.height / 2);
 
 			x = (float)position.x;

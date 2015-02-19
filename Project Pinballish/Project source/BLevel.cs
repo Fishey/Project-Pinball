@@ -16,8 +16,7 @@ namespace GXPEngine
 		private bool playedSound3;
 		private bool playedSoundGo;
 
-
-		public BLevel (MyGame myGame, int levelNum, Level level) : base ("CountDown.png",4,1)
+		public BLevel (MyGame myGame, int levelNum, Level level) : base ("Images/CountDown.png",4,1)
 		{
 			_level = level;
 			Timer = 180;

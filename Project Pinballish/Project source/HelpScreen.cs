@@ -9,7 +9,7 @@ namespace GXPEngine
 
 		public HelpScreen (MyGame myGame)
 		{
-			_background = new AnimSprite ("Helpscreen.png",2,1);
+			_background = new AnimSprite ("Images/Helpscreen.png",2,1);
 			AddChild (_background);
 
 			_game = myGame;

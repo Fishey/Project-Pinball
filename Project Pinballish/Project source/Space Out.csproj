@@ -136,6 +136,7 @@
     <Compile Include="Winner.cs" />
     <Compile Include="Winscreen.cs" />
     <Compile Include="HudShell.cs" />
+    <Compile Include="BrokenAsteroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

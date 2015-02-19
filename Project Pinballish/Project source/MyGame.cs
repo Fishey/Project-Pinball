@@ -28,8 +28,8 @@ namespace GXPEngine
 	
 		public MyGame ():base (1920,1080, false,false) 
 		{
-			//scaleX = 0.5f;
-			//scaleY = 0.5f;
+			//scaleX = 0.67f;
+			//scaleY = 0.67f;
 			SetState ("titleScreen");
 		}
 
