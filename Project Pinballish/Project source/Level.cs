@@ -30,6 +30,7 @@ namespace GXPEngine
 		private Ship _ship2 = null;
 		private Vec2 _center = null;
 		private MyGame _mg;
+		private bool running = true;
 
 		private int[,] _data = new int[WIDTH,HEIGHT];
 
@@ -96,9 +97,13 @@ namespace GXPEngine
 				if (Ships [0].Score > Ships [1].Score) {
 					SoundManager.PlaySound (SoundFile.BLUEWINS);
 					_mg.LevelWinners [_level - 1] = LevelWinner.BLUE;
+					Winner winner = new Winner (_mg, this, _mg.LevelWinners [_level - 1]);
+					this.AddChild (winner);
 				} else if (Ships [0].Score < Ships [1].Score) {
 					SoundManager.PlaySound (SoundFile.REDWINS);
 					_mg.LevelWinners [_level - 1] = LevelWinner.RED;
+					Winner winner = new Winner (_mg, this, _mg.LevelWinners [_level - 1]);
+					this.AddChild (winner);
 				}
 				else 
 					_mg.LevelWinners [_level - 1] = LevelWinner.NULL;
@@ -128,6 +133,9 @@ namespace GXPEngine
 			resolveCollisions ();
 			Scoreboard ();
 			}
+
+			if (!running)
+				_mg.SetState ("titleScreen");
 
 			if (_ship.StunTimer == 200 && _level != 3)
 				_mg.SetState ("level" + (_level + 1));
@@ -240,8 +248,8 @@ namespace GXPEngine
 				}
 			}
 
-			if (Input.GetKeyDown (Key.BACKSPACE)) {
-				_mg.SetState ("titleScreen");
+			if (Input.GetKeyDown (Key.X)) {
+				running = false;
 			}
 
 		}
@@ -296,16 +304,22 @@ namespace GXPEngine
 				foreach (Ship ship in _ships) {
 					if (ship.HitTest(_powerUps[i]))
 						{
-						if (_powerUps [i].PowerUpType != PowerUpType.SPEEDDOWN)
+						if (_powerUps [i].PowerUpType != PowerUpType.SPEEDDOWN) {
+							SoundManager.PlaySound (SoundFile.POWERUP);
 							ship.AddPowerUp (_powerUps [i]);
-						else {
-							if (ship.PlayerNum == 1)
-								_ships [1].AddPowerUp (_powerUps [i]);
-							else
-								_ships [0].AddPowerUp (_powerUps [i]);
 						}
-							_powerUps [i].Destroy ();
-							_powerUps.Remove (_powerUps [i]);
+						else {
+							SoundManager.PlaySound(SoundFile.POWERDOWN);
+
+							if (ship.PlayerNum == 1){
+								_ships [1].AddPowerUp (_powerUps [i]);
+							}
+							else{
+								_ships [0].AddPowerUp (_powerUps [i]);
+							}
+						}
+						_powerUps [i].Destroy ();
+						 _powerUps.Remove (_powerUps [i]);
 						break;
 						}
 				}
@@ -367,9 +381,9 @@ namespace GXPEngine
 									newPowerUp = new PowerUp (PowerUpType.ENERGYUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else if (randomNum >= 90) {
 									newPowerUp = new PowerUp (PowerUpType.MULTIPLIER, new Vec2(_asteroids[y].x, _asteroids[y].y));
-								} else if (randomNum >= 85) {
+								} else if (randomNum >= 50) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDDOWN, new Vec2(_asteroids[y].x, _asteroids[y].y));
-								} else if (randomNum >= 80) {
+								} else if (randomNum >= 0) {
 									newPowerUp = new PowerUp (PowerUpType.SPEEDUP, new Vec2(_asteroids[y].x, _asteroids[y].y));
 								} else {
 									newPowerUp = new PowerUp (PowerUpType.NULL);

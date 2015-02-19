@@ -97,7 +97,7 @@ namespace GXPEngine
 				_startbutton.SetFrame (1);
 
 
-				if (Input.GetKeyDown (Key.SPACE)) {
+				if (Input.GetKeyDown (Key.SPACE) || Input.GetKeyDown(Key.ENTER)) {
 					_game.SetState ("level1");
 				}
 			} 
@@ -109,7 +109,7 @@ namespace GXPEngine
 				_controlbutton.SetFrame (1);
 
 			
-				if (Input.GetKeyDown (Key.SPACE)) {
+				if (Input.GetKeyDown (Key.SPACE) || Input.GetKeyDown(Key.ENTER)) {
 					_game.SetState ("controls");
 				}
 			} else
@@ -119,7 +119,7 @@ namespace GXPEngine
 			if (_levelselector.y == _helpbutton.y) {
 				_helpbutton.SetFrame (1);
 
-				if (Input.GetKeyDown (Key.SPACE)) {
+				if (Input.GetKeyDown (Key.SPACE) || Input.GetKeyDown(Key.ENTER)) {
 					_game.SetState ("help");
 				}
 			}
@@ -127,18 +127,10 @@ namespace GXPEngine
 					_helpbutton.SetFrame (0);
 			
 
-
-
-
-
-
-
-
-
 			if (_levelselector.y == _quitbutton.y) {
 				_quitbutton.SetFrame (1);
 
-				if (Input.GetKey (Key.ENTER)) {
+				if (Input.GetKeyDown (Key.SPACE) || Input.GetKeyDown(Key.ENTER)) {
 					Environment.Exit (0);
 				} 
 

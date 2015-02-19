@@ -148,11 +148,16 @@ namespace GXPEngine
 
 		public void addPowerup(Ship ship, PowerUp powerup)
 		{
-			PowerUp _powerup = new PowerUp (powerup.PowerUpType);
+			int count = 0;
+			foreach (PowerUp plist in _powerupList) {
+				if (plist.PlayerNum == ship.PlayerNum)
+					count++;
+			}
+			PowerUp _powerup = new PowerUp (powerup.PowerUpType, null, null, ship);
 			if (ship.PlayerNum == 1)
-				_powerup.SetXY (shell1.x-200+(_powerupList.Count*powerup.width), shell2.y+120);
+				_powerup.SetXY (shell1.x-200+(count*powerup.width), shell2.y+120);
 			else if (ship.PlayerNum == 2)
-				_powerup.SetXY (shell2.x-200-(_powerupList.Count*powerup.width), shell2.y+120);
+				_powerup.SetXY (shell2.x-100-(count*powerup.width), shell2.y+120);
 			_powerupList.Add (_powerup);
 			this.AddChild (_powerup);	
 		}
@@ -163,7 +168,7 @@ namespace GXPEngine
 				return;
 			for (int i = _powerupList.Count - 1; i >= 0; i--) {
 				if (i >= 0) {
-					if (_powerupList [i].PowerUpType == powerup.PowerUpType) {
+					if (_powerupList [i].PowerUpType == powerup.PowerUpType && powerup.PlayerNum == _powerupList[i].PlayerNum) {
 						_powerupList [i].Destroy ();
 						this.RemoveChild (_powerupList [i]);
 						_powerupList.RemoveAt (i);

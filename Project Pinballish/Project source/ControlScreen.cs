@@ -18,7 +18,7 @@ namespace GXPEngine
 
 		void Update ()
 		{
-			if (Input.GetKey (Key.X)) {
+			if (Input.GetKeyDown (Key.X)) {
 				_game.SetState ("titleScreen");
 			}
 		}

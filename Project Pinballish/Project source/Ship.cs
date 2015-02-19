@@ -35,6 +35,7 @@ namespace GXPEngine
 
 		public int _score;
 		private int _shieldTimer;
+		private bool _soundPlaying;
 
 		private AnimSprite _graphic;
 		private Shield _shield;
@@ -290,7 +291,8 @@ namespace GXPEngine
 			{
 				_powerUps [i].Step ();
 				if (_powerUps [i].Timer == 0) {
-					_MG.Hud.removePowerup (this, _powerUps [i]);
+					PowerUp powerup = new PowerUp (_powerUps [i].PowerUpType, null, null, this);
+					_MG.Hud.removePowerup (this, powerup);
 					this.RemovePowerUp (_powerUps [i]);
 				}
 			}

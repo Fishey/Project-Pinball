@@ -8,7 +8,7 @@ namespace GXPEngine
 
 	public enum SoundFile
 	{
-		NULL, PEW1, PEW2, MUSIC1, MUSIC2, MUSIC3, MUSICMENU, SELECTION, RICOCHET, ASTEROIDBREAK, SHIELD1, SHIELD2, ENERGYLOW, COUNTDOWN1, COUNTDOWN2, COUNTDOWN3, COUNTDOWNGO, BLUEWINS, REDWINS
+		NULL, PEW1, PEW2, MUSIC1, MUSIC2, MUSIC3, MUSICMENU, SELECTION, RICOCHET, ASTEROIDBREAK, SHIELD1, SHIELD2, ENERGYLOW, COUNTDOWN1, COUNTDOWN2, COUNTDOWN3, COUNTDOWNGO, BLUEWINS, REDWINS, POWERUP, POWERDOWN
 	}
 
 	public class SoundManager
@@ -40,6 +40,8 @@ namespace GXPEngine
 			{SoundFile.COUNTDOWNGO ,  new Sound(@"Sounds/CountdownGo.wav")},
 			{SoundFile.BLUEWINS ,  new Sound(@"Sounds/BlueWins.wav")},
 			{SoundFile.REDWINS ,  new Sound(@"Sounds/RedWins.wav")},
+			{SoundFile.POWERUP ,  new Sound(@"Sounds/Good Powerup.wav")},
+			{SoundFile.POWERDOWN ,  new Sound(@"Sounds/Bad Powerup.wav")},
 
 
 

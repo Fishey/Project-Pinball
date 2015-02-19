@@ -7,9 +7,11 @@ namespace GXPEngine
 		PowerUpType _type;
 		Vec2 _position, _velocity;
 		int _timer;
+		Ship _ship;
 
-		public PowerUp (PowerUpType type, Vec2 position = null, Vec2 velocity = null) : base ("Images/SpriteSheet.png", 16, 16)
+		public PowerUp (PowerUpType type, Vec2 position = null, Vec2 velocity = null, Ship ship = null) : base ("Images/SpriteSheet.png", 16, 16)
 		{
+			_ship = ship;
 			_timer = 120;
 			_type = type;
 			_position = position;
@@ -55,6 +57,11 @@ namespace GXPEngine
 			get {
 				return _velocity;
 			}
+		}
+
+		public int PlayerNum
+		{
+			get { return this._ship.PlayerNum; }
 		}
 
 		public PowerUpType PowerUpType

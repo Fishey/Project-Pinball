@@ -11,6 +11,10 @@ namespace GXPEngine
 		private int _lastFrame = 3;
 		private float _frame;
 		private int Timer;
+		private bool playedSound1;
+		private bool playedSound2;
+		private bool playedSound3;
+		private bool playedSoundGo;
 
 
 		public BLevel (MyGame myGame, int levelNum, Level level) : base ("CountDown.png",4,1)
@@ -32,7 +36,19 @@ namespace GXPEngine
 		void Update ()
 		{
 			Timer--;
-
+			if (currentFrame == 0 && !playedSound3) {
+				SoundManager.PlaySound (SoundFile.COUNTDOWN3);
+				playedSound3 = true;
+			} else if (currentFrame == 1 && !playedSound2) {
+				SoundManager.PlaySound (SoundFile.COUNTDOWN2);
+				playedSound2 = true;
+			} else if (currentFrame == 2 && !playedSound1) {
+				SoundManager.PlaySound (SoundFile.COUNTDOWN1);
+				playedSound1 = true;
+			} else if (currentFrame == 3 && !playedSoundGo) {
+				SoundManager.PlaySound (SoundFile.COUNTDOWNGO);
+				playedSoundGo = true;
+			}
 		
 			if (Timer == 0) {
 				//something something darkside
