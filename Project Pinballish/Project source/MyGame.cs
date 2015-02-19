@@ -19,17 +19,19 @@ namespace GXPEngine
 		private HUD _hud;
 		private Scoreboard _scoreboard;
 		private Scoreboard _scoreboard2;
-		private List<LevelWinner> _levelWinners = new List<LevelWinner> {LevelWinner.NULL, LevelWinner.NULL, LevelWinner.NULL};
+		private Winscreen _winscreen;
+
+		private List<LevelWinner> _levelWinners = new List<LevelWinner> {LevelWinner.RED, LevelWinner.NULL, LevelWinner.NULL};
 
 		//pink fluffy unicorns with lasers
 
 	
-		public MyGame ():base (1920,1080, false) 
+		public MyGame ():base (1920,1080, false,false) 
 		{
-			//scaleX = 0.5f;
-			//scaleY = 0.5f;
+			scaleX = 0.5f;
+			scaleY = 0.5f;
 
-			SetState ("titleScreen");
+			SetState ("Win");
 		}
 
 		public void SetState (string state) // Setting which state the game should start on 
@@ -110,6 +112,15 @@ namespace GXPEngine
 				_scoreboard2 = new Scoreboard (new PointF (1700,250), new SolidBrush(Color.Red), _levelWinners, _level.Ships[1]);
 				this.AddChild (_scoreboard2);
 				break;
+
+			case "Win":
+
+				_winscreen = new Winscreen (this, _levelWinners);
+				AddChild  (_winscreen);
+				break;
+
+
+
 			}
 		
 		}
@@ -164,6 +175,12 @@ namespace GXPEngine
 				this.RemoveChild (_scoreboard);
 				this.RemoveChild (_scoreboard2);
 				break;
+
+//			case "Win":
+//
+//				_winscreen.Destroy ();
+//				this.RemoveChild (_winscreen);
+//				break;
 			}
 		}
 	
