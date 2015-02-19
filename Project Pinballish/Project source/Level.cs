@@ -289,10 +289,10 @@ namespace GXPEngine
 		void resolveCollisions()
 		{
 			if (_ship.HitTest (_ship2)) {
-				_ship.speed = -_ship.speed*1.5f -_ship2.speed;
+				_ship.speed = -_ship.speed*1.5f - _ship2.speed;
 			}
 			if (_ship2.HitTest (_ship)) {
-				_ship2.speed = -_ship2.speed*1.5f- _ship.speed;
+				_ship2.speed = -_ship2.speed*1.5f - _ship.speed;
 			}
 
 			for (int i = _powerUps.Count - 1; i >= 0; i--)

@@ -6,16 +6,15 @@ namespace GXPEngine
 {
 	public class HUD : GameObject
 	{
-		private Sprite shell1;
-		private Sprite shell2;
+		private HudShell shell1;
+		private HudShell shell2;
 		private Level _level;
 		private MyGame _game;
 		private List<Ship> _shipList;
 		private List<PowerUp> _powerupList;
 		private List<Sprite> _hpBar1;
 		private List<Sprite> _hpBar2;
-		private TextField _energytf = null;
-		private TextField _energytf2 = null;
+
 
 		public HUD (MyGame game, Level level, List<Ship> shipList) : base ()
 
@@ -26,11 +25,11 @@ namespace GXPEngine
 			_hpBar1 = new List<Sprite> ();
 			_hpBar2 = new List<Sprite> ();
 			_powerupList = new List<PowerUp> ();
-			shell1 = new Sprite ("Images/Shell2.png");
+			shell1 = new HudShell ();
 			shell1.SetOrigin (shell1.width, shell1.height);
 			shell1.SetXY(2 + shell1.width, this._game.height - shell1.height/2);
 			this.AddChild (shell1);
-			shell2 = new Sprite ("Images/Shell2.png");
+			shell2 = new HudShell();
 			shell2.SetOrigin (shell2.width, shell2.height);
 			shell2.SetXY(this._game.width - 5, this._game.height - shell2.height/2);
 			this.AddChild (shell2);
@@ -93,10 +92,24 @@ namespace GXPEngine
 				_hpBar1 [ship.Energy - 1].Destroy ();
 				this.RemoveChild (_hpBar1 [ship.Energy-1]);
 				_hpBar1.Remove (_hpBar1 [ship.Energy - 1]);
+				if (_hpBar1.Count < 1) {
+					shell1.FirstFrame = 3;
+					shell1.LastFrame = 4;
+				} else if (_hpBar1.Count < 3) {
+					shell1.FirstFrame = 1;
+					shell1.LastFrame = 2;
+				}
 			} else if (ship.PlayerNum == 2) {
 				_hpBar2 [ship.Energy - 1].Destroy ();
 				this.RemoveChild (_hpBar2 [ship.Energy - 1]);
 				_hpBar2.Remove (_hpBar2 [ship.Energy - 1]);
+				if (_hpBar2.Count < 1) {
+					shell2.FirstFrame = 3;
+					shell2.LastFrame = 4;
+				} else if (_hpBar2.Count < 3) {
+					shell2.FirstFrame = 1;
+					shell2.LastFrame = 2;
+				}
 			}
 		}
 
@@ -124,7 +137,6 @@ namespace GXPEngine
 			}
 			} else if (ship.PlayerNum == 2) {
 				if (_hpBar2.Count < 10) {
-
 					Sprite energy;
 					if (_hpBar2.Count == 9) {
 						energy = new Sprite ("Images/Top Energy 2.png");

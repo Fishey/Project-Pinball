@@ -135,6 +135,7 @@
     <Compile Include="HelpButton.cs" />
     <Compile Include="Winner.cs" />
     <Compile Include="Winscreen.cs" />
+    <Compile Include="HudShell.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

@@ -121,12 +121,10 @@ namespace GXPEngine
 				bullet.rotation = this.rotation;
 				_level.Projectiles.Add (bullet);
 				_level.AddChild (bullet);
-				if (_soundPlayed) {
 					if (PlayerNum == 1)
 						SoundManager.PlaySound (SoundFile.PEW1);
 					else if (PlayerNum == 2)
 						SoundManager.PlaySound (SoundFile.PEW2);
-				}
 			} else {
 				if (!_soundPlayed || _soundPlayed & sound.Volume == 0) {
 					sound = SoundManager.PlaySound (SoundFile.ENERGYLOW);

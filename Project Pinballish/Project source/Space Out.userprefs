@@ -1,18 +1,18 @@
 ﻿<Properties StartupItem="Space Out.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Level.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="HUD.cs">
     <Files>
-      <File FileName="SoundManager.cs" Line="58" Column="58" />
+      <File FileName="SoundManager.cs" Line="23" Column="23" />
       <File FileName="Shield.cs" Line="1" Column="1" />
-      <File FileName="HUD.cs" Line="40" Column="40" />
+      <File FileName="HUD.cs" Line="12" Column="12" />
       <File FileName="Asteroid.cs" Line="1" Column="1" />
-      <File FileName="BLevel.cs" Line="23" Column="23" />
-      <File FileName="Level.cs" Line="34" Column="34" />
-      <File FileName="PowerUp.cs" Line="3" Column="3" />
-      <File FileName="Ship.cs" Line="42" Column="42" />
-      <File FileName="MyGame.cs" Line="5" Column="5" />
-      <File FileName="Winner.cs" Line="33" Column="33" />
-      <File FileName="c:\Users\Randy\Documents\GitHub\Project-Pinball\gxpengine\sources\gxpengine\Core\Texture2D.cs" Line="1" Column="1" />
+      <File FileName="BLevel.cs" Line="1" Column="1" />
+      <File FileName="Level.cs" Line="39" Column="39" />
+      <File FileName="PowerUp.cs" Line="1" Column="1" />
+      <File FileName="MyGame.cs" Line="47" Column="47" />
+      <File FileName="Winner.cs" Line="1" Column="1" />
+      <File FileName="Winscreen.cs" Line="4" Column="4" />
+      <File FileName="HudShell.cs" Line="4" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
