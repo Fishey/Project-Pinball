@@ -1,19 +1,17 @@
 ﻿<Properties StartupItem="Space Out.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Asteroid.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MyGame.cs">
     <Files>
-      <File FileName="SoundManager.cs" Line="23" Column="23" />
-      <File FileName="Shield.cs" Line="1" Column="1" />
-      <File FileName="HUD.cs" Line="12" Column="12" />
-      <File FileName="Asteroid.cs" Line="12" Column="12" />
-      <File FileName="BLevel.cs" Line="1" Column="1" />
-      <File FileName="Level.cs" Line="1" Column="1" />
-      <File FileName="PowerUp.cs" Line="1" Column="1" />
-      <File FileName="MyGame.cs" Line="1" Column="1" />
-      <File FileName="Winner.cs" Line="1" Column="1" />
-      <File FileName="Winscreen.cs" Line="1" Column="1" />
-      <File FileName="HudShell.cs" Line="1" Column="1" />
-      <File FileName="Ship.cs" Line="1" Column="1" />
+      <File FileName="SoundManager.cs" Line="21" Column="21" />
+      <File FileName="Shield.cs" Line="30" Column="30" />
+      <File FileName="HUD.cs" Line="7" Column="7" />
+      <File FileName="BLevel.cs" Line="30" Column="30" />
+      <File FileName="MyGame.cs" Line="3" Column="3" />
+      <File FileName="Titlescreen.cs" Line="20" Column="20" />
+      <File FileName="BrokenAsteroid.cs" Line="35" Column="35" />
+      <File FileName="Level.cs" Line="27" Column="27" />
+      <File FileName="Ship.cs" Line="22" Column="22" />
+      <File FileName="Projectile.cs" Line="20" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

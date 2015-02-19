@@ -47,8 +47,10 @@ namespace GXPEngine
 		{
 			switch (_state) {
 			case "titleScreen":
-				_levelWinners = new List<LevelWinner> {LevelWinner.NULL, LevelWinner.NULL, LevelWinner.NULL};
+				_levelWinners = new List<LevelWinner> { LevelWinner.NULL, LevelWinner.NULL, LevelWinner.NULL };
+
 				SoundManager.PlayMusic (SoundFile.MUSICMENU);
+
 				_titleScreen = new Titlescreen (this);
 				AddChild (_titleScreen);
 				break;

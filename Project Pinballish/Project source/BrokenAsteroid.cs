@@ -45,13 +45,13 @@ namespace GXPEngine
 			if (_frame < _firstFrame)
 			_frame = _firstFrame;
 
-			_frame = _frame + 0.02f;
+			_frame = _frame + 0.04f;
 			if ((int)_frame == _lastFrame + 1) {
 				this.Destroy ();
 				_level.RemoveChild (this);
 			}
 			this.SetFrame ((int)_frame);
-			this.alpha = this.alpha - (0.02f / (_lastFrame-_firstFrame+1));
+			this.alpha = this.alpha - (0.04f / (_lastFrame-_firstFrame+1));
 
 
 		}

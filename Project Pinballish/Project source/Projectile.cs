@@ -19,7 +19,7 @@ namespace GXPEngine
 
 		public Projectile (int pRadius, MyGame MG, Level level, int playerNum, Vec2 pPosition = null, Vec2 pVelocity = null, Color? pColor = null):base (pRadius, null, null, Color.Transparent)
 		{
-			_catchTimer = 50;
+			_catchTimer = 25;
 			this.SetOrigin (this.width / 2, this.height / 2+20);
 			if (playerNum == 1)
 				graphic = new AnimSprite ("Images/Blue Laser.png", 1, 1);

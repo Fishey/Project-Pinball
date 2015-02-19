@@ -107,7 +107,7 @@ namespace GXPEngine
 
 		public static void PlayMusic(SoundFile song)
 		{
-			if (_timer == null) {
+			if (_timer == null && song != _song) {
 				StopMusic ();
 				Sound _currentBgMusic = SOUND_FILE_DICT [song];
 				_song = song;
