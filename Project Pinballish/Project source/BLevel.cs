@@ -47,7 +47,6 @@ namespace GXPEngine
 		void UpdateAnimation ()
 		{
 			_frame = _frame + 0.022f;
-			Console.WriteLine (_frame % 1);
 			this.alpha = 1 - _frame % 1;
 			if (_frame >= _lastFrame + 1)
 				_frame = _firstFrame;

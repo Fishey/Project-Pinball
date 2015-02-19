@@ -133,6 +133,7 @@
     <Compile Include="BLevel.cs" />
     <Compile Include="HelpScreen.cs" />
     <Compile Include="HelpButton.cs" />
+    <Compile Include="Winner.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />

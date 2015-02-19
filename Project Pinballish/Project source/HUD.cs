@@ -152,7 +152,7 @@ namespace GXPEngine
 			if (ship.PlayerNum == 1)
 				_powerup.SetXY (shell1.x-200+(_powerupList.Count*powerup.width), shell2.y+120);
 			else if (ship.PlayerNum == 2)
-				_powerup.SetXY (shell2.x-200+(_powerupList.Count*powerup.width), shell2.y+120);
+				_powerup.SetXY (shell2.x-200-(_powerupList.Count*powerup.width), shell2.y+120);
 			_powerupList.Add (_powerup);
 			this.AddChild (_powerup);	
 		}
